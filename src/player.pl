@@ -2,7 +2,7 @@
 TODO
 -Samain variabel & fungsi sama properti
 -Tambahin angel card waktu move
--Tambahin move
+-Tambahin move (Done?)
 */
 :-include('lokasinProperti.pl').
 
@@ -27,7 +27,8 @@ balance(p2, 300).
 bangkrut(p1, false).
 bangkrut(p2, false).
 /*data properti*/
-:-dynamic(posession/3).
+:-dynamic(asetProperti/2).
+:-dynamic(tingkatanAset/2).
 /*data properti yang dimiliki dalam array*/
     /*ini gw perlu buat ngitung asset, soalnya susah rekursinya kalo gak pake array*/
 :-dynamic(posessionArr/2).
@@ -36,15 +37,22 @@ bangkrut(p2, false).
 
 
 /*TEMP*/
+asetProperti(p1, a1).
+asetProperti(p1, a2).
+asetProperti(p1, a3).
+asetProperti(p2, b1).
+asetProperti(p2, b2).
+asetProperti(p2, b3).
+tingkatanAset(a1, 'Tanah').
+tingkatanAset(a2, 'Tanah').
+tingkatanAset(a3, 'Tanah').
+tingkatanAset(b1, 'Tanah').
+tingkatanAset(b2, 'Tanah').
+tingkatanAset(b3, 'Tanah').
 posessionArr(p1, [a1,a2,a3]).
 posessionArr(p2, [b1,b2,b3]).
-posession(p1, a1, tanah).
-posession(p1, a2, tanah).
-posession(p1, a3, tanah).
-
-listLokasi([go,a1,a2,a3]).
+listLokasi([go,a1,a2,a3,b1,b2,b3]).
 /*AKHIR TEMP*/
-    
 
 
 /*Basic-----------------------------------------------*/
@@ -66,13 +74,11 @@ subtBalance(Pemain, Amount):-
     New is Old - Amount,
     changeBalance(Pemain, New).
 
-
 changeLokasiPemain(Pemain, New):-
     /*ganti lokasi direct*/
     pemain(Pemain),
     retract(lokasiPemain(Pemain, _X)),
     asserta(lokasiPemain(Pemain, New)).
-
 
 /*ganti lokasiPemain dari nilai integer*/
 inNextLocations(_Pemain, H, [H|T], T).
@@ -107,9 +113,12 @@ move(Pemain, X):-
 /*properti----------------------------------------------*/
 addPosession(Pemain, Properti, Level):-
     /*nambahin posession di paling depan*/
-    asserta(posession(Pemain, Properti, Level)),
     posessionArr(Pemain, OldArr),
     retract(posessionArr(Pemain, _X)),
+
+    asserta(asetProperti(Pemain, Properti)),
+    asserta(tingkatanAset(Properti, Level)),
+    
     asserta(posessionArr(Pemain, [Properti|OldArr])).
 
 inRemovePosession(Pemain, Properti, [Properti|T], T).
@@ -122,30 +131,17 @@ removePosession(Pemain, Properti):-
     /*ngeluarin properti dari posession*/
     posessionArr(Pemain, OldArr),
     inRemovePosession(Pemain, Properti, OldArr, NewArr),
-    retract(posession(Pemain, Properti, _X)),
+    
+    retract(asetProperti(Pemain, Properti)),
+    retract(tingkatanAset(Properti, _X)),
+
     retract(posessionArr(Pemain, _Arr)),
     asserta(posessionArr(Pemain, [Properti|NewArr])).
 
 sellProperti(Pemain, Properti):-
     /*ngejual properti dari posession dengan harga 80%*/
-    posession(Pemain, H, Level),
-    (
-        Level == tanah,
-        hargaProperti(H, Harga, _, _, _, _)
-        ;
-        Level == bangunan1,
-        hargaProperti(H, _, Harga, _, _, _)
-        ;
-        Level == bangunan2,
-        hargaProperti(H, _, _, Harga, _, _)
-        ;
-        Level == bangunan3,
-        hargaProperti(H, _, _, _, Harga, _)
-        ;
-        Level == landmark,
-        hargaProperti(H, _, _, _, _, Harga)
-    ),
-    HargaJual is Harga*80/100,
+    biayaProperti(Properti, Biaya),
+    HargaJual is Biaya*80/100,
     addBalance(Pemain, HargaJual),
     removePosession(Pemain, Properti),!.
 
@@ -154,24 +150,9 @@ inJumlahAsset(Pemain, X, []):-
     X is 0.
 inJumlahAsset(Pemain, X, [H|T]):-
     /*rekursif untuk ngitung jumlah asset*/
-    posession(Pemain, H, Level),
-    (
-        Level == tanah,
-        hargaProperti(H, Harga, _, _, _, _)
-        ;
-        Level == bangunan1,
-        hargaProperti(H, _, Harga, _, _, _)
-        ;
-        Level == bangunan2,
-        hargaProperti(H, _, _, Harga, _, _)
-        ;
-        Level == bangunan3,
-        hargaProperti(H, _, _, _, Harga, _)
-        ;
-        Level == landmark,
-        hargaProperti(H, _, _, _, _, Harga)
-    ), inJumlahAsset(Pemain, A, T),
-    X is Harga + A,!.
+    biayaProperti(H, Biaya),
+    inJumlahAsset(Pemain, A, T),
+    X is Biaya + A,!.
 jumlahAsset(Pemain, Output):-
     /*ngitung jumlah asset*/
     posessionArr(Pemain, PossArr),
@@ -183,8 +164,7 @@ checkBangkrut(Pemain):-
     /*bangkrut kalo duit < 0*/
     /*ini sintaks if else*/
     balance(Pemain, X),
-    posession(Pemain, Posess),
-    (X < 0, Posess = [],
+    (X < 0,
 
         /*ini harusnya condition semua harga jual - balance < 0 tapi belum*/
 
