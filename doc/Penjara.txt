@@ -1,0 +1,56 @@
+### Definisi
+Pemain akan masuk penjara apabila pemain mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut.
+Pemain akan langsung dipindahkan ke “jail” dan akan diberi kesempatan untuk bermain dadu selama tiga kali giliran.
+Terdapat 4 mekanisme sebagai berikut untuk keluar dari penjara:
+    Apabila terdapat dadu yang double sebelum tiga kali giliran, pemain langsung keluar dari penjara.
+    Apabila pemain sudah melempar dadu sebanyak tiga kali, pemain keluar dari penjara.
+    Pemain mempunyai kartu untuk lolos dari penjara. Pada giliran berikutnya, pemain dapat memilih untuk mengaktifkannya.
+    Pemain dapat membayar pada giliran berikutnya sehingga lolos dari penjara lalu dapat langsung melempar dadu.
+Daerah penjara dapat dilewati atau ditempati oleh pemain pada umumnya, tetapi pemain tersebut tidak masuk penjara atau istilahnya “just visiting”.
+
+### Rencana Alur
+- (?) cek kalau pemain mendapat double 3 kali atau kartu penjara
+- cek pemain menginjak tile
+    - apakah masuk penjara
+    - apakah "just visitin
+- ketika masuk penjara 
+    - set state gulir dadu = 0
+    *giliran lawan*
+- menampilkan kemunkinan untuk keluar dari penjara
+
+    - cek keadaan pemain
+        - apakah punya kartu lolos penjara
+        - apakah uang yang cukup (Absolutly suap menyuap)
+    - Kondisi : state gulir dadu
+        - jika sudah gulir 3 kali -> pemain keluar -> lakukan giliran (gulir dadu)
+        - jika belum:
+            - berdasarkan pemain menampilkan pilihan untuk keluar penjara
+
+                ```Perkiraan tampilan
+                Pilih angka untuk keluar
+                1. Dadu Double
+                2. Kartu Bebas [ Tidak Punya :( ]
+                3. Bayar Pajak [ Tidak Cukup :( ]
+                ```
+                **kurung kotak akan hilang jika kondisi ada
+            
+            - meminta input 
+                - cek hingga benar loop
+
+            - kondisi:
+                - kocok dadu :
+                    - dapat double -> keluar (ingin dibuat langsung maju sesuai double ATAU gulir lagi ATAU nuggu giliran)
+                    - tidak dapat double -> state dulir daduu += 1
+                - kartu
+                    - keluar penjara -> kocok dadu
+                - Bayar Pajak
+                    - keluar penjara -> kocok dadu
+
+#### Fakta dan Rules
+/* Deklarasi Fakta dan Rules */
+/* isJustVisit(X) benar, jika X hanya mampir ke tile Penjara */
+/* isJailed(X) benar, jika X ada di dalam penjara */
+/* Jailed(X) -> membuat state gulir dadu = 0 */
+/* cek stack berapa kali udah gulir??? */
+/* cekUangPajak(X) benar, jika uang yang dimiliki X >= uang pajak */
+/* cekKartuPenjara(X) benar, jika X memiliki kartu keluar penjara */

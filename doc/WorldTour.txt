@@ -17,3 +17,7 @@ Misal, pemain tiba/menginjak tile WT (World Tour)
     - pemain akann tiba di tempat tujuan
     - ditampilkan map
     - (?)ditampilkan apakah ia mendapat uang (melewati GO)
+
+#### Fakta dan Rules
+/* Deklarasi Fakta dan Rules */
+/* isInWT(X) benar jika pemain X ada di tile WT */
