@@ -23,7 +23,7 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaSewaProperti(Properti, _, _, _, _, HargaSewaLandmark), BiayaSewa is HargaSewaLandmark, !.
 
 /*biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
-biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+landmark(Properti),
+biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+landmark(Properti).
 biayaAkuisisiProperti(Properti, BiayaAkuisisi):- BiayaAkuisisi is 'tidak bisa diakuisisi'.
 
 /*tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
@@ -37,7 +37,7 @@ checkLocationDetail(X):- properti(X), kepemilikanProperti(X,Pemilik),
 
     write('Kepemilikan         : '), write(Pemilik), nl,
     write('Biaya Sewa Saat Ini : '), biayaSewaProperti(Properti, BiayaSewa), write(BiayaSewa), nl,
-    write('Biaya Akuisisi      : '), biayaAkuisisiProperti(Properti, BiayaAkuisisi), write(BiayaAkuisisi) nl,
+    write('Biaya Akuisisi      : '), biayaAkuisisiProperti(Properti, BiayaAkuisisi), write(BiayaAkuisisi), nl,
     write('Tingkatan Properti  : '), tingkatanProperti(Properti, TingkatanProperti), write(TingkatanProperti), nl, !.
 
 checkLocationDetail(X):- properti(X),
@@ -83,12 +83,12 @@ checkLocationDetail(X):- lokasi(X), X=='fp',
 checkLocationDetail(X):- lokasi(X), X=='wt', 
     write('Nama Lokasi         : '), nl,
     write('Deskripsi Lokasi    : '), nl,
-    write('Bila pemain mendarat di kotak ini, pemain akan diberikan kesempatan untuk berpindah ke lokasi manapun di map kecuali kotak World Tour. Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan melewati kotak-kotak lainnya, pemain harus membayar 50$ untuk bisa berpindah'), nl,
+    write('Bila pemain mendarat di kotak ini, pemain akan diberikan kesempatan untuk berpindah ke lokasi manapun di map kecuali kotak World Tour. Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan melewati kotak-kotak lainnya, pemain harus membayar 50$ untuk bisa berpindah'), nl.
 
-checkLocationDetail(X):- lokasi(X), X=='tx', 
+checkLocationDetail(X):- lokasi(X), X =='tx', 
     write('Nama Lokasi         : '), nl,
     write('Deskripsi Lokasi    : '), nl,
-    write('Pemain yang mencapai daerah TX wajib membayar pajak sejumlah 10% dari total aset yang dimilikinya. Aset tersebut termasuk uang yang dimiliki dan semua nilai aset properti yang dimiliki.'), nl,
+    write('Pemain yang mencapai daerah TX wajib membayar pajak sejumlah 10% dari total aset yang dimilikinya. Aset tersebut termasuk uang yang dimiliki dan semua nilai aset properti yang dimiliki.'), nl.
 
 checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), nl, !.
 
@@ -97,7 +97,7 @@ checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), 
 
 /*Deklarasi Fakta*/
 /*landmark(X): X adalah sebuah landmark*/
-:- dynamic landmark/1.
+:- dynamic(landmark/1).
 /*properti(X): X adalah sebuah properti */
 properti(a1).
 properti(a2).
