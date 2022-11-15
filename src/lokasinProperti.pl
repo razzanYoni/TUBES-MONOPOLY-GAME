@@ -78,9 +78,9 @@ checkLocationDetail(X):- lokasi(X), X=='jl',
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain akan masuk penjara apabila pemain mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. Pemain akan langsung dipindahkan ke “jail” dan akan diberi kesempatan untuk bermain dadu selama tiga kali giliran.'), nl,
     write('Terdapat 4 mekanisme sebagai berikut untuk keluar dari penjara:'), nl,
-    write('1. Apabila terdapat dadu yang double sebelum tiga kali giliran, pemain langsung keluar dari penjara.'), nl.
-    write('2. Apabila pemain sudah melempar dadu sebanyak tiga kali, pemain keluar dari penjara.'), nl.
-    write('3. Pemain mempunyai kartu untuk lolos dari penjara. Pada giliran berikutnya, pemain dapat memilih untuk mengaktifkannya.'), nl.
+    write('1. Apabila terdapat dadu yang double sebelum tiga kali giliran, pemain langsung keluar dari penjara.'), nl,
+    write('2. Apabila pemain sudah melempar dadu sebanyak tiga kali, pemain keluar dari penjara.'), nl,
+    write('3. Pemain mempunyai kartu untuk lolos dari penjara. Pada giliran berikutnya, pemain dapat memilih untuk mengaktifkannya.'), nl,
     write('4. Pemain dapat membayar pada giliran berikutnya sehingga lolos dari penjara lalu dapat langsung melempar dadu.'), nl, !.
 
 checkLocationDetail(X):- lokasi(X), X=='fp', 

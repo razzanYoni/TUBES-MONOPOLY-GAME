@@ -1,16 +1,19 @@
+/*DEPENDENCY KE lokasinproperti.pl*/
+
+
 /*
 TODO
 -Samain variabel & fungsi sama properti
 -Tambahin angel card waktu move
 -Tambahin move (Done?)
 */
-:-include('lokasinProperti.pl').
+
 
 /*DATA Pemain*/
 
 /*Current pemain*/
-:-dynamic(currentPemain1/1).
-currentPemain1(p1).
+:-dynamic(currentPemain/1).
+currentPemain(p1).
 /*predikat pemain*/
 pemain(p1).
 pemain(p2).
@@ -51,7 +54,7 @@ tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
 posessionArr(p1, [a1,a2,a3]).
 posessionArr(p2, [b1,b2,b3]).
-listLokasi([go,a1,a2,a3,b1,b2,b3]).
+listLokasi([go,a1,a2,a3,cc,b1,b2,b3,jl,c1,c2,c3,tx,d1,d2,d3,fp,e1,e2,e3,cc,f1,f2,f3,wt,g1,g2,g3,tx,cc,h1,h2]).
 /*AKHIR TEMP*/
 
 
@@ -79,6 +82,18 @@ changeLokasiPemain(Pemain, New):-
     pemain(Pemain),
     retract(lokasiPemain(Pemain, _X)),
     asserta(lokasiPemain(Pemain, New)).
+
+switchPlayer:-
+    currentPemain(X),
+    X == p1,
+    retract(currentPemain(_)),
+    asserta(currentPemain(p2)).
+switchPlayer:-
+    currentPemain(X),
+    X == p2,
+    retract(currentPemain(_)),
+    asserta(currentPemain(p1)).
+
 
 /*ganti lokasiPemain dari nilai integer*/
 inNextLocations(_Pemain, H, [H|T], T).
@@ -184,7 +199,7 @@ resolveBangkrut(Pemain):-
     write('Bayar utang bos\n'),
     write('Properti yang akan dijual: \n'),
     retract(bangkrut(Pemain, _X)),
-    asserta(bangkrut(Pemain, nope)),
+    asserta(bangkrut(Pemain, false)),
 
     /*Masukin jual properti ke sini*/    
     /*sellProperti(Pemain, Properti)*/    
