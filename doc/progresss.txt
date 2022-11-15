@@ -1,7 +1,23 @@
 COMPLETED TASKS
+=== LOKASI ===
+/* lokasi(X): X adalah sebuah lokasi yang valid pada Map */
+/* checkLocationDetail(X): Menampilkan detail lokasi X*/
+/* landmark(X): X adalah sebuah landmark*/
+=== PROPERTI ===
+/* properti(X): X adalah sebuah properti */
+/* idProperti(Properti, NamaProperti, DeskripsiProperti) : Fakta tentang identitas dari Properti*/
+/* hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark): Fakta tentang harga pada Properti*/
+/* hargaSewaProperti(Properti, HargaSewaTanah, HargaSewaBangunan1, HargaSewaBangunan2, HargaSewaBangunan3, HargaSewaLandmark): Fakta tentang harga hargaSewa pada Properti*/
+/* checkPropertyDetail(X): Menampilkan detail dari suatu properti*/
 
 
 ONGOING TASKS
-
+=== LOKASI ===
+/* kepemilikanProperti(Properti, Pemilik): Pemilik adalah pemilik dari Properti */
+/* biayaSewaProperti(Properti, BiayaSewa): BiayaSewa adalah biaya sewa dari Properti saat ini*/
+/* biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
+/* tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
 
 UNSTARTED TASKS
+=== MAIN ===
+Kerangka Program dan Penyatuan semua fitur
