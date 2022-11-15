@@ -1,0 +1,59 @@
+/* ALUR PROGRAM */
+
+1. Start Game: Setup Pemain, Lokasi, Properti, Map {kedua pemain berada di lokasi GO}
+2. Giliran Pemain 1: Pemain melempar dadu, lalu berpindah sejauh nilai dadu yang didapat, lalu melakukan aksi (bisa tidak).
+3. Giliran Pemain 2: Pemain melempar dadu, lalu berpindah sejauh nilai dadu yang didapat, lalu melakukan aksi (bisa tidak).
+3. Kembali ke pemain 1, lalu ke pemain 2 hingga salah satunya bangkrut
+
+Selama permainan, hal yang dapat terjadi saat pelemparan dadu adalah:
+    - Jika Pemain mendapatkan double {kedua dadu bernilai sama}, pemain berpindah, bisa melakukan aksi, lalu ia berhak untuk roll dice lagi
+    - Jika Pemain mendapatkan double tiga kali berturut-turut, ia akan masuk penjara (tanpa melewati start) dan langsung dipindahkan tanpa berpindah sesuai hasil roll dice terlebih dahulu
+
+Saat Pemain berhenti di suatu tile, ada beberapa kemungkinan kejadian:
+    1. Tile Properti
+        a. Jika pemain berhenti di tile properti kosong (belum dimiliki), ia bisa membeli properti tersebut(tanah) atau tidak melakukan apa-apa.
+        b. Jika pemain berhenti di tile properti yang sudah dimiliki, pemain harus membayar biaya sewa properti tersebut kepada pemilik,
+            atau menggunakan angel card agar bisa terbebas dari biaya sewa (angel card dilepaskan). Setelah membayar biaya sewa, jika properti
+            tersebut memiliki tingkatan di bawah landmark (tanah, bangunan1, bangunan2, bangunan3), pemain yang berhenti bisa melakukan aksi ambil 
+            alih properti dengan membayar sebanyak dua kali harga aset properti tersebut, setelah diambil alih, dilakukan update informasi pada lokasi yang bersesuaian (informasi player, map, dan lokasi). 
+            Namun, jika properti tersebut memiliki landmark, ia tidak bisa melakukan aksi ambil alih.
+        
+        note:
+            Setelah dilakukan proses pembelian / ambil alih, pemain bisa melakukan aksi build (Peningkatan properti)
+
+    2. Tile non Properti
+        a. GO
+            Jika pemain menginjak GO setelah melewati satu putaran, ia akan menerima uang $200 dan bisa melakukan aksi build
+        b. JL (jail)
+            Jika pemain menginjak JL karena roll dice (bukan masuk penjara), ia tidak masuk penjara, tetapi hanya sekedar berada di sana (just visiting).
+            Jika pemain menginjak JL karena masuk penjara akibat kartu CC atau double tiga kali.
+            Pemain yang berada pada jail bisa keluar sesuai detail pada Penjara.txt, selama dipenjara player tidak bisa melakukan aksi apa-apa
+        c. CC
+            Pemain yang menginjak tile ini akan diberi kesempatan mengambil kartu kesempatan, jika kartu yang didapat adalah kartu
+            yang bisa disimpan, jumlah kartu maksimal yang bisa dimiliki setiap pemain adalah 2 buah kartu sehingga jika slot sudah penuh, ia harus membuang salah satu kartu.
+            Namun jika kartu yang didapat adalah kartu aksi (masuk penjara, world tour, pengurangan uang, dll), aksi akan langsung dieksekusi.
+        d. TX
+            Pemain yang menginjak tile ini akan dikenakan pajak 10% dari nilai aset yang dimiliki.
+        e. WT
+            Pemain yang menginjak tile ini bisa memilih tempat yang ingin dikunjungi (jika melewati start, akan dilakukan perjalanan melewati start, buka teleportasi).
+            Pemain yang ingin berpindah harus membayar sejumlah $50, jika tidak mampu membayar, pemain menjadi 'just visiting'
+        f. FP
+            Pemain yang menginjak tile ini tidak dikenakan aksi apa-apa dan tidak bisa melakukan aksi apa-apa
+
+Saat pemain dikenakan aksi bayar:
+    1. Pemain kekurangan uang saat membayar sewa, membayar pajak, atau menerima kartu pengurangan uang
+        ada 3 mekanisme yang bisa dilakukan pemain:
+        a. Menjual tile(properti yang dimiliki) dengan ketentuan harga jual adalah 80% nilai aset. Informasi lokasi, map, dan player otomatis diupdate
+        b. Menyerah, jika pemain memilih ini, pemain akan dinyatakan bangkrut dan pemain lain menjadi pemenang
+
+Saat pemain melakukan aksi build:
+    1. Pemain dapat melakukan peningkatan properti (informasi lokasi, player, dan map otomatis diupdate):
+        a. tanah menjadi bangunan 1
+        b. tanah menjadi bangunan 2
+        c. tanah menjadi bangunan 3
+        d. bangunan 1 menjadi bangunan 2
+        e. bangunan 1 menjadi bangunan 3
+        f. bangunan 2 menjadi bangunan 3
+        g. bangunan 3 menjadi landmark (syarat: pemain sudah melewati minimal satu putaran)
+    
+

@@ -1,0 +1,61 @@
+COMPLETED TASKS
+=== LOKASI ===
+/* lokasi(X): X adalah sebuah lokasi yang valid pada Map */
+/* checkLocationDetail(X): Menampilkan detail lokasi X*/
+/* landmark(X): X adalah sebuah landmark*/
+=== PROPERTI ===
+/* properti(X): X adalah sebuah properti */
+/* idProperti(Properti, NamaProperti, DeskripsiProperti) : Fakta tentang identitas dari Properti*/
+/* hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark): Fakta tentang harga pada Properti*/
+/* hargaSewaProperti(Properti, HargaSewaTanah, HargaSewaBangunan1, HargaSewaBangunan2, HargaSewaBangunan3, HargaSewaLandmark): Fakta tentang harga hargaSewa pada Properti*/
+/* checkPropertyDetail(X): Menampilkan detail dari suatu properti*/
+== PLAYER ==
+/*player(X) menunjukkan X adalah player (belum tentu diperlukan, nanti dipikirkan lagi)*/
+/*changeBalance(Player, New) mengganti fakta balance player dengan New sebagai X*/
+/*addBalance(Player, Amount) menambahkan Amount pada X di fakta balance player*/
+/*subtBalance(Player, Amount) mengurangkan Amount pada X di fakta balance player*/
+/*changeLocation(Player, New) mengganti lokasi player*/
+/*inPosession(Player, Posession, X) fungsi internal rekursif untuk mengecek kepemilikan properti, X true/false*/
+/*checkPosession(Player, Posession, X) fungsi untuk mengecek kepemilikan properti, X true/false*/
+/*addPosession(Player, Property) fungsi untuk menambahkan kepemilikan properti*/
+/*removePosession(Player, Property) fungsi untuk mengurangi kepemilikan properti*/
+/*sellProperty(Player, Property, Level) fungsi untuk menjual properti dan menambahkan uang ke balance*/
+/*currentPlayer(X) menunjukkan player yang mendapatkan giliran*/
+/*location(Player, X) menunjukkan X sebagai lokasi dari player*/
+/*balance(Player, X) menunjukkan X sebagai uang yang dimiliki player*/
+/*bankrupt(Player, X) menunjukkan X sebagai kondisi bangkrut player, berisikan true atau false*/
+/*posession(Player, Location, Level) menunjukkan kepemilikan player akan suatu lokasi dan level propertinya*/
+== BANGKRUT ==
+/*bankrupt(Player, X) menunjukkan X sebagai kondisi bangkrut Player, X adalah true/false*/
+
+
+ONGOING TASKS
+=== LOKASI ===
+/* kepemilikanProperti(Properti, Pemilik): Pemilik adalah pemilik dari Properti */
+/* biayaSewaProperti(Properti, BiayaSewa): BiayaSewa adalah biaya sewa dari Properti saat ini*/
+/* biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
+/* tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
+== WORLD TOUR ==
+/* Rules kasar : */
+/* kelilingDunia(X,Y,Z) benar, ketika player X ada di Z dari Y atau Z berganti menjadi daerah sebelahnya sesuai arah jarum jam  */
+/* isMenginjakGO(X) benar, jika player kelilingDunia(X,Y) melewati tile GO */
+== PENJARA ==
+/* Sebagian besar prototype Rules dan Aturan yang digunkan */
+== PLAYER ==
+/*move(Player, X, ArrayMap) mengganti lokasi player sesuai X sebagai nilai dadu*/
+/*buyProperty(Player, Property, Level) fungsi untuk membeli properti dan menambahkan uang ke balance*/
+/*takeoverProperty(Player, Property, Level) fungsi untuk membeli properti dari orang lain dan menambahkan uang ke balance*/
+== BANGKRUT ==
+/*checkBankrupt(Player) mendeteksi kondisi player jika kondisi memenuhi seperti pada alur*/
+/*resolveBankrupt(Player) menyajikan tempat memilih properti yang akan dijual atau pilihan untuk menyerah*/
+
+
+UNSTARTED TASKS
+=== MAIN ===
+Kerangka Program dan Penyatuan semua fitur
+== WORLD TOUR ==
+/* hargaSewaNaik(X) benar, jika player X ada di World Tour -> membuat harga properti yang dimilki X naik 2 kali */
+== PLAYER ==
+/*checkPlayerDetail(X) untuk mengeluarkan semua data yang dimiliki player*/
+== BANGKRUT ==
+/*kondisi kalo endgame keluar apa belom dibikin*/

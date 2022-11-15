@@ -156,7 +156,7 @@ idProperti(g3, brasilia, ibukotaBrazil).
 idProperti(h1, athena, ibukotaYunani).
 idProperti(h2, kairo, ibukotaMesir).
 
-/* hargatanah(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark): Fakta tentang harga pada Properti*/
+/* hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark): Fakta tentang harga pada Properti*/
 hargaProperti(a1, 50, 100, 150, 200, 250).
 hargaProperti(a2, 50, 100, 150, 200, 250).
 hargaProperti(a3, 60, 110, 160, 210, 260).

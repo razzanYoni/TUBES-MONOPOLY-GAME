@@ -1,6 +1,8 @@
 /* Lokasi */
 /*Deklarasi Fakta*/
 
+tiles([go,a1,a2,a3,cc,b1,b2,b3,jl,c1,c2,c3,tx,d1,d2,d3,fp,e1,e2,e3,cc,f1,f2,f3,wt,g1,g2,g3,tx,cc,h1,h2]).
+
 /*Deklarasi Rules*/
 
 printmap :- nl, nl,
@@ -22,5 +24,7 @@ printmap :- nl, nl,
     write('        | C1 |               <-                 | H2 |'), nl,
     write('        |____|__________________________________|____|'), nl,
     write('        | JL | B3 | B2 | B1 | CC | A3 | A2 | A1 | GO |'), nl,
-    write('        |____|____|____|____|____|____|____|____|____|').
-
+    write('        |____|____|____|____|____|____|____|____|____|'), nl,nl,
+    write('Posisi '), nl,
+    write('P1 : '), location(p1, X), write(X), nl,
+    write('P2 : '), location(p2, Y), write(Y), nl.
