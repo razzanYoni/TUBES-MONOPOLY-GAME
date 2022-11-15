@@ -1,0 +1,28 @@
+## definisi
+Setiap lokasi mempunyai informasinya masing-masing. Terdapat dua jenis lokasi, yakni properti dan non-properti.
+Deskripsi informasi yang disertakan pada masing-masing jenis adalah sebagai berikut.
+Untuk lokasi properti, informasi yang ditampilkan antara lain nama, deskripsi, kepemilikan, biaya sewa untuk yang menghampiri,
+biaya akuisisi (selain landmark), dan tingkatan properti saat ini. Jika belum ada yang memiliki properti tersebut, tampilkan bahwa properti belum dimiliki oleh siapapun.
+Untuk lokasi non-properti, informasi yang ditampilkan antara lain nama dan deskripsi bebas yang intuitif untuk menjelaskan spesifikasi lokasi berkaitan.
+
+## Rencana Alur 
+- Klasifikasi lokasi menjadi properti dan non properti
+- Memberi identitas setiap lokasi (Nama dan Deskripsi lokasi)
+- Cek apakah sebuah lokasi properti dimiliki oleh player
+- Cek apakah sebuah lokasi properti dibangun landmark
+- Update kepemilikan dan tingkatan properti jika terjadi aksi terhadap lokasi properti
+    - Jika Bangunan landmark tidak bisa ambil alih
+    - Jika belum satu putaran tidak bisa membangun landmark
+- Update biaya sewa lokasi properti jika terjadi aksi peningkatan properti
+- Update biaya akuisisi lokasi properti jika terjadi aksi peningkatan properti
+- Mengubah biaya sewa menjadi 2x jika terdapat lokasi properti yang satu blok 
+- Menampilkan detail lokasi jika dipanggil checkLocationDetail
+
+## Fakta dan Rules
+/* lokasi(X): X adalah sebuah lokasi yang valid pada Map */
+/* kepemilikanProperti(Properti, Pemilik): Pemilik adalah pemilik dari Properti */
+/* biayaSewaProperti(Properti, BiayaSewa): BiayaSewa adalah biaya sewa dari Properti saat ini*/
+/* biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
+/* tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
+/* checkLocationDetail(X): Menampilkan detail lokasi X*/
+/* landmark(X): X adalah sebuah landmark*/
