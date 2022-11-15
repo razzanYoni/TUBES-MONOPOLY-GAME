@@ -17,7 +17,15 @@ ONGOING TASKS
 /* biayaSewaProperti(Properti, BiayaSewa): BiayaSewa adalah biaya sewa dari Properti saat ini*/
 /* biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
 /* tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
+== WORLD TOUR ==
+/* Rules kasar : */
+/* kelilingDunia(X,Y,Z) benar, ketika player X ada di Z dari Y atau Z berganti menjadi daerah sebelahnya sesuai arah jarum jam  */
+/* isMenginjakGO(X) benar, jika player kelilingDunia(X,Y) melewati tile GO */
+== PENJARA ==
+/* Sebagian besar prototype Rules dan Aturan yang digunkan */
 
 UNSTARTED TASKS
 === MAIN ===
 Kerangka Program dan Penyatuan semua fitur
+== WORLD TOUR ==
+/* hargaSewaNaik(X) benar, jika player X ada di World Tour -> membuat harga properti yang dimilki X naik 2 kali */
