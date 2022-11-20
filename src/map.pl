@@ -10,7 +10,6 @@ tiles([go,a1,gc,a3,cc,b1,b2,b3,jl,c1,c2,c3,tx,d1,d2,d3,fp,e1,e2,e3,cc,f1,f2,f3,w
 
 
 /*Deklarasi Rules*/
-
 searchProperti(Tile, [H|T]) :- H = Tile, !.
 searchProperti(Tile, [H|T]) :- searchProperti(Tile, T).
 
@@ -56,4 +55,3 @@ printMap :- nl, nl,
     write('Posisi '), nl,
     write('P1 : '), lokasiPemain(p1, X),  write(X), nl,
     write('P2 : '), lokasiPemain(p2, Y), write(Y), nl.
-

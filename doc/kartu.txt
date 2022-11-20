@@ -1,0 +1,10 @@
+### Definisi
+Pemain mendapatkan kartu tertentu secara acak apabila menginjak daerah ini. Tingkat keacakan/probabilitas munculnya masing-masing kartu dibebaskan.
+
+### Rencana Alur
+- ketika masuk ke lokasi chance card pemain bisa mendapatkan kartu
+
+#### Fakta dan Rules
+/* Deklarasi Fakta dan Rules */
+/* runCard perintah untuk melempar dadu sudah mencakup kondisi apakah di penjara atau tidak
+	berapa kali gulir dan berapa kali double */
