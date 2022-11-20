@@ -256,14 +256,14 @@ inMove(Pemain, X, []):-
 
     retract(lewatGO(Pemain, _)),
     asserta(lewatGO(Pemain, KaliLewatBaru)),
-
+    
     listLokasi(ListLokasi),
     inMove(Pemain, X, ListLokasi).
 inMove(Pemain, 1, [H|_T]):-
     /*rekursif untuk basis jika nilai integernya 1*/
     changeLokasiPemain(Pemain, H),
     checkLokasi(Pemain).
-
+    
 inMove(Pemain, X, [_H|T]):-
     /*rekursif untuk basis jika nilai integernya bukan 1*/
     A is X-1,

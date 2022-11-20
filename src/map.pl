@@ -34,4 +34,11 @@ printmap :- nl, nl,
             ;
             write(X)
         ), nl,
-    write('P2 : '), lokasiPemain(p2, Y), write(Y), nl.
+    write('P2 : '), lokasiPemain(p2, X), 
+        (
+            (X == cc1 ; X == cc2 ; X == cc3), write('cc')
+            ;
+            (X == tx1 ; X == tx2), write('tx')
+            ;
+            write(X)
+        ), nl,
