@@ -49,6 +49,9 @@ ONGOING TASKS
 /*checkBankrupt(Player) mendeteksi kondisi player jika kondisi memenuhi seperti pada alur*/
 /*resolveBankrupt(Player) menyajikan tempat memilih properti yang akan dijual atau pilihan untuk menyerah*/
 
+== MAP ==
+/* Peletakan properti pada map */
+/* Posisi pemain dalam map */
 
 UNSTARTED TASKS
 === MAIN ===
@@ -59,3 +62,8 @@ Kerangka Program dan Penyatuan semua fitur
 /*checkPlayerDetail(X) untuk mengeluarkan semua data yang dimiliki player*/
 == BANGKRUT ==
 /*kondisi kalo endgame keluar apa belom dibikin*/
+
+== TAX ==
+/* payTax(p1, X) mengurangi jumlah uang pemain sesuai nilai pajak (X) pemain tersebut */
+/* tax(p1, X) dengan X adalah besar nilai pajak pemain p1 */
+/* propertyValue(properti, X) dengan X adalah nilai keseluruhan properti yang dimiliki pemain */

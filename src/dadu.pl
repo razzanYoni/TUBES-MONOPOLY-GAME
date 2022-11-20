@@ -1,14 +1,14 @@
+/*DEPENDENCY KE player.pl*/
+
+
 /* Deklarasi Fakta */
 
 /* Deklarasi Rules */
 % dynamic predikat double/1 untuk menyimpan berapa kali dadu yang double
 :- dynamic(double/1).
 
-% dynamic predikat dice/1 untuk menyimpan nilai dadu, hanya berisikan angka dadu pertama dan kedua
-:- dynamic(dice/1).
-
 % rules randomNumberForDice untuk meng-generate angka random 1-6
-randomNumberForDice(Number) :- random(1, 7, Number).
+randomNumberForDice(Number) :- randomize, get_seed(X), Number is (X mod 6 + 1).
 
 % dynamic predikat jailFromDice/1 untuk menyimpan 
 % pemain yang berada dalam jail sebanyak turn yang perlu ditempuh 
@@ -24,15 +24,19 @@ randomNumberForDice(Number) :- random(1, 7, Number).
 /* rules throwDice untuk melempar 2 dadu lalu ditampilkan hasilnya dan menyimpan nilai dadu kedalam dynamic predikat dice/1 */
 % lemparan pertama
 throwDice :- % berisikan dynamic giliranpemain/1
-             _Pemain is 1,
+
+             currentPemain(_Pemain),
              \+ jail(_Pemain), \+ double(X), asserta(double(0)),
              randomNumberForDice(Number1), randomNumberForDice(Number2), 
 
-             % output pemain 
+             nl, write(_Pemain), nl, 
 
              write('Dadu 1: '), write(Number1), nl, 
              write('Dadu 2: '), write(Number2), nl, 
              Total is Number1 + Number2,
+
+             move(_Pemain, Total),
+
              write('Anda maju sebanyak '), write(Total), write(' langkah'), nl, 
              ((Number1 = Number2, retractall(double(X)), asserta(double(1))) % kondisi ketika player mendapat double maka dia lanjut lempar dadu, jangan lupa beri prosedur (harusnya gausah karena kan dia tetap) lanjutnya harusnya ada di main
              ; 
@@ -41,7 +45,7 @@ throwDice :- % berisikan dynamic giliranpemain/1
 
 % lemparan selanjutnya, kondisi ketika belum double sebanyak 3 kali
 throwDice :- % berisikan dynamic giliranpemain/1
-             _Pemain is 1,
+             currentPemain(_Pemain),
              \+ jail(_Pemain),
              randomNumberForDice(Number1), randomNumberForDice(Number2), 
              write('Dadu 1: '), write(Number1), nl, 
@@ -51,12 +55,17 @@ throwDice :- % berisikan dynamic giliranpemain/1
              ; 
              (Number1 \= Number2, retractall(double(X)))), % kondisi ketika player tidak mendapat double maka dia berhenti lempar dadu, jangan lupa beri prosedur berhentinya harusnya ada di main
              Total is Number1 + Number2,
+
+             move(_Pemain, Total),
+
              write('Anda maju sebanyak '), write(Total), write(' langkah'), nl, !.
 
 % lemparan selanjutnya, kondisi ketika sudah double sebanyak 3 kali
-throwDice :- _Pemain is 1,
+throwDice :- currentPemain(_Pemain),
              \+ jail(_Pemain),
              % kondisi masuk penjara, pemain masuk penjara dan giliran pemain berikutnya (jangan lupa prosedurnya)
+             
+             changeLokasiPemain(_Pemain, jl),
 
              write('Anda masuk ke jail karena mendapatkan Double 3 kali berturut-turut'), nl, 
              retractall(double(X)), asserta(jail(_Pemain)), asserta(jail(_Pemain)),!.
@@ -64,16 +73,19 @@ throwDice :- _Pemain is 1,
 
 /* keluar dari jail dengan dadu*/
 % jika dadu double maka pemain keluar dari jail
-throwDice :- _Pemain is 1,
+throwDice :- currentPemain(_Pemain),
              randomNumberForDice(Number1), randomNumberForDice(Number2), 
              write('Dadu 1: '), write(Number1), nl, 
              write('Dadu 2: '), write(Number2), nl, 
              Number1 = Number2, retractall(jail(_Pemain)),
              Total is Number1 + Number2,
+
+             move(_Pemain, Total),
+
              write('Anda maju sebanyak '), write(Total), write(' langkah'), nl, !.
 
 % jika dadu bukan double
-throwDice :- _Pemain is 1,
+throwDice :- currentPemain(_Pemain),
              write('Anda masih dalam jail'), nl,
              retract(jail(_Pemain)), !.
 
