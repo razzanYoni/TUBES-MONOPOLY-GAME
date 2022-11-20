@@ -58,14 +58,15 @@ asetProperti(p2, d2).
 asetProperti(p2, d3).
 
 tingkatanAset(a1, 'Tanah').
-tingkatanAset(a2, 'Tanah').
-tingkatanAset(a3, 'Tanah').
-tingkatanAset(b1, 'Tanah').
+tingkatanAset(c2, 'Bangunan 1').
+tingkatanAset(a3, 'Landmark').
+tingkatanAset(g1, 'Tanah').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
 posessionArr(p1, [a1,a2,a3]).
-posessionArr(p2, [b1,b2,b3]).
-listLokasi([go,a1,a2,a3,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
+posessionArr(p2, [g1,b2,b3]).
+listLokasi([go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
+
 /*AKHIR TEMP*/
 
 
