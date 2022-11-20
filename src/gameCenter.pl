@@ -10,7 +10,7 @@ hadiah(150, 300, 500).
 
 /*Deklarasi Rules*/
 /*lempar_koin(Sisi): Melakukan randomize, dan memperoleh angka 1(HEAD) atau 0(TAIL)*/
-lempar_koin(Sisi) :- get_seed(Seed), Sisi is Seed, !.
+lempar_koin(Sisi) :- randomize, get_seed(Seed), Sisi is (Seed mod 2)+1, !.
 
 /* guessing(N_true, Guess, Hadiah_pemain) : Predikat untuk berjalannya game, terminasi saat tebakan salah, tebakan pemain benar 3 kali, atau pemain mengkaim hadiah, */
 guessing(N_true,Guess):- lempar_koin(Sisi), Sisi =\= Guess, asserta(hadiah_pemain(0)), asserta(bermain(2)),
