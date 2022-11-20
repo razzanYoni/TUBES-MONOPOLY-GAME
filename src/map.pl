@@ -26,5 +26,12 @@ printmap :- nl, nl,
     write('        | JL | B3 | B2 | B1 | CC | A3 | A2 | A1 | GO |'), nl,
     write('        |____|____|____|____|____|____|____|____|____|'), nl,nl,
     write('Posisi '), nl,
-    write('P1 : '), lokasiPemain(p1, X), write(X), nl,
+    write('P1 : '), lokasiPemain(p1, X), 
+        (
+            (X == cc1 ; X == cc2 ; X == cc3), write('cc')
+            ;
+            (X == tx1 ; X == tx2), write('tx')
+            ;
+            write(X)
+        ), nl,
     write('P2 : '), lokasiPemain(p2, Y), write(Y), nl.

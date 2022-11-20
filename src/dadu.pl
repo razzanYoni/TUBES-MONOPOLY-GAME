@@ -8,7 +8,7 @@
 :- dynamic(double/1).
 
 % rules randomNumberForDice untuk meng-generate angka random 1-6
-randomNumberForDice(Number) :- random(1, 7, Number).
+randomNumberForDice(Number) :- randomize, get_seed(X), Number is (X mod 6 + 1).
 
 % dynamic predikat jailFromDice/1 untuk menyimpan 
 % pemain yang berada dalam jail sebanyak turn yang perlu ditempuh 
