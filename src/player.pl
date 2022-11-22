@@ -128,10 +128,21 @@ landingWT:-
     1 = 1.
 landingTX:-
     1 = 1.
-landingFP:-
-    1 = 1.
 landingGO:-
     1 = 1.
+landingGC:-
+    write('Apakah kamu ingin menguji keberuntunganmu??? (Masukkan angka: )'),
+    write('1. Ya'), nl,
+    write('2. Tidak'), nl,
+    write('Pilihan: '), read(Pilihan),
+    (
+        Pilihan == 1, subtBalance(Pemain,50), playGameCenter,
+        ;
+        Pilihan == 2 
+    ).
+    write('===Terima Kasih Telah Berkunjung ke Game Center===').
+
+
 
 landingNonProperti(Pemain):-
     lokasiPemain(Pemain, Lokasi),
@@ -154,16 +165,19 @@ landingNonProperti(Pemain):-
         ;
         Lokasi == fp,
         nl , write('Masuk parkir gratis'), nl, nl,
-        landingFP
         ;
         Lokasi == go,
         nl , write('Masuk go'), nl, nl,
         landingGO
+        ;
+        lokasi == gc,
+        nl, write('====SELAMAT DATANG DI GAME CENTER==='), nl, nl,
+        landingGC
     ).
 
 /*Properti*/
 landingPropertiLawan:-
-    1 = 1.
+    subtBalance(Pemain, hargas)
 landingPropertiSendiri:-
     1 = 1.
 landingPropertiKosong:-
