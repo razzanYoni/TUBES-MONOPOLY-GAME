@@ -63,7 +63,8 @@ tingkatanAset(a3, 'Landmark').
 tingkatanAset(g1, 'Tanah').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
-posessionArr(p1, [a1,a2,a3]).
+tingkatanAset(d1, 'Bangunan 2').
+posessionArr(p1, [d1,a2,a3]).
 posessionArr(p2, [g1,b2,b3]).
 
 /*AKHIR TEMP*/
