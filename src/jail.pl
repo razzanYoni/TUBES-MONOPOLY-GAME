@@ -76,6 +76,9 @@ cekBalance :-
 
 /* ####### Output ketika Pemain di penjara ####### */
     /* writeinJail menulis output ketika player berada di penjara  */
+    writeinJail :-
+        nl,
+        write('Anda berada di penjara'), nl.
     
 /* ####### Output ketika Pemain di penjara ####### */
 
