@@ -44,18 +44,12 @@ lewatGO(p2, 0).
 
 
 /*TEMP*/
-asetProperti(p2, a1).
-asetProperti(p2, a2).
-asetProperti(p2, a3).
-asetProperti(p2, b1).
+asetProperti(p1, d1).
+asetProperti(p1, a2).
+asetProperti(p1, a3).
+asetProperti(p2, g1).
 asetProperti(p2, b2).
 asetProperti(p2, b3).
-asetProperti(p2, c1).
-asetProperti(p2, c2).
-asetProperti(p2, c3).
-asetProperti(p2, d1).
-asetProperti(p2, d2).
-asetProperti(p2, d3).
 
 tingkatanAset(a1, 'Tanah').
 tingkatanAset(c2, 'Bangunan 1').
@@ -174,6 +168,8 @@ landingPropertiSendiri:-
     1 = 1.
 landingPropertiKosong:-
     printMap,
+    write('Sekarang giliran: '), currentPemain(X), write(X), nl,
+    write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
 
     currentPemain(Player),
     balance(Player, Uang),
@@ -380,6 +376,15 @@ jumlahAsset(Pemain, Output):-
     /*ngitung jumlah asset*/
     posessionArr(Pemain, PossArr),
     inJumlahAsset(Pemain, Output, PossArr).
+
+playerDetail:-
+    currentPemain(Pemain).
+
+
+
+
+
+
 
 
 /*Bangkrut---------------------------------------------*/

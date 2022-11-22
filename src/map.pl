@@ -78,7 +78,7 @@ printMap :- nl, nl,
             (Y == tx1 ; Y == tx2), write('tx')
             ;
             write(Y)
-        ), nl.
+        ), nl,!.
 
 
 

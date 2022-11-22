@@ -82,6 +82,7 @@ startGameIn:-
     checkBangkrut(X),
 
     /*Command Closingan kalo kalah di sini*/
+    
     (bangkrut(X, true)
     ;
     fail,!).
