@@ -71,9 +71,6 @@ printMap :- nl, nl,
             ;
             write(X)
         ), nl,
-<<<<<<< HEAD
-    write('P2 : '), lokasiPemain(p2, Y), write(Y), nl.
-=======
     write('P2 : '), lokasiPemain(p2, Y),
         (
             (Y == cc1 ; Y == cc2 ; Y == cc3), write('cc')
@@ -92,4 +89,3 @@ printMap :- nl, nl,
 %Rumah 3 |
 %Landmark|
 %p1      |
->>>>>>> e52b34355b4870b5d4dce9fe5fe0cc36d0416298
