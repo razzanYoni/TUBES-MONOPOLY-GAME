@@ -7,6 +7,7 @@ lokasi(jl).
 lokasi(tx).
 lokasi(fp).
 lokasi(wt).
+lokasi(gc).
 
 /*Deklarasi Rules*/
 /*lokasi(X): X adalah sebuah lokasi yang valid pada Map*/
@@ -58,13 +59,13 @@ checkLocationDetail(X):- properti(X),
     write('Tingkatan Properti  : Tanah'), nl, !.
 
 checkLocationDetail(X):- lokasi(X), X=='go', 
-    write('Nama Lokasi         : '), nl,
+    write('Nama Lokasi         : '), write('GO'), nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain mendapatkan uang sebanyak 200$ ketika menginjak atau melewati daerah ini.'), nl,
     write('Pemain juga dapat meningkatkan properti miliknya saat menginjak daerah ini.'), nl, !.
 
 checkLocationDetail(X):- lokasi(X), X=='cc', 
-    write('Nama Lokasi         : '), nl,
+    write('Nama Lokasi         : '), write('Chance Card'), nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain mendapatkan kartu tertentu secara acak apabila menginjak daerah ini.'), nl,
     write('Jenis Kartu: '), nl,
@@ -74,7 +75,7 @@ checkLocationDetail(X):- lokasi(X), X=='cc',
     write('4. Kartu Go To Jail: Pemain langsung ditransportasi ke lokasi Penjara dan dipenjara. Permainan dilanjutkan oleh pemain selanjutnya.'), nl, !.
 
 checkLocationDetail(X):- lokasi(X), X=='jl', 
-    write('Nama Lokasi         : '), nl,
+    write('Nama Lokasi         : '), write('Jail'), nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain akan masuk penjara apabila pemain mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. Pemain akan langsung dipindahkan ke “jail” dan akan diberi kesempatan untuk bermain dadu selama tiga kali giliran.'), nl,
     write('Terdapat 4 mekanisme sebagai berikut untuk keluar dari penjara:'), nl,
@@ -84,21 +85,38 @@ checkLocationDetail(X):- lokasi(X), X=='jl',
     write('4. Pemain dapat membayar pada giliran berikutnya sehingga lolos dari penjara lalu dapat langsung melempar dadu.'), nl, !.
 
 checkLocationDetail(X):- lokasi(X), X=='fp', 
-    write('Nama Lokasi         : '), nl,
+    write('Nama Lokasi         : '), write('Free Parking'), nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain yang menginjak daerah ini tidak mendapatkan efek apa-apa. Pemain dapat melakukan giliran setelahnya seperti biasa.'), nl, !.
 
 checkLocationDetail(X):- lokasi(X), X=='wt', 
-    write('Nama Lokasi         : '), nl,
+    write('Nama Lokasi         : '), write('World Tour'),nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Bila pemain mendarat di kotak ini, pemain akan diberikan kesempatan untuk berpindah ke lokasi manapun di map kecuali kotak World Tour. Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan melewati kotak-kotak lainnya, pemain harus membayar 50$ untuk bisa berpindah'), nl.
 
 checkLocationDetail(X):- lokasi(X), X =='tx', 
-    write('Nama Lokasi         : '), nl,
+    write('Nama Lokasi         : '), write('Tax'), nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain yang mencapai daerah TX wajib membayar pajak sejumlah 10% dari total aset yang dimilikinya. Aset tersebut termasuk uang yang dimiliki dan semua nilai aset properti yang dimiliki.'), nl.
 
-checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), nl, !.
+checkLocationDetail(X):- lokasi(X), X =='gc', 
+    write('Nama Lokasi         : '),  write('Game Center'), nl,
+    write('Deskripsi Lokasi    : '), nl,
+    write('Pemain bisa memilih untuk bermain di game center atau tidak jika menginjak tile ini.'), nl,
+    write('Permainan di game center ini adalah menebak sisi yang akan muncul dari koin yang dilempar.'), nl,
+    write('Jika pemain memilih untuk bermain, ia harus membayar $50 untuk memulai permainan.'), nl,
+    write('Permainan berakhir jika pemain salah menebak sisi koin, pemain berhasil menebak dengan benar 3 kali,'), nl,
+    write('atau pemain memilih untuk berhenti bermain dan mengklaim hadiahnya.'), nl,
+    write('Jika pemain berhasil menebak dengan benar, tetapi pada saat tebakan selanjutnya ia salah,'), nl,
+    write('hadiah yang telah dikumpulkan sebelumnya menjadi 0.'), nl, nl, 
+
+    write('Rincian Hadiah: '), nl,
+    write('Hadiah1 : Jika berhasil menebak dengan benar satu kali ($150)'), nl,
+    write('Hadiah2 : Jika berhasil menebak dengan benar dua kali ($300)'), nl,
+    write('Hadiah3 : Jika berhasil menebak dengan benar tiga kali ($500)'),nl, !.
+
+
+checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), nl, fail.
 
 
 /* Properti */
@@ -109,7 +127,6 @@ checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), 
 /*properti(X): X adalah sebuah properti */
 properti(a1).
 properti(a2).
-properti(a3).
 properti(b1).
 properti(b2).
 properti(b3).
@@ -133,8 +150,7 @@ properti(h2).
 
 /* idProperti(Properti, NamaProperti, DeskripsiProperti) : Fakta tentang identitas dari Properti*/
 idProperti(a1, jakarta, ibukotaIndonesia).
-idProperti(a2, hanoi, ibukotaVietnam).
-idProperti(a3, bangkok, ibukotaThailand).
+idProperti(a2, kualaLumpur, ibukotaMalaysia).
 idProperti(b1, dhaka, ibukotaBangladesh).
 idProperti(b2, islamabad, ibukotaPakistan).
 idProperti(b3, newdelhi, ibukotaIndia).
@@ -150,7 +166,7 @@ idProperti(e3, london, ibukotaInggris).
 idProperti(f1, roma, ibukotaItalia).
 idProperti(f2, madrid, ibukotaSpanyol).
 idProperti(f3, lisbon, ibukotaPortugal).
-idProperti(g1, mexicocity, ibukotaMeksiko).
+idProperti(g1, mexicoCity, ibukotaMeksiko).
 idProperti(g2, ottawa, ibukotaKanada).
 idProperti(g3, brasilia, ibukotaBrazil).
 idProperti(h1, athena, ibukotaYunani).
@@ -158,8 +174,7 @@ idProperti(h2, kairo, ibukotaMesir).
 
 /* hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark): Fakta tentang harga pada Properti*/
 hargaProperti(a1, 50, 100, 150, 200, 250).
-hargaProperti(a2, 50, 100, 150, 200, 250).
-hargaProperti(a3, 60, 110, 160, 210, 260).
+hargaProperti(a2, 60, 110, 160, 210, 260).
 hargaProperti(b1, 100, 150, 200, 250, 300).
 hargaProperti(b2, 100, 150, 200, 250, 300).
 hargaProperti(b3, 120, 170, 220, 270, 320).
@@ -183,8 +198,7 @@ hargaProperti(h2, 400, 600, 800, 1000, 1200).
 
 /* hargaSewaProperti(Properti, HargaSewaTanah, HargaSewaBangunan1, HargaSewaBangunan2, HargaSewaBangunan3, HargaSewaLandmark): Fakta tentang harga hargaSewa pada Properti*/
 hargaSewaProperti(a1, 5, 18, 30, 90, 250).
-hargaSewaProperti(a2, 5, 18, 30, 90, 250).
-hargaSewaProperti(a3, 10, 30, 60, 180, 450).
+hargaSewaProperti(a2, 10, 30, 60, 180, 450).
 hargaSewaProperti(b1, 10, 40, 90, 270, 550).
 hargaSewaProperti(b2, 10, 40, 90, 270, 550).
 hargaSewaProperti(b3, 16, 50, 100, 300, 600).
