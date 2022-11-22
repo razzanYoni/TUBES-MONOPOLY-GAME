@@ -65,3 +65,12 @@ printMap :- nl, nl,
     write('Posisi '), nl,
     write('P1 : '), lokasiPemain(p1, X),  write(X), nl,
     write('P2 : '), lokasiPemain(p2, Y), write(Y), nl.
+
+
+%        |
+%Tanah   |
+%Rumah 1 |
+%Rumah 2 |
+%Rumah 3 |
+%Landmark|
+%p1      |
