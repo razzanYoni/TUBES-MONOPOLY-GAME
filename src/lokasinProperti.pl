@@ -116,7 +116,7 @@ checkLocationDetail(X):- lokasi(X), X =='gc',
     write('Hadiah3 : Jika berhasil menebak dengan benar tiga kali ($500)'),nl, !.
 
 
-checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), nl, !.
+checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), nl, fail.
 
 
 /* Properti */
