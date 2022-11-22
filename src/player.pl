@@ -63,7 +63,7 @@ tingkatanAset(a3, 'Landmark').
 tingkatanAset(g1, 'Tanah').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
-posessionArr(p1, [a1,a2,a3]).
+posessionArr(p1, [d1,a2,a3]).
 posessionArr(p2, [g1,b2,b3]).
 listLokasi([go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
 
