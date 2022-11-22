@@ -18,54 +18,50 @@ cekProperti(T, X) :-
     posessionArr(X, L), searchProperti(T, L).
 
 
-printPro2(T, P) :- cekProperti(T,P) -> tingkatanAset(T,Aset),write(Aset) ; write('      ').
-
-/* printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 1',
+printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Tanah',
+                write('Tanah').
+printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 1',
                 write('Rumah 1 ').
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 2',
                 write('Rumah 2 ').
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 3',
                 write('Rumah 3 ').
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Landmark',
-                write('Landmark'). !. */
+                write('Landmark'). !.
+  
 
-printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset),
-                write(Aset).
-printPro(T, P) :- write('        ').
-     
-
-printOwner(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset), write('  ') ,write(P). 
+printOwner(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset),write(P), write('      '). 
 
 
 printMap :- nl, nl,
-    write('    '),write('     ________________________________________________________________________________'), nl,
-    write('    '),write('    |   FP   |   E1   |   E2   |   E3   |   CC   |   F1   |   F2   |   F3   |   WT   |'), nl,
-    write('    '),write('    |        |        |        |        |        |        |        |        |        |'), nl,
-    write('    '),write('    |________|________|________|________|________|________|________|________|________|'), nl,
-    write('    '),write('    |   D3   |                                                              |   G1   |'), printOwner(g1,_), nl,
-    write('    '),write('    |        |                                                              |        |'), printPro(g1,_), nl,
-    write('    '),write('    |________|                                                              |________|'), nl,
-    write('    '),write('    |   D2   |                                                              |   G2   |'), printOwner(g2,_), nl,
-    write('    '),write('    |        |                                                              |        |'), printPro(g2,_), nl,
-    write('    '),write('    |________|                                                              |________|'), nl,
-    write('    '),write('    |   D1   |                                                              |   G3   |'), printOwner(g3,_), nl,
-    write('    '),write('    |        |                                                              |        |'), printPro(g3,_), nl,
-    write('    '),write('    |________|                                                              |________|'), nl,
-    write('    '),write('    |   TX   |                                                              |   TX   |'), nl,
-    write('    '),write('    |        |                                                              |        |'), nl,
-    write('    '),write('    |________|                                                              |________|'), nl,
-    write('    '),write('    |   C3   |                                                              |   CC   |'), nl,
-    write('    '),write('    |        |                                                              |        |'), nl,
-    write('    '),write('    |________|                                                              |________|'), nl,
-    write('    '),write('    |   C2   |                                                              |   H1   |'), printOwner(h1,_), nl,
-    write('    '),write('    |        |                                                              |        |'), printPro(h1,_), nl,
-    write('    '),write('    |________|                                                              |________|'), nl,
-    write('    '),write('    |   C1   |                                                              |   H2   |'), printOwner(h2,_), nl,
-    write('    '),write('    |        |                                                              |        |'), printPro(h2,_), nl,
-    write('    '),write('    |________|______________________________________________________________|________|'), nl,
-    write('    '),write('    |   JL   |   B3   |   B2   |   B1   |   CC   |   A3   |   GC   |   A1   |   GO   |'), nl,
-    write('    '),write('    |        |        |        |        |        |        |        |        |        |'), nl,
-    write('    '),write('    |________|________|________|________|________|________|________|________|________|'), nl,
+    write('    '),write('             ________________________________________________________________________________'), nl,
+    write('    '),write('            |   FP   |   E1   |   E2   |   E3   |   CC   |   F1   |   F2   |   F3   |   WT   |'), nl,
+    write('    '),write('            |        |        |        |        |        |        |        |        |        |'), nl,
+    write('    '),write('            |________|________|________|________|________|________|________|________|________|'), nl,
+    write('    '),(printOwner(d3,_);write('        ')),write('    |   D3   |                                                              |   G1   |'), (printOwner(g1,_);write('        ')), nl,
+    write('    '),(printPro(d3,_);write('        ')),write('    |        |                                                              |        |'), (printPro(g1,_);write('        ')), nl,
+    write('    '),write('            |________|                                                              |________|'), nl,
+    write('    '),(printOwner(d2,_);write('        ')),write('    |   D2   |                                                              |   G2   |'), (printOwner(g2,_);write('        ')),nl,
+    write('    '),(printPro(d2,_);write('        ')),write('    |        |                                                              |        |'), (printPro(g2,_);write('        ')), nl,
+    write('    '),write('            |________|                                                              |________|'), nl,
+    write('    '),(printOwner(d1,_);write('        ')),write('    |   D1   |                                                              |   G3   |'), (printOwner(g3,_);write('        ')), nl,
+    write('    '),(printPro(d1,_);write('        ')),write('    |        |                                                              |        |'), (printPro(g3,_);write('        ')), nl,
+    write('    '),write('            |________|                                                              |________|'), nl,
+    write('    '),write('            |   TX   |                                                              |   TX   |'), nl,
+    write('    '),write('            |        |                                                              |        |'), nl,
+    write('    '),write('            |________|                                                              |________|'), nl,
+    write('    '),(printOwner(c3,_);write('        ')),write('    |   C3   |                                                              |   CC   |'), nl,
+    write('    '),(printPro(c3,_);write('        ')),write('    |        |                                                              |        |'), nl,
+    write('    '),write('            |________|                                                              |________|'), nl,
+    write('    '),(printOwner(c2,_);write('        ')),write('    |   C2   |                                                              |   H1   |'), (printOwner(h1,_);write('        ')), nl,
+    write('    '),(printPro(c2,_);write('        ')),write('    |        |                                                              |        |'), (printPro(h1,_);write('        ')), nl,
+    write('    '),write('            |________|                                                              |________|'), nl,
+    write('    '),(printOwner(c1,_);write('        ')),write('    |   C1   |                                                              |   H2   |'), (printOwner(h2,_);write('        ')), nl,
+    write('    '),(printPro(c1,_);write('        ')),write('    |        |                                                              |        |'), (printPro(h2,_);write('        ')), nl,
+    write('    '),write('            |________|______________________________________________________________|________|'), nl,
+    write('    '),write('            |   JL   |   B3   |   B2   |   B1   |   CC   |   A3   |   GC   |   A1   |   GO   |'), nl,
+    write('    '),write('            |        |        |        |        |        |        |        |        |        |'), nl,
+    write('    '),write('            |________|________|________|________|________|________|________|________|________|'), nl,
     write('Posisi '), nl,
     write('P1 : '), lokasiPemain(p1, X),  write(X), nl,
     write('P2 : '), lokasiPemain(p2, Y), write(Y), nl.
