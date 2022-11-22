@@ -129,8 +129,6 @@ landingWT:-
     1 = 1.
 landingTX:-
     1 = 1.
-landingGO:-
-    1 = 1.
 landingGC:-
     write('Apakah kamu ingin menguji keberuntunganmu??? (Masukkan angka: )'),
     write('1. Ya'), nl,
@@ -164,13 +162,6 @@ landingNonProperti(Pemain):-
         nl , write('Masuk world tour'), nl, nl,
         landingWT
         ;
-        Lokasi == fp,
-        nl , write('Masuk parkir gratis'), nl, nl,
-        ;
-        Lokasi == go,
-        nl , write('Masuk go'), nl, nl,
-        landingGO
-        ;
         lokasi == gc,
         nl, write('====SELAMAT DATANG DI GAME CENTER==='), nl, nl,
         landingGC
@@ -201,8 +192,8 @@ landingPropertiKosong:-
         ;
         Input == beli,
         (repeat, 
-            lokasiPemain(Pemain, X),
-            checkPropertyDetail(X),
+            lokasiPemain(Pemain, LokasiBeli),
+            checkPropertyDetail(LokasiBeli),
 
             nl, write('Uang Anda: '), write(Uang), nl,
             write('Properti yang mau dibeli: '),
@@ -219,33 +210,57 @@ landingPropertiKosong:-
                 write('cancel.: tidak jadi membeli properti'), nl, fail
                 ;
                 InputPilihan == tanah,
-                write('tanah dibeli'), nl
+                hargaProperti(LokasiBeli, HargaBeli, _,_,_,_),
+                (
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                    ;
+                    write('Tanah berhasil dibeli! '), nl, 
+                    idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    subtBalance(Pemain, HargaBeli)
+                )
                 ;
                 InputPilihan == bangunan1,
-                write('bangunan1 dibeli'), nl
+                hargaProperti(LokasiBeli,_, HargaBeli,_,_,_),
+                (
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                    ;
+                    write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    subtBalance(Pemain, HargaBeli)
+                )
                 ;
                 InputPilihan == bangunan2,
-                write('bangunan2 dibeli'), nl
+                hargaProperti(LokasiBeli,_, _, HargaBeli,_,_),
+                (
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                    ;
+                    write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    subtBalance(Pemain, HargaBeli)
+                )
                 ;
                 InputPilihan == bangunan3,
+                hargaProperti(LokasiBeli,_, _,_, HargaBeli,_),
                 (
-                    lewatGO(Pemain, KaliLewat),
-                    KaliLewat > 0,
-                    write('bangunan3 dibeli'), nl
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
-                    write('bangunan3 belum bisa dibeli'), nl,
-                    landingPropertiKosong,fail
+                    write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    subtBalance(Pemain, HargaBeli)
                 )
                 ;
                 InputPilihan == landmark,
+                (lewatGO(Pemain, KaliLewat2),
+                    KaliLewat2 > 1,
+                hargaProperti(LokasiBeli,_, _, _,_, HargaBeli),
                 (
                     lewatGO(Pemain, KaliLewat2),
-                    KaliLewat2 > 1,
-                    write('landmark dibeli'), nl
-                    ;
-                    write('landmark belum bisa dibeli'), nl,
-                    landingPropertiKosong,fail
-                )
+                    KaliLewat2 > 1,(
+                        Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                        ;
+                        write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                        subtBalance(Pemain, HargaBeli)
+                    )
+                );
+                write('landmark belum bisa dibeli'), nl,
+                landingPropertiKosong,fail
                 ;
                 InputPilihan == cancel
                 ;

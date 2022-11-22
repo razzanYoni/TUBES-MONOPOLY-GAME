@@ -47,7 +47,15 @@ inputHandling:-
                 ;
 
                 /* Check Property Detail */
-                InputString == propertyDetail
+                InputString == propertyDetail,
+                (repeat,
+                    (
+                        nl, write('Masukkan nama properti: '), read(InputProperti),
+                        (
+                            checkPropertyDetail(InputProperti)
+                        )
+                    )
+                )
                 ;
                 
                 /* Next */
