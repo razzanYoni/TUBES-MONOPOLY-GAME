@@ -4,7 +4,7 @@
 
 /*Deklarasi Fakta*/
 
-tiles([go,a1,gc,a3,cc,b1,b2,b3,jl,c1,c2,c3,tx,d1,d2,d3,fp,e1,e2,e3,cc,f1,f2,f3,wt,g1,g2,g3,tx,cc,h1,h2]).
+listLokasi([go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
 
  
 

@@ -42,5 +42,5 @@ guessing_flow :- write('Siap untuk mendapatkan hadiah yang lebih besar?? (masukk
 
 /*playGameCenter : Memulai permainan di game center*/
 playGameCenter :- retractall(n_true(N)), retractall(bermain(S)), retractall(hadiah_pemain(H)), 
-                    asserta(n_true(0)), asserta(bermain(1)), asserta(hadiah_pemain(0)), inputGuessing.
+                    asserta(n_true(0)), asserta(bermain(1)), asserta(hadiah_pemain(0)),inputGuessing.
                     /*Mau ditambahin subtBalance dan addBalance*/
