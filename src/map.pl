@@ -34,11 +34,11 @@ printmap :- nl, nl,
             ;
             write(X)
         ), nl,
-    write('P2 : '), lokasiPemain(p2, X), 
+    write('P2 : '), lokasiPemain(p2, Y),
         (
-            (X == cc1 ; X == cc2 ; X == cc3), write('cc')
+            (Y == cc1 ; Y == cc2 ; Y == cc3), write('cc')
             ;
-            (X == tx1 ; X == tx2), write('tx')
+            (Y == tx1 ; Y == tx2), write('tx')
             ;
             write(X)
-        ), nl,
+        ), nl.

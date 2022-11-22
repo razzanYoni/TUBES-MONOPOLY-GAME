@@ -9,6 +9,8 @@ startGame:-
     
     write('Sekarang giliran: '), currentPemain(X), write(X), nl,
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
+    
+    (repeat,
     write('Masukkan perintah: '),
     read(InputString),
     (
@@ -16,7 +18,7 @@ startGame:-
         /* Help */
         InputString = help,
         nl, write('Perintah yang tersedia'), nl,
-        write('lempar.: mulai melempar dadu'), nl
+        write('lempar.: mulai melempar dadu'), nl, nl, fail
         ;
 
         /* Lempar */
@@ -39,8 +41,10 @@ startGame:-
 
 
         /* Default */
-        write('Input tidak valid')
+        InputString \= help,
+        nl, write('Input tidak valid'), nl, nl, fail
     
+    )
     ),
 
     checkBangkrut(X),
