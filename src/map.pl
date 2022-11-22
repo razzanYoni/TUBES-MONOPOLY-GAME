@@ -21,7 +21,9 @@ cekProperti(T, X) :-
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset),
                 write('|'),write(P), write('| '), write(Aset).
 
-printAtap1(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset), write(' /   \\ ').
+printAtap1(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset), write('/   \\').
+
+printAtap2(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset), write(' ____ ').
 
 
 printMap :- nl, nl,
@@ -29,8 +31,8 @@ printMap :- nl, nl,
     write('        |   FP   |   E1   |   E2   |   E3   |   CC   |   F1   |   F2   |   F3   |   WT   |'), nl,
     write('        |        |        |        |        |        |        |        |        |        |'), nl,
     write('        |________|________|________|________|________|________|________|________|________|'), nl,
-    write('        |   D3   |                                                              |   G1   |'), nl,
-    write('        |        |              ->                                              |        |'), nl,
+    write('        |   D3   |                                                              |   G1   |'), printAtap2(g1,_), nl,
+    write('        |        |              ->                                              |        |'), printAtap1(g1,_), nl,
     write('        |________|                                                              |________|'), nl,
     write('        |   D2   |                                                              |   G2   |'), nl,
     write('        |        |                                                              |        |'), nl,
