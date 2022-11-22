@@ -79,3 +79,13 @@ printMap :- nl, nl,
             ;
             write(Y)
         ), nl.
+
+
+
+%        |
+%Tanah   |
+%Rumah 1 |
+%Rumah 2 |
+%Rumah 3 |
+%Landmark|
+%p1      |
