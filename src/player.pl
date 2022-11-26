@@ -238,6 +238,7 @@ landingPropertiKosong:-
         Input == tidak,
         write('Properti tidak dibeli'), nl
         ;
+        Input \= help,
         write('Input tidak valid'), nl,
         landingPropertiKosong
     ).
@@ -245,7 +246,7 @@ landingPropertiKosong:-
 landingProperti(Pemain):-
     lokasiPemain(Pemain, Lokasi),
     (
-        \+ asetProperti(Siapapun, Lokasi),
+        \+ asetProperti(_Siapapun, Lokasi),
         nl , write('Properti kosong'), nl, nl,
         landingPropertiKosong
         ;
@@ -287,7 +288,7 @@ inMove(Pemain, X, []):-
     inMove(Pemain, X, ListLokasi).
 inMove(Pemain, 1, [H|_T]):-
     /*rekursif untuk basis jika nilai integernya 1*/
-    changeLokasiPemain(Pemain, H).
+    changeLokasiPemain(Pemain, H),!.
     
 inMove(Pemain, X, [_H|T]):-
     /*rekursif untuk basis jika nilai integernya bukan 1*/
@@ -298,7 +299,7 @@ move(Pemain, X):-
     listLokasi(ListLokasi),
     lokasiPemain(Pemain, Lokasi),
     inNextLocations(Pemain, Lokasi, ListLokasi, Output),
-    inMove(Pemain, X, Output).
+    inMove(Pemain, X, Output),!.
 
 /*properti----------------------------------------------*/
 addPosession(Pemain, Properti, Level):-
@@ -311,7 +312,7 @@ addPosession(Pemain, Properti, Level):-
     
     asserta(posessionArr(Pemain, [Properti|OldArr])).
 
-inRemovePosession(Pemain, Properti, [Properti|T], T).
+inRemovePosession(_Pemain, Properti, [Properti|T], T).
     /*rekursif buat basis ngeluarin properti dari posession*/
 inRemovePosession(Pemain, Properti, [H|T], [H|Next]):-
     /*rekursif buat ngeluarin properti dari posession*/
@@ -335,7 +336,7 @@ sellProperti(Pemain, Properti):-
     addBalance(Pemain, HargaJual),
     removePosession(Pemain, Properti),!.
 
-inJumlahAsset(Pemain, X, []):-
+inJumlahAsset(_Pemain, X, []):-
     /*rekursif untuk ngitung jumlah asset*/
     X is 0.
 inJumlahAsset(Pemain, X, [H|T]):-

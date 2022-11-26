@@ -27,7 +27,7 @@ printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 2'
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 3',
                 write('Rumah 3 ').
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Landmark',
-                write('Landmark'). !.
+                write('Landmark').
   
 
 printOwner(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset),write(P), write('      '). 

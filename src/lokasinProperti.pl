@@ -239,5 +239,5 @@ checkPropertyDetail(X):- properti(X),
     write('Harga Sewa Bangunan 3 : '), hargaSewaProperti(X, _, _, _, HargaSewaBangunan3, _) , write(HargaSewaBangunan3), nl,
     write('Harga Sewa Landmark   : '), hargaSewaProperti(X, _, _, _, _, HargaSewaLandmark) , write(HargaSewaLandmark), nl, !.
 
-checkPropertyDetail(X):- write(X), write(' bukan merupakan sebuah properti'), !.
+checkPropertyDetail(X):- write(X), write(' bukan merupakan sebuah properti'), nl.
     

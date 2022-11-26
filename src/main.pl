@@ -7,6 +7,8 @@
 :-include('kartu.pl').
 :-include('gameCenter.pl').
 
+:-dynamic(debug/1).
+debug(debugging).
 
 inputHandling:-
     (repeat,
@@ -18,7 +20,9 @@ inputHandling:-
                 InputString == help,
                 nl, write('Perintah yang tersedia'), nl,
                 write('lempar.: mulai melempar dadu'), nl,
-                write('locationDetail.: mengecek informasi lokasi yang ada'), nl, nl, fail
+                write('locationDetail.: mengecek informasi lokasi yang ada'), nl,
+                write('propertyDetail.: mengecek informasi properti yang ada'), nl,
+                write('debug.: keluar dari overlay game untuk memasukkan command secara direct'), nl, nl, fail
                 ;
 
                 /* Lempar */
@@ -40,19 +44,28 @@ inputHandling:-
                     (
                         nl, write('Masukkan nama lokasi: '), read(InputLokasi),
                         (
-                            checkLocationDetail(InputLokasi)
+                            checkLocationDetail(InputLokasi),!
                         )
                     )
                 )
                 ;
 
                 /* Check Property Detail */
-                InputString == propertyDetail
+                InputString == propertyDetail,
+                (repeat,
+                    (
+                        nl, write('Masukkan nama lokasi: '), read(InputLokasi),
+                        (
+                            checkPropertyDetail(InputLokasi),!
+                        )
+                    )
+                )
                 ;
-                
-                /* Next */
-                InputString == test, nl, 
-                write('Test brehasil')
+
+                /* Debug mode*/
+                InputString == debug,
+                asserta(debug(debugging)),
+                nl, write('Masuk ke mode debug'), nl, nl, !
                 ;
 
                 /* Default */
@@ -77,10 +90,13 @@ startGameIn:-
     
     (bangkrut(X, true)
     ;
+    debug(debugging)
+    ;
     fail,!).
 
 
 startGame:-
+    retractall(debug(_Debugging)),
     (repeat,
        startGameIn
     ).
