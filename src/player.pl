@@ -52,14 +52,29 @@ asetProperti(p2, b2).
 asetProperti(p2, b3).
 
 tingkatanAset(a1, 'Tanah').
-tingkatanAset(c2, 'Bangunan 1').
-tingkatanAset(a3, 'Landmark').
-tingkatanAset(g1, 'Tanah').
+tingkatanAset(a2, 'Bangunan 1').
+tingkatanAset(b1, 'Landmark').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
-tingkatanAset(d1, 'Bangunan 2').
-posessionArr(p1, [d1,a2,a3]).
-posessionArr(p2, [g1,b2,b3]).
+tingkatanAset(c1, 'Tanah').
+tingkatanAset(c2, 'Bangunan 2').
+tingkatanAset(c3, 'Tanah').
+tingkatanAset(d1, 'Bangunan 1').
+tingkatanAset(d2, 'Landmark').
+tingkatanAset(d3, 'Tanah').
+tingkatanAset(e1, 'Tanah').
+tingkatanAset(e2, 'Tanah').
+tingkatanAset(e3, 'Bangunan 2').
+tingkatanAset(f1, 'Tanah').
+tingkatanAset(f2, 'Bangunan 1').
+tingkatanAset(f3, 'Landmark').
+tingkatanAset(g1, 'Tanah').
+tingkatanAset(g2, 'Tanah').
+tingkatanAset(g3, 'Tanah').
+tingkatanAset(h1, 'Bangunan 2').
+tingkatanAset(h2, 'Bangunan 2').
+posessionArr(p1, [go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
+posessionArr(p2, []).
 
 /*AKHIR TEMP*/
 
