@@ -4,7 +4,6 @@
 /*
 TODO
 -Tambahin angel card waktu move
--Tambahin detektor landing waktu move
 -Tambahin aksi landing waktu move
 -Integrasiin fitur dari non properti
 */
@@ -43,22 +42,22 @@ lewatGO(p1, 0).
 lewatGO(p2, 0).
 
 
+
 /*TEMP*/
 asetProperti(p1, d1).
 asetProperti(p1, a2).
-asetProperti(p1, a3).
+asetProperti(p1, a1).
 asetProperti(p2, g1).
 asetProperti(p2, b2).
 asetProperti(p2, b3).
 
+tingkatanAset(d1, 'Tanah').
+tingkatanAset(a2, 'Tanah').
 tingkatanAset(a1, 'Tanah').
-tingkatanAset(c2, 'Bangunan 1').
-tingkatanAset(a3, 'Landmark').
 tingkatanAset(g1, 'Tanah').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
-tingkatanAset(d1, 'Bangunan 2').
-posessionArr(p1, [d1,a2,a3]).
+posessionArr(p1, [d1,a2,a1]).
 posessionArr(p2, [g1,b2,b3]).
 
 /*AKHIR TEMP*/
@@ -129,10 +128,10 @@ landingGC:-
     write('2. Tidak'), nl,
     write('Pilihan: '), read(Pilihan),
     (
-        Pilihan == 1, subtBalance(Pemain,50), playGameCenter,
+        Pilihan == 1, subtBalance(Pemain,50), playGameCenter
         ;
         Pilihan == 2 
-    ).
+    ),
     write('===Terima Kasih Telah Berkunjung ke Game Center===').
 
 
@@ -163,7 +162,7 @@ landingNonProperti(Pemain):-
 
 /*Properti*/
 landingPropertiLawan:-
-    subtBalance(Pemain, hargas)
+    1 = 1.
 landingPropertiSendiri:-
     1 = 1.
 landingPropertiKosong:-
@@ -185,6 +184,9 @@ landingPropertiKosong:-
         write('    landmark dapat dibeli setelah dua putaran'), nl,
         write('tidak.: tidak membeli properti'), nl,
         landingPropertiKosong
+        ;
+        Input == tidak,
+        write('Properti tidak dibeli'), nl
         ;
         Input == beli,
         (repeat, 
@@ -211,7 +213,7 @@ landingPropertiKosong:-
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
                     write('Tanah berhasil dibeli! '), nl, 
-                    idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
@@ -220,7 +222,7 @@ landingPropertiKosong:-
                 (
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
-                    write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
@@ -229,7 +231,7 @@ landingPropertiKosong:-
                 (
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
-                    write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
@@ -238,34 +240,30 @@ landingPropertiKosong:-
                 (
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
-                    write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
                 InputPilihan == landmark,
-                (lewatGO(Pemain, KaliLewat2),
-                    KaliLewat2 > 1,
                 hargaProperti(LokasiBeli,_, _, _,_, HargaBeli),
                 (
                     lewatGO(Pemain, KaliLewat2),
                     KaliLewat2 > 1,(
                         Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                         ;
-                        write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                        write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                         subtBalance(Pemain, HargaBeli)
                     )
-                );
-                write('landmark belum bisa dibeli'), nl,
-                landingPropertiKosong,fail
+                    ;
+                    write('landmark belum bisa dibeli'), nl,
+                    landingPropertiKosong,fail
+                )
                 ;
                 InputPilihan == cancel
                 ;
                 write('Input tidak valid'), nl, fail
             )    
         )
-        ;
-        Input == tidak,
-        write('Properti tidak dibeli'), nl
         ;
         Input \= help,
         write('Input tidak valid'), nl,
@@ -365,9 +363,7 @@ sellProperti(Pemain, Properti):-
     addBalance(Pemain, HargaJual),
     removePosession(Pemain, Properti),!.
 
-inJumlahAsset(_Pemain, X, []):-
-    /*rekursif untuk ngitung jumlah asset*/
-    X is 0.
+inJumlahAsset(Pemain, 0, []).
 inJumlahAsset(Pemain, X, [H|T]):-
     /*rekursif untuk ngitung jumlah asset*/
     biayaProperti(H, Biaya),
@@ -377,11 +373,43 @@ jumlahAsset(Pemain, Output):-
     /*ngitung jumlah asset*/
     posessionArr(Pemain, PossArr),
     inJumlahAsset(Pemain, Output, PossArr).
+totalAsset(Pemain, Output):-
+    jumlahAsset(Pemain, Asset),
+    balance(Pemain, Uang),
+    Output is Asset + Uang.
 
-playerDetail:-
-    currentPemain(Pemain).
+inShowProperties(Pemain, X, []).
+inShowProperties(Pemain, X, [H|T]):-
+    tingkatanAset(H, Tingkat),
+    write(X), write('. '), write(H), write(' - '), write(Tingkat),nl,
+    A is X + 1,
+    inShowProperties(Pemain, A, T).
+showProperties(Pemain):-
+    posessionArr(Pemain, PossArr),
+    inShowProperties(Pemain, 1, PossArr),!.
 
+checkPlayerDetail(Pemain):-
+    pemain(Pemain),
+    lokasiPemain(Pemain, Lokasi),
+    balance(Pemain, Uang),
+    jumlahAsset(Pemain, Asset),
+    totalAsset(Pemain, Total),
 
+    nl, write('Informasi '), write(Pemain), nl, nl,
+
+    write('Lokasi                        :' ), write(Lokasi), nl,
+    write('Total Uang                    :' ), write(Uang), nl,
+    write('Total Nilai Properti          :' ), write(Total),nl,nl,
+
+    write('Daftar Kepemilikan Properti   :' ),nl,
+    showProperties(Pemain).
+
+    write('Daftar Kepemilikan Card       : '),nl.
+
+    /*Masuk ke sini yang card*/
+
+playerDetail(Pemain):-
+    write("Nama pemain tidak valid").
 
 
 

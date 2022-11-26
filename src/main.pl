@@ -22,6 +22,7 @@ inputHandling:-
                 write('lempar.: mulai melempar dadu'), nl,
                 write('locationDetail.: mengecek informasi lokasi yang ada'), nl,
                 write('propertyDetail.: mengecek informasi properti yang ada'), nl,
+                write('playerDetail.: mengecek informasi properti yang ada'), nl,
                 write('debug.: keluar dari overlay game untuk memasukkan command secara direct'), nl, nl, fail
                 ;
 
@@ -57,6 +58,18 @@ inputHandling:-
                         nl, write('Masukkan nama lokasi: '), read(InputLokasi),
                         (
                             checkPropertyDetail(InputLokasi),!
+                        )
+                    )
+                )
+                ;
+
+                /* Check Property Player */
+                InputString == playerDetail,
+                (repeat,
+                    (
+                        nl, write('Masukkan nama pemain: '), read(InputPlayer),
+                        (
+                            checkPlayerDetail(Pemain),!
                         )
                     )
                 )
