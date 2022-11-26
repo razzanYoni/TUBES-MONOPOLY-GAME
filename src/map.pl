@@ -32,6 +32,8 @@ printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Landmark',
 
 printOwner(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset),write(P), write('      '), !.
 
+printBalance(Player) :- balance(Player, X), write(X).
+
 
 printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_);write('        ')),write(' '),(printOwner(e2,_);write('        ')),write(' '),(printOwner(e3,_);write('        ')),write(' '),write('        '),write(' '),(printOwner(f1,_);write('        ')),write(' '),(printOwner(f2,_);write('        ')),write(' '),(printOwner(f3,_);write('        ')),nl,
                     write('             '),write('          '),(printPro(e1,_);write('        ')),write(' '),(printPro(e2,_);write('        ')),write(' '),(printPro(e3,_);write('        ')),write(' '),write('        '),write(' '),(printPro(f1,_);write('        ')),write(' '),(printPro(f2,_);write('        ')),write(' '),(printPro(f3,_);write('        ')),nl,
@@ -73,7 +75,7 @@ printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_)
             (X == tx1 ; X == tx2), write('tx')
             ;
             write(X)
-        ), nl,
+        ), nl, printBalance(p1),
     write('P2 : '), lokasiPemain(p2, Y),
         (
             (Y == cc1 ; Y == cc2 ; Y == cc3), write('cc')
@@ -81,7 +83,7 @@ printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_)
             (Y == tx1 ; Y == tx2), write('tx')
             ;
             write(Y)
-        ), nl,!.
+        ), nl, printBalance(p2),!.
 
 
 
