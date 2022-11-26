@@ -135,7 +135,7 @@ landingGC:-
     write('2. Tidak'), nl,
     write('Pilihan: '), read(Pilihan),
     (
-        Pilihan == 1, subtBalance(Pemain,50), playGameCenter,
+        Pilihan == 1, subtBalance(Pemain,50), playGameCenter
         ;
         Pilihan == 2 
     ).
@@ -167,9 +167,11 @@ landingNonProperti(Pemain):-
         landingGC
     ).
 
-/*Properti*/
+/*Properti
 landingPropertiLawan:-
-    subtBalance(Pemain, hargas)
+    biayaSewaProperti(Lokasi, BiayaSewa),
+    subtBalance(Pemain, biayaSewa),
+*/
 landingPropertiSendiri:-
     1 = 1.
 landingPropertiKosong:-
@@ -215,7 +217,7 @@ landingPropertiKosong:-
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
                     write('Tanah berhasil dibeli! '), nl, 
-                    idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
@@ -224,7 +226,7 @@ landingPropertiKosong:-
                 (
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
-                    write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
@@ -233,7 +235,7 @@ landingPropertiKosong:-
                 (
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
-                    write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
@@ -242,7 +244,7 @@ landingPropertiKosong:-
                 (
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
-                    write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                    write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli)
                 )
                 ;
@@ -255,7 +257,7 @@ landingPropertiKosong:-
                     KaliLewat2 > 1,(
                         Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                         ;
-                        write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu') nl,
+                        write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                         subtBalance(Pemain, HargaBeli)
                     )
                 );
@@ -273,6 +275,7 @@ landingPropertiKosong:-
         ;
         write('Input tidak valid'), nl,
         landingPropertiKosong
+    )
     ).
 
 landingProperti(Pemain):-
