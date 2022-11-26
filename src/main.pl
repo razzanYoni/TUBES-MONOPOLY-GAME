@@ -47,7 +47,15 @@ inputHandling:-
                 ;
 
                 /* Check Property Detail */
-                InputString == propertyDetail
+                InputString == propertyDetail,
+                (repeat,
+                    (
+                        nl, write('Masukkan nama properti: '), read(InputProperti),
+                        (
+                            checkPropertyDetail(InputProperti)
+                        )
+                    )
+                )
                 ;
                 
                 /* Next */
@@ -74,6 +82,7 @@ startGameIn:-
     checkBangkrut(X),
 
     /*Command Closingan kalo kalah di sini*/
+    
     (bangkrut(X, true)
     ;
     fail,!).

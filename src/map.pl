@@ -81,7 +81,7 @@ printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_)
             (Y == tx1 ; Y == tx2), write('tx')
             ;
             write(Y)
-        ), nl.
+        ), nl,!.
 
 
 
@@ -92,4 +92,3 @@ printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_)
 %Gedung 3|
 %Landmark|
 %p1      |
-%
