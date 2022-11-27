@@ -19,7 +19,7 @@ pemain(p1).
 pemain(p2).
 /*data lokasiPemain*/
 :-dynamic(lokasiPemain/2).
-lokasiPemain(p1, tx2).
+lokasiPemain(p1, go).
 lokasiPemain(p2, go).
 /*data duit*/
 :-dynamic(balance/2).
@@ -121,6 +121,9 @@ nextLocations(Pemain, Output):-
     listLokasi(ListLokasi),
     inNextLocations(Pemain, X, ListLokasi, Output).
 
+/* Menghitung Tax dari Satu Pemain */
+taxValue(Player, Tax) :- totalAsset(Player, Total), Tax is Total / 10.
+
 /*Check tempat landing buat move, masukin command sesuai keperluan*/
 /*Non Properti*/
 landingJail:-
@@ -130,7 +133,13 @@ landingCC:-
 landingWT:-
     1 = 1.
 landingTX:-
-    1 = 1.
+    taxValue(Player, Tax),
+    nl, nl,
+    write('    Anda harus membayar pajak sebesar '), 
+    write(Tax),
+    write(' dolar.'),
+    subtBalance(Player, Tax).
+
 landingGC:-
     write('Apakah kamu ingin menguji keberuntunganmu??? (Masukkan angka: )'),
     write('1. Ya'), nl,

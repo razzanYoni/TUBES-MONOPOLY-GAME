@@ -6,7 +6,7 @@
 :-include('gameCenter.pl').
 :-include('kartu.pl').
 :-include('gameCenter.pl').
-:-include('pajak.pl').
+
 
 :-dynamic(debug/1).
 debug(debugging).
@@ -92,7 +92,6 @@ inputHandling:-
 
 startGameIn:-
 
-    bayarPajak(X),
 
     printMap,
 
