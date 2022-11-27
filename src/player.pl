@@ -538,6 +538,11 @@ inMove(Pemain, X, []):-
     /*rekursif untuk list supaya sirkuler*/
     addBalance(Pemain, 200),
     balance(Pemain, Uang),
+    worldCup(Penyelenggara, _),
+    (
+        Penyelenggara == Pemain,
+        retract(worldCup(Penyelenggara, LokasiWorldCup))
+    ),
 
     nl, write(Pemain), write(' melewati go, uangmu sekarang, '), write(Uang), nl, nl,
 
