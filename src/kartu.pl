@@ -42,8 +42,8 @@ chanceCard1(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
 chanceCard1(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadiah Kepada Lawanmu'),
                     randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
                     subtBalance(p1, Saldo), addBalance(p2, Saldo), nl, !.
-chanceCard1(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'),
-                    asetProperti(p1, Properti), \+ landmark(Properti), removePosession(p1, Properti), nl, !.
+chanceCard1(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl
+                    asetProperti(p1, Properti), \+ landmark(Properti), removePosession(p1, Properti), !.
 chanceCard1(Num) :- Num == 13, write('Setelah Dilihat-lihat Ternyata Sudah Aman'), nl, !.
 chanceCard1(Num) :- Num == 14, write('Ada Tetanggamu yang Membutuhkan Tempat!!!'),
                     asetProperti(p1, Properti), \+ landmark(Properti), nilaiProperti(Properti, Nilai),
@@ -79,8 +79,8 @@ chanceCard2(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
 chanceCard2(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadiah Kepada Lawanmu'),
                     randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
                     subtBalance(p2, Saldo), addBalance(p1, Saldo), nl, !.
-chanceCard2(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'),
-                    asetProperti(p2, Properti), \+ landmark(Properti), removePosession(p2, Properti), nl, !.
+chanceCard2(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl,
+                    asetProperti(p2, Properti), \+ landmark(Properti), removePosession(p2, Properti), !.
 chanceCard2(Num) :- Num == 13, write('Setelah Dilihat-lihat Ternyata Sudah Aman'), nl, !.
 chanceCard2(Num) :- Num == 14, write('Ada Tetanggamu yang Membutuhkan Tempat, Jual Propertimu'),
                     asetProperti(p2, Properti), \+ landmark(Properti), nilaiProperti(Properti, Nilai),
@@ -106,8 +106,8 @@ isPoor(Player, Boolean) :- totalAsset(Player, Balance1),
 /* untuk kocok kartu */
 runCard :- currentPemain(_P), (lokasiPemain(_P, cc1); lokasiPemain(_P, cc2); lokasiPemain(_P, cc3)),
            isPoor(_P, Boolean), randomNumberForCard(Number, Boolean), 
-           ((_P == p1, chanceCard1(Number), lenCard1(X), isChangeCard1(X, Number)) ; 
-           (_P == p2, chanceCard2(Number), lenCard2(X), isChangeCard2(X, Number))), !.
+           ((_P == p1, chanceCard1(Number), lenCard1(X), isChangeCard1(X, Number), !) ; 
+           (_P == p2, chanceCard2(Number), lenCard2(X), isChangeCard2(X, Number), !)), !.
 
 /* program untuk print card */
 infoCard :- currentPemain(_P), _P == p1, lenCard1(_Len), _Len = 0, write('Kamu tidak memiliki kartu'), nl, !.        
