@@ -33,9 +33,12 @@ chanceCard1(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke 
                     moveToClosestTax(p1), landingTX(p1), !.
 chanceCard1(Num) :- Num == 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'), 
                     asserta(jail(p1)), asserta(jail(p1)),
-                    changeLokasiPemain(p1, jl), switchPlayer, retractall(double(_X)), nl, !.
-chanceCard1(Num) :- Num == 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), nl, 
-                    moveToLocation(p1, fp), !.
+                    changeLokasiPemain(p1, jl), switchPlayer, retractall(double(_X)), nl, 
+                    printMap,
+                    write('Sekarang giliran: '), currentPemain(X), write(X), nl,
+                    write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,!.
+chanceCard1(Num) :- Num == 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
+                    moveToLocation(p1, fp), nl, !.
 chanceCard1(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
                     randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
                     subtBalance(p1, Saldo), nl, !.
@@ -70,9 +73,12 @@ chanceCard2(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke 
                     moveToClosestTax(p2),landingTX(p2), !.
 chanceCard2(Num) :- Num == 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'),
                     asserta(jail(p2)), asserta(jail(p2)),
-                    changeLokasiPemain(p2, jl), switchPlayer, retractall(double(_X)), nl, !.
-chanceCard2(Num) :- Num == 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), nl,
-                    moveToLocation(p2, fp), !.
+                    changeLokasiPemain(p2, jl), switchPlayer, retractall(double(_X)), nl,
+                    printMap,
+                    write('Sekarang giliran: '), currentPemain(X), write(X), nl,
+                    write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,!.
+chanceCard2(Num) :- Num == 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
+                    moveToLocation(p2, fp), nl, !.
 chanceCard2(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
                     randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
                     subtBalance(p2, Saldo), nl, !.
@@ -92,6 +98,7 @@ isChangeCard1(X, Num) :- X == 3, write('Kartumu berlebih mau mengambil kartu bar
                         ((Answer == y, retract(card(p1,_LastCard)), !) ; (Answer == n, retract(card(p1, Num)), !) ; 
                         (Answer \= y, Answer \= n, write('Input tidak valid'), nl, isChangeCard1(X, Num), !)),
                         retract(lenCard1(Len)), LenNew is Len - 1, asserta(lenCard1(LenNew)), !.
+isChangeCard1(X, _Num) :- X \= 3.
 isChangeCard2(X, Num) :- X == 3, write('Kartumu berlebih mau mengambil kartu baru?[y/n]'), nl, read(Answer), 
                         ((Answer == y, retract(card(p2,_LastCard)), !) ; (Answer == n, retract(card(p2, Num)), !) ; 
                         (Answer \= y, Answer \= n, write('Input tidak valid'), nl, isChangeCard2(X, Num), !)), 
