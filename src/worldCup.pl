@@ -34,7 +34,7 @@ worldCup :-
             write(InputProp), write(' menjadi Tuan rumah World cup'), nl,
             write('di Dunia Boku no Prolog!'), nl
             write('(akhirnya cewek-cewek akan terpukau denganku!!)'),nl,
-            write('pikirmu'), nl, !
+            write('pikirmu..'), nl, !
             ;
 
             /* non valid */
