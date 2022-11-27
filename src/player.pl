@@ -519,7 +519,7 @@ landingPropertiKosong(Pemain):-
                     ;
                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
-                    addPosession(Pemain, LokasiBeli, 'Bangunan3'), landingPropertiSendiri(Pemain), !
+                    addPosession(Pemain, LokasiBeli, 'Bangunan3'), !
                 )
                 ;
                 InputPilihan == landmark,

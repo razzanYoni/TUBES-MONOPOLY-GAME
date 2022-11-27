@@ -8,7 +8,7 @@ outputWc :-
     write('__      __       _    _   _____             '), nl,
     write('\\ \\    / /__ _ _| |__| | |_   _|__ _  _ _ _ '), nl,
     write(' \\ \\/\\/ / _ \\ \'_| / _` |   | |/ _ \\ || | \'_|'), nl,
-    write('  \\_/\\_/\\___/_| |_\\__,_|   |_|\\___/\\_,_|_|  '), !.
+    write('  \\_/\\_/\\___/_| |_\\__,_|   |_|\\___/\\_,_|_|  '),nl,nl, !.
 /* ======================================== Initwcoutput ======================================== */
 
 
@@ -29,10 +29,6 @@ worldCup :-
     currentPemain(Pemain),
     lokasiPemain(Pemain, wc),
     pemainLawan(Pemain, Lawan),
-    retractall(worldCupCurrent(_Pemain, _Lokasi)),
-    (
-        write('efek World Cup' write(_Lokasi),
-    ),
     (
         repeat,
         write('Masukkan properti yang akan menjadi tuan rumah: '),
@@ -40,12 +36,19 @@ worldCup :-
         (
             /* valid */
             asetProperti(Pemain, InputProp),
+            retractall(worldCupCurrent(_Pemain, _Lokasi)),
+            (
+                worldCupCurrent(_Pemain, _Lokasi),
+                write('efek World Cup '),  write(_Lokasi), write(' dihilangkan'), nl
+                ;
+                true
+            ),
             asserta(worldCupCurrent(Pemain, InputProp)),
             asserta(worldCupCurrent(Pemain, InputProp)),
             asserta(worldCupCurrent(Pemain, InputProp)),
             write(InputProp), write(' menjadi Tuan rumah World cup'), nl,
             write('di Dunia Boku no Prolog!'), nl,
-            write('(nilai properti '), write(InputProp), write(' naik 2 kali lipat)') nl,
+            write('(nilai properti '), write(InputProp), write(' naik 2 kali lipat)'), nl,
             write('(akhirnya cewek-cewek akan terpukau denganku!!)'),nl,
             write('pikirmu..'), nl, !
             ;
@@ -80,7 +83,7 @@ worldCup :-
             write(InputProp), write(' bukanlah properti yang valid!'), nl, fail
         )   
     ),!.
-
+0
 
 worldCup :-
     currentPemain(Pemain),
