@@ -35,30 +35,12 @@ bangkrut(p2, false).
 /*data properti yang dimiliki dalam array*/
     /*ini perlu buat ngitung asset, susah rekursinya kalo gak pake array*/
 :-dynamic(posessionArr/2).
-/*
 posessionArr(p1, []).
 posessionArr(p2, []).
-*/
 :-dynamic(lewatGO/2).
 lewatGO(p1, 0).
 lewatGO(p2, 0).
 
-/*
-TEMP untuk debugging */
-asetProperti(p1, d1).
-asetProperti(p2, a2).
-asetProperti(p1, a1).
-asetProperti(p2, g1).
-asetProperti(p2, b2).
-asetProperti(p2, b3).
-tingkatanAset(d1, 'Tanah').
-tingkatanAset(a2, 'Tanah').
-tingkatanAset(a1, 'Tanah').
-tingkatanAset(b2, 'Tanah').
-tingkatanAset(b3, 'Tanah').
-tingkatanAset(g1, 'Bangunan2').
-posessionArr(p1, [d1,a2,a1]).
-posessionArr(p2, [g1,b2,b3]).
 
 
 /*Basic-----------------------------------------------*/
@@ -798,6 +780,15 @@ resetGame:-
     retractall(tingkatanAset(_M, _N)),
     retractall(posessionArr(_O, _P)),
     retractall(lewatGO(_Q, _R)),
+    retractall(double(_)),
+    retractall(jail(_)),
+    retractall(worldCupCurrent(_)),
+    retractall(lenCard1(_)),
+    retractall(lenCard2(_)),
+    retractall(card(_)),
+    retractall(n_true(_)),
+    retractall(hadiah_pemain(_)),
+    retractall(bermain(_)),
 
     asserta(currentPemain(p1)),
     asserta(lokasiPemain(p1, go)),
@@ -808,9 +799,6 @@ resetGame:-
     asserta(bangkrut(p2, false)),
     asserta(lewatGO(p1, 0)),
     asserta(lewatGO(p1, 0)).
-
-
-
 
 /*Blok---------------------------------------------*/
 isBlock(a1):-
