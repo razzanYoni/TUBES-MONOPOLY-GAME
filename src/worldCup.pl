@@ -83,7 +83,6 @@ worldCup :-
             write(InputProp), write(' bukanlah properti yang valid!'), nl, fail
         )   
     ),!.
-0
 
 worldCup :-
     currentPemain(Pemain),
