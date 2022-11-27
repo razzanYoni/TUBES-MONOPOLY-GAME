@@ -13,6 +13,7 @@ lokasi(tx2).
 lokasi(fp).
 lokasi(wt).
 lokasi(gc).
+lokasi(wc).
 
 /*Deklarasi Rules*/
 /*lokasi(X): X adalah sebuah lokasi yang valid pada Map*/
@@ -175,6 +176,9 @@ checkLocationDetail(X):- lokasi(X), X =='gc',
     write('Hadiah2 : Jika berhasil menebak dengan benar dua kali ($300)'), nl,
     write('Hadiah3 : Jika berhasil menebak dengan benar tiga kali ($500)'),nl, !.
 
+checkLocationDetail(X):- lokasi(X), X=='wc', 
+    write('Nama Lokasi         : '), write('Free Parking'), nl,
+    write('Deskripsi Lokasi    : '), nl, !. % Tambahin deskripsi di newline
 
 checkLocationDetail(X):- write(X), write(' bukan merupakan lokasi yang valid'), nl, fail.
 
@@ -198,7 +202,6 @@ properti(d2).
 properti(d3).
 properti(e1).
 properti(e2).
-properti(e3).
 properti(f1).
 properti(f2).
 properti(f3).
@@ -222,7 +225,6 @@ idProperti(d2, copenhagen, ibukotaDenmark).
 idProperti(d3, stockholm, ibukotaSwedia).
 idProperti(e1, berlin, ibukotaJerman).
 idProperti(e2, paris, ibukotaPrancis).
-idProperti(e3, london, ibukotaInggris).
 idProperti(f1, roma, ibukotaItalia).
 idProperti(f2, madrid, ibukotaSpanyol).
 idProperti(f3, lisbon, ibukotaPortugal).
@@ -245,8 +247,7 @@ hargaProperti(d1, 200, 300, 400, 500, 600).
 hargaProperti(d2, 200, 300, 400, 500, 600).
 hargaProperti(d3, 220, 320, 420, 520, 620).
 hargaProperti(e1, 220, 370, 520, 670, 820).
-hargaProperti(e2, 220, 370, 520, 670, 820).
-hargaProperti(e3, 240, 390, 540, 690, 840).
+hargaProperti(e2, 240, 390, 540, 690, 840).
 hargaProperti(f1, 280, 430, 580, 730, 880).
 hargaProperti(f2, 280, 430, 580, 730, 880).
 hargaProperti(f3, 300, 450, 600, 750, 900).
@@ -269,8 +270,7 @@ hargaSewaProperti(d1, 20, 70, 200, 550, 950).
 hargaSewaProperti(d2, 20, 70, 200, 550, 950).
 hargaSewaProperti(d3, 30, 80, 220, 600, 1000).
 hargaSewaProperti(e1, 30, 90, 250, 700, 1050).
-hargaSewaProperti(e2, 30, 90, 250, 700, 1050).
-hargaSewaProperti(e3, 40, 100, 300, 750, 1100).
+hargaSewaProperti(e2, 40, 100, 300, 750, 1100).
 hargaSewaProperti(f1, 40, 110, 330, 800, 1150).
 hargaSewaProperti(f2, 40, 110, 330, 800, 1150).
 hargaSewaProperti(f3, 50, 120, 360, 850, 1200).
