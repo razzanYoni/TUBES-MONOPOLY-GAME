@@ -198,6 +198,8 @@ landingNonProperti(Pemain):-
         lokasi == gc,
         nl, write('====SELAMAT DATANG DI GAME CENTER==='), nl, nl,
         landingGC(Pemain),!
+        ;
+        lokasi == fp,!
     ).
 
 /* Properti */
