@@ -78,7 +78,7 @@ chanceCard2(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
                     subtBalance(p2, Saldo), nl, !.
 chanceCard2(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadiah Kepada Lawanmu'),
                     randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
-                    subtBalance(p2, Saldo), addBalance(p1, Saldo), nl, !.
+                    subtBalance(p2, Saldo), addBalance(p2, Saldo), nl, !.
 chanceCard2(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'),
                     asetProperti(p2, Properti), \+ landmark(Properti), removePosession(p2, Properti), nl, !.
 chanceCard2(Num) :- Num == 13, write('Setelah Dilihat-lihat Ternyata Sudah Aman'), nl, !.
