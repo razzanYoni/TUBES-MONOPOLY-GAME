@@ -68,7 +68,7 @@ throwDice :- currentPemain(_Pemain),
              changeLokasiPemain(_Pemain, jl),
 
              write('Anda masuk ke jail karena mendapatkan Double 3 kali berturut-turut'), nl, 
-             retractall(double(X)), asserta(jail(_Pemain)), asserta(jail(_Pemain)),!.
+             retractall(double(_X)), asserta(jail(_Pemain)), asserta(jail(_Pemain)),!.
              % janganlupa ganti masukan pemain yang ke jail
 
 /* keluar dari jail dengan dadu*/

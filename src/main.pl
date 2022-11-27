@@ -5,7 +5,7 @@
 :-include('player.pl').
 :-include('gameCenter.pl').
 :-include('kartu.pl').
-:-include('gameCenter.pl').
+:-inlcude('jail.pl'). 
 
 
 :-dynamic(debug/1).
@@ -32,7 +32,7 @@ inputHandling:-
                 throwDice,
                 (
                     /* Kalo gak double switch and stop */
-                    \+ double(Berapapun),
+                    \+ double(_Berapapun),
                     switchPlayer, !
                     ;
                     1 = 1
@@ -68,9 +68,9 @@ inputHandling:-
                 InputString == playerDetail,
                 (repeat,
                     (
-                        nl, write('Masukkan nama pemain: '), read(InputPlayer),
+                        nl, write('Masukkan nama pemain: '), read(_InputPlayer),
                         (
-                            checkPlayerDetail(Pemain),!
+                            checkPlayerDetail(InputPlayer),!
                         )
                     )
                 )
@@ -99,10 +99,6 @@ startGameIn:-
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
         
     inputHandling,
-
-    checkBangkrut(X),
-
-    /*Command Closingan kalo kalah di sini*/
     
     (bangkrut(X, true)
     ;
