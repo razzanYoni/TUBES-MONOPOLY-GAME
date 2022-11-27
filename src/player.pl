@@ -35,14 +35,16 @@ bangkrut(p2, false).
 /*data properti yang dimiliki dalam array*/
     /*ini perlu buat ngitung asset, susah rekursinya kalo gak pake array*/
 :-dynamic(posessionArr/2).
+/*
 posessionArr(p1, []).
 posessionArr(p2, []).
+*/
 :-dynamic(lewatGO/2).
 lewatGO(p1, 0).
 lewatGO(p2, 0).
 
-/*
-TEMP untuk debugging 
+
+landmark(b2).
 asetProperti(p1, d1).
 asetProperti(p2, a2).
 asetProperti(p1, a1).
@@ -52,12 +54,12 @@ asetProperti(p2, b3).
 tingkatanAset(d1, 'Tanah').
 tingkatanAset(a2, 'Tanah').
 tingkatanAset(a1, 'Tanah').
-tingkatanAset(b2, 'Tanah').
+tingkatanAset(b2, 'Landmark').
 tingkatanAset(b3, 'Tanah').
 tingkatanAset(g1, 'Bangunan2').
 posessionArr(p1, [d1,a2,a1]).
 posessionArr(p2, [g1,b2,b3]).
-*/
+
 
 
 /*Basic-----------------------------------------------*/
@@ -207,43 +209,55 @@ landingPropertiLawan(Pemain):-
     lokasiPemain(Pemain, Lokasi),
     asetProperti(Pemainlain, Lokasi),
     Pemainlain \= Pemain,
+    
+    currentPemain(Pemain),
+    biayaSewaProperti(Lokasi, BiayaSewa),
+    asetProperti(PemilikLama, Lokasi),
+
+    subtBalance(Pemain, BiayaSewa),
+    addBalance(PemilikLama, BiayaSewa),
+    balance(Pemain, Uang),
 
     printMap,
     write('Sekarang giliran: '), write(Pemain), nl,
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
-    
-    currentPemain(Pemain),
-    biayaSewaProperti(Lokasi, BiayaSewa),
+
     (
         card(Pemain, 6), 
         write('Apakah kamu ingin menggunakan Kartu Sakti?[y/n]'), nl,
         read(Answer),
         (
-            Answer == y, subtBalance(Pemain, BiayaSewa), write('Berhasil mengaktifkan Kartu Sakti'), nl, nl, retract(card(Pemain, 6)), !
+            Answer == y, addBalance(Pemain, BiayaSewa),subtBalance(PemilikLama, BiayaSewa), write('Berhasil mengaktifkan Kartu Sakti'), nl, nl, retract(card(Pemain, 6)),
+            nl, write('Saldo Player P1: '), printBalance(p1), nl,nl,nl, write('Saldo Player P2: '), printBalance(p2),nl,nl,!
             ;
-            Answer == n, subtBalance(Pemain, BiayaSewa), asetProperti(PemainLawan, Lokasi) ,addBalance(PemainLawan, BiayaSewa), write('Biaya sewa properti berhasil dibayar'), !
+            Answer == n, write('Biaya sewa properti berhasil dibayar'), !
             ;
             Answer \= y, Answer \= n, write('Input tidak valid'), nl, nl, landingPropertiLawan(Pemain), !
         )
         ;
-        subtBalance(Pemain, BiayaSewa),
-        balance(Pemain, Uang)
+        \+ card(Pemain, 6)
     ),
 
-    (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
-        (
-            AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
-                (
-                    Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, asetProperti(PemilikLama, Lokasi), ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
-                    ;
-                    write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid'), ! 
-                ), !
+    (
+        \+ landmark(Lokasi),
+        (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
+            (
+                AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
+                    (
+                        Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
+                        ;
+                        write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid'), ! 
+                    ), !
+                ;
+                AmbilAlih == tidak, !
+            )
             ;
-            AmbilAlih == tidak, !
+            checkBangkrut(Pemain) ,!
         )
         ;
-        checkBangkrut(Pemain) 
+        landmark(Lokasi),!
     ).
+
 
 landingPropertiSendiri(Pemain):-
     /*aksi jika player mendarat di properti sendiri*/
@@ -505,13 +519,12 @@ landingPropertiKosong(Pemain):-
                     ;
                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
-                    addPosession(Pemain, LokasiBeli, 'Bangunan2'), landingPropertiSendiri(Pemain), !
+                    addPosession(Pemain, LokasiBeli, 'Bangunan3'), landingPropertiSendiri(Pemain), !
                 )
                 ;
                 InputPilihan == landmark,
                 write('landmark belum bisa dibeli'), nl,
                 landingPropertiKosong(Pemain),fail
-
                 ;
                 InputPilihan == cancel,!
                 ;
@@ -549,6 +562,7 @@ checkLokasi(Pemain):-
         landingProperti(Pemain),!
         ;
         lokasi(Lokasi),
+        \+ properti(Lokasi),
         landingNonProperti(Pemain),!
     ).
 
@@ -598,7 +612,7 @@ moveToLocation(Pemain, Location):-
     /*ganti lokasi sampai masuk lokasi tertentu*/
     \+ bangkrut(Pemain, true),
     \+ jail(Pemain),
-    (lokasi(Location) ; properti(Location)),
+    lokasi(Location),
     
     repeat, lokasiPemain(Pemain, CurrentLoc),
     (
@@ -629,7 +643,12 @@ addPosession(Pemain, Properti, Level):-
     asserta(asetProperti(Pemain, Properti)),
     asserta(tingkatanAset(Properti, Level)),
     
-    asserta(posessionArr(Pemain, [Properti|OldArr])),!.
+    asserta(posessionArr(Pemain, [Properti|OldArr])),
+    
+    (Level == 'Landmark', asserta(landmark(Properti))
+    ;
+    Level \= 'Landmark'
+    ), !.
 
 addPosession(Pemain, Properti, _Level):-
     asetProperti(Pemain, Properti),
@@ -806,6 +825,7 @@ resetGame:-
     retractall(n_true(_)),
     retractall(hadiah_pemain(_)),
     retractall(bermain(_)),
+    retractall(landmark(_)),
 
     asserta(currentPemain(p1)),
     asserta(lokasiPemain(p1, go)),

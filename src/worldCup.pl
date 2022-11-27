@@ -27,6 +27,7 @@ pemainLawan(P1, P2) :-
 worldCup :-
     currentPemain(Pemain),
     lokasiPemain(Pemain, wc),
+    pemainLawan(Pemain, Lawan),
     (
         repeat,
         write('Masukkan properti yang akan menjadi tuan rumah: '),
@@ -48,34 +49,29 @@ worldCup :-
             ;
 
             /* non valid */
+            /* termasuk lokasi */
+            lokasi(InputProp),
+            \+ properti(InputProp),
+            write('Buat apa naro world cup di tile ini....'), nl,
+            write(Lawan), write(' menggelengkan kepala'), nl, fail
+            ;
+
+            /* termasuk properti lawan */
+            asetProperti(Lawan, InputProp),
+            write('Kamu ingin mengadakan World Cup di lokasi musuh!!'), nl,
+            write(Lawan), write(' menatap sinis padamu'), nl, fail
+            ;
+
+            /* bukan properti siapapun */
+            properti(InputProp),
             \+ asetProperti(Pemain, InputProp),
-            pemainLawan(Pemain, Lawan),
-            (
-                /* termasuk lokasi */
-                lokasi(InputProp),
-                \+ pemainLawan(Pemain, Lawan),
-                write('Buat apa naikin pajak tile ini....'), nl,
-                write(Lawan), write('menggelengkan kepala')
-                ;
+            \+ asetProperti(Lawan, InputProp),
+            write(InputProp), write(' belum dimiliki siapapun, termasuk dirimu!'), nl, fail
+            ;
 
-                /* termasuk properti lawan */
-                \+ lokasi(InputProp),
-                asetProperti(Lawan, InputProp),
-                write('Kamu ingin mengadakan World Cup di lokasi musuh!!'),
-                write(Lawan), write('menatap sinis padamu'), nl
-                ;
-
-                /* tidak termasuk properti lawan atau pun lokasi */
-                properti(InputProp),
-                \+ lokasi(InputProp),
-                \+ asetProperti(Lawan, InputProp),
-                write(InputProp), write(' belum dimiliki siapapun, termasuk dirimu!'), nl
-                ;
-
-                /* tidak termasuk semuanya */
-                write(InputProp), write(' bukanlah properti yang valid!'), nl
-                
-            ), fail
+            /* tidak termasuk semuanya */
+            \+ lokasi(InputProp),
+            write(InputProp), write(' bukanlah properti yang valid!'), nl, fail
         )   
     ),!.
 
