@@ -1,88 +1,97 @@
 /* File : jail.pl */
 
-
-/* Deklarasi Fakta */
-
-/* ####### Pengecekan Kartu ####### */
-    /* cekKartuJail1(L) benar jika player p1 dengan banyak kartu L memiliki Kartu Jail */
-cekKartuJail1(Len) :-
-    Len == 0,
-    false, !.
-cekKartuJail1(Len) :-
-    Len =\= 0,
-    retract(card1(X))
-    card(X,_),
-    X == 1,
-    asserta(card1(X)), !.
-cekKartuJail1(Len) :-
-    Len =\= 0,
-    retract(card1(X)),
-    card(X,_)
-    X =\= 1,
-    assertz(card1(X)).
-    Len1 is Len - 1
-    cekKartuJail1(Len1).
-
-    /* cekKartuJail2(L) benar jika player p2 dengan banyak kartu L memiliki Kartu Jail */
-cekKartuJail2(Len) :-
-    Len == 0,
-    fail, !.
-cekKartuJail2(Len) :-
-    Len =\= 0,
-    retract(card2(X))
-    card(X,_),
-    X == 1,
-    asserta(card2(X)), !.
-cekKartuJail2(Len) :-
-    Len =\= 0,
-    retract(card2(X)),
-    card(X,_)
-    X =\= 1,
-    assertz(card2(X)).
-    Len1 is Len - 1
-    cekKartuJail2(Len1).
-
-    /* cekKartu benar jika player memiliki kartu Penjara*/
-cekKartuJail :-
-    currentPemain(P),
-    P == p1,
-    retract(lenCard1(Len)),
-    asserta(lenCard1(Len)),
-    cekKartuJail1(Len).
-cekKartuJail :-
-    currentPemain(P),
-    P == p2,
-    retract(lenCard2(Len)),
-    asserta(lenCard2(Len)),
-    cekKartuJail2(Len).
-/* ####### Pengecekan Kartu ####### */
-
-/* ####### Pengecekan Keuangan ####### */
-    /* cekBalance benar jika player memiliki cukup uang (>=100) untuk menyuap sipir penjara */
-cekBalance :-
-    currentPemain(Pemain),
+/* Deklarasi Fakta dan Aturan */
+/* ======================================== Pengecekan Kartu ======================================== */
+    /* cekKartu benar jika player P memiliki kartu X*/
+cekKartu(Pemain,X) :-
     Pemain == p1,
-    retract(balance(p1,X)),
-    asserta(balance(p1,X)),
-    X >= 100, !.
-cekBalance :-
-    currentPemain(Pemain),
+    card1(X,_),!.
+cekKartu(Pemain,X) :-
     Pemain == p2,
-    retract(balance(p2,X)),
-    asserta(balance(p2,X)),
-    X >= 100, !.
+    card2(X,_),!.
+/* ####### Pengecekan Kartu ####### */
+
 /* ####### Pengecekan Keuangan ####### */
+    /* cekBalance(P,X) benar jika player P memiliki X uang yang cukup untuk menyuap sipir penjara (>=100)*/
+cekBalance(Pemain) :-
+    balance(Pemain,X),
+    X >= 100, !.
+/* ======================================== Pengecekan Kartu ======================================== */
 
 
-/* ####### Output ketika Pemain di penjara ####### */
+/* ======================================== Output ketika Pemain di penjara ======================================== */
     /* writeinJail menulis output ketika player berada di penjara  */
+    /* Jika user dipenjara, ditile penjara, dan masuk gilirannya */
+    writeinJail.
     writeinJail :-
-        nl,
-        write('Anda berada di penjara'), nl.
-    
-/* ####### Output ketika Pemain di penjara ####### */
+        currentPemain(Pemain),
+        jail(Pemain),
+        write('Anda berada di penjara!!!'), nl,
+        write('pilih input berikut untuk keluar: '), nl,
+        write('lempar : menggunakan keburuntungan double dadu untuk keluar dari penjara'), nl,
+        (
+            cekKartu(Pemain, 1), write('useJailCard : menggunakan kartu Jail'), nl
+            ;
+            write('useJailCard : (kamu tidak memilikinya :\'('), nl
+        ),
+        (
+            cekBalance(Pemain), write('suapSipir : menggunakan uang untuk menyuap sipir!'), nl
+            ;
+            write('suapSipir : (uangmu tidak cukup!) '), nl
+        ).
+    /* Jika user tidak dipenjara, ditile penjara, dan masuk gilirannya */
+    writeinJail :-
+        currentPemain(Pemain),
+        \+ jail(Pemain),
+        write('hanya berkunjung...'),nl.
+/* ======================================== Output ketika Pemain di penjara ======================================== */
 
-/* #######  ####### */
-    /*  */
-    /*  */
-/* #######  ####### */
+/* ======================================== Penanganan input ketika dalam penjara ======================================== */
+    /* usingCard(P, X) benar jika  P memiliki kartu X */
+    usingCard(Pemain, X) :-
+        Pemain == p1,
+        cekKartu(Pemain, X),
+        retract(card1(X)), !.
+    usingCard(Pemain, X) :-
+        Pemain == p2,
+        cekKartu(Pemain, X),
+        retract(card2(X)), !.
+
+    /* useJailCard benar jika currentPemain(P), P berada di penjara dan usingCard(P, X) benar */
+    useJailCard :-
+        currentPemain(Pemain),
+        jail(Pemain),  
+        (   
+            usingCard(Pemain, 1), 
+            card(1, Y), 
+            write('Kamu menggunakan '), write(Y), write('!'), nl
+            ;
+            card(1, Y), 
+            write('Kamu tidak memiliki kartu '), write(Y), write('!'), nl
+        ), !.
+    useJailCard :-
+        currentPemain(Pemain),
+        \+ jail(Pemain),
+        write('Kamu tidak berada di penjara...'), nl, !.        
+
+    /* suapSipir benar jika currentPemain(P), P berada di penjara dan cekBalance(P,X) benar */
+    suapSipir :-
+        currentPemain(Pemain),
+        jail(Pemain),
+        (
+            cekBalance(Pemain),
+            subtBalance(Pemain, 100),
+            retractall(jail(Pemain)),
+            write('Sipir tertarik dengan uang yang kamu berikan'), nl,
+            write('Kamu berhasil keluar dari penjara!'), nl,
+            write('rasa bersalah menghantui dirimu...'), nl
+            ;
+            write('kamu menjulurkan tangan berisi uang'), nl,
+            write('Sipir: Berani sekali kamu menyuapku!! (minimal 100 dollar lahh)'), nl
+        ), !.
+    suapSipir :-
+        currentPemain(Pemain),
+        \+ jail(Pemain),
+        write('Kamu tak di penjara, buat apa kamu menyuap sipir??'), nl, !.
+
+/* ======================================== Penanganan input ketika dalam penjara ======================================== */
