@@ -92,7 +92,7 @@ nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti),
 nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark), Nilai = (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3 + HargaLandmark), !.
 
 /*biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
-biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+ landmark(Properti), nilaiProperti(Properti, Nilai), BiayaAkuisisi = Nilai*(2), !.
+biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+ landmark(Properti), nilaiProperti(Properti, Nilai), BiayaAkuisisi = Nilai*2, !.
 biayaAkuisisiProperti(_Properti, BiayaAkuisisi):- BiayaAkuisisi is 'tidak bisa diakuisisi', !.
 
 /*tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
@@ -106,7 +106,7 @@ checkLocationDetail(X):- properti(X), kepemilikanProperti(X,Pemilik),
 
     write('Kepemilikan         : '), write(Pemilik), nl,
     write('Biaya Sewa Saat Ini : '), biayaSewaProperti(Properti, BiayaSewa), write(BiayaSewa), nl,
-    write('Biaya Akuisisi      : '), biayaAkuisisiProperti(Properti, BiayaAkuisisi), write(BiayaAkuisisi), nl,
+    write('Biaya Akuisisi      : '), biayaAkuisisiProperti(Properti, BiayaAkuisisi), Biaya is BiayaAkuisisi, write(Biaya), nl,
     write('Tingkatan Properti  : '), tingkatanProperti(Properti, TingkatanProperti), write(TingkatanProperti), nl, !.
 
 checkLocationDetail(X):- properti(X),
@@ -227,27 +227,27 @@ properti(h1).
 properti(h2).
 
 /* idProperti(Properti, NamaProperti, DeskripsiProperti) : Fakta tentang identitas dari Properti*/
-idProperti(a1, jakarta, ibukotaIndonesia).
-idProperti(a2, kualaLumpur, ibukotaMalaysia).
-idProperti(b1, dhaka, ibukotaBangladesh).
-idProperti(b2, islamabad, ibukotaPakistan).
-idProperti(b3, newdelhi, ibukotaIndia).
-idProperti(c1, beijing, ibukotaChina).
-idProperti(c2, seoul, ibukotaKoreaSelatan).
-idProperti(c3, tokyo, ibukotaJepang).
-idProperti(d1, moskow, ibukotaRusia).
-idProperti(d2, copenhagen, ibukotaDenmark).
-idProperti(d3, stockholm, ibukotaSwedia).
-idProperti(e1, berlin, ibukotaJerman).
-idProperti(e2, paris, ibukotaPrancis).
-idProperti(f1, roma, ibukotaItalia).
-idProperti(f2, madrid, ibukotaSpanyol).
-idProperti(f3, lisbon, ibukotaPortugal).
-idProperti(g1, mexicoCity, ibukotaMeksiko).
-idProperti(g2, ottawa, ibukotaKanada).
-idProperti(g3, brasilia, ibukotaBrazil).
-idProperti(h1, athena, ibukotaYunani).
-idProperti(h2, kairo, ibukotaMesir).
+idProperti(a1, 'Jakarta', 'Ibukota Indonesia').
+idProperti(a2, 'Kuala Lumpur', 'Ibukota Malaysia').
+idProperti(b1, 'Dhaka', 'Ibukota Bangladesh').
+idProperti(b2, 'Islamabad', 'Ibukota Pakistan').
+idProperti(b3, 'New Delhi', 'Ibukota India').
+idProperti(c1, 'Beijing', 'Ibukota China').
+idProperti(c2, 'Seoul', 'Ibukota Korea Selatan').
+idProperti(c3, 'Tokyo', 'Ibukota Jepang').
+idProperti(d1, 'Moskow', 'Ibukota Rusia').
+idProperti(d2, 'Copenhagen', 'Ibukota Denmark').
+idProperti(d3, 'Stockholm', 'Ibukota Swedia').
+idProperti(e1, 'Berlin', 'Ibukota Jerman').
+idProperti(e2, 'Paris', 'Ibukota Prancis').
+idProperti(f1, 'Roma', 'Ibukota Italia').
+idProperti(f2, 'Madrid', 'Ibukota Spanyol').
+idProperti(f3, 'Lisbon', 'Ibukota Portugal').
+idProperti(g1, 'Mexico City', 'Ibukota Meksiko').
+idProperti(g2, 'Ottawa', 'Ibukota Kanada').
+idProperti(g3, 'Brasilia', 'Ibukota Brazil').
+idProperti(h1, 'Athena', 'Ibukota Yunani').
+idProperti(h2, 'Kairo', 'Ibukota Mesir').
 
 /* hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark): Fakta tentang harga pada Properti*/
 hargaProperti(a1, 50, 100, 150, 200, 250).
