@@ -28,14 +28,14 @@ chanceCard1(Num) :- Num = 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pe
 chanceCard1(Num) :- Num = 6, write('Selamat Kamu Mendapatkan Kartu Sakti'), 
                     assertz(card(p1,Num)), nl, retract(lenCard1(X)), X1 is X + 1, asserta(lenCard1(X1)), !.
 chanceCard1(Num) :- Num = 7, write('Selamat Kamu Pergi ke World Cup'), 
-                    changeLokasiPemain(p1, wc), nl, !.
+                    moveToLocation(p1, wc), nl, !.
 chanceCard1(Num) :- Num = 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'), 
                     moveToClosestTax(p1), nl, !.
 chanceCard1(Num) :- Num = 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'), 
                     asserta(jail(p1)), asserta(jail(p1)),
                     changeLokasiPemain(p1, jl), nl, !.
 chanceCard1(Num) :- Num = 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
-                    changeLokasiPemain(p1, fp), nl, !.
+                    moveToLocation(p1, fp), nl, !.
 
 chanceCard2(Num) :- Num = 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jail'), 
                     assertz(card(p2, Num)), nl, retract(lenCard2(X)), X1 is X + 1, asserta(lenCard2(X1)), !.
@@ -51,14 +51,14 @@ chanceCard2(Num) :- Num = 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pe
 chanceCard2(Num) :- Num = 6, write('Selamat Kamu Mendapatkan Kartu Sakti'), 
                     assertz(card(p2,Num)), nl, retract(lenCard2(X)), X1 is X + 1, asserta(lenCard2(X1)), !.
 chanceCard2(Num) :- Num = 7, write('Selamat Kamu Pergi ke World Cup'), 
-                    changeLokasiPemain(p2, wc), nl, !.
+                    moveToLocation(p2, wc), nl, !.
 chanceCard2(Num) :- Num = 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'),
                     moveToClosestTax(p2), nl, !.
 chanceCard2(Num) :- Num = 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'),
                     asserta(jail(p2)), asserta(jail(p2)),
                     changeLokasiPemain(p2, jl), nl, !.
 chanceCard2(Num) :- Num = 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
-                    changeLokasiPemain(p2, fp), nl, !.
+                    moveToLocation(p2, fp), nl, !.
 
 /* Kartu kalau sudah 3 */
 isChangeCard1(X, Num) :- X = 3, write('Kartumu berlebih mau mengambil kartu baru?[y/n]'), nl, read(Answer), 
