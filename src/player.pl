@@ -168,9 +168,25 @@ landingNonProperti(Pemain):-
         landingGC
     ).
 
-/*Properti*/
+/*Properti
 landingPropertiLawan:-
-    1 = 1.
+    biayaSewaProperti(Lokasi, BiayaSewa),
+    subtBalance(Pemain, biayaSewa),
+    balance(Pemain, Uang), 
+    (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
+        (
+            AmbilAlih == ya, 
+                (
+                    har
+                )
+            ;
+            Ambil == tidak
+        )
+    ; 
+    ), */
+
+
+
 landingPropertiSendiri:-
     1 = 1.
 landingPropertiKosong:-
@@ -393,9 +409,9 @@ sellProperti(Pemain, Properti):-
 inJumlahAsset(_Pemain, 0, []).
 inJumlahAsset(Pemain, X, [H|T]):-
     /*rekursif untuk ngitung jumlah asset*/
-    biayaProperti(H, Biaya),
+    nilaiProperti(H, Nilai),
     inJumlahAsset(Pemain, A, T),
-    X is Biaya + A,!.
+    X is Nilai + A,!.
 jumlahAsset(Pemain, Output):-
     /*ngitung jumlah asset*/
     posessionArr(Pemain, PossArr),
