@@ -460,7 +460,7 @@ inMove(Pemain, X, []):-
     addBalance(Pemain, 200),
     balance(Pemain, Uang),
 
-    nl, write(Pemain), write(" melewati go, uangmu sekarang, "), write(Uang), nl, nl,
+    nl, write(Pemain), write(' melewati go, uangmu sekarang, '), write(Uang), nl, nl,
 
     lewatGO(Pemain, KaliLewat),
     KaliLewatBaru is KaliLewat + 1,
@@ -484,6 +484,26 @@ move(Pemain, X):-
     lokasiPemain(Pemain, Lokasi),
     inNextLocations(Pemain, Lokasi, ListLokasi, Output),
     inMove(Pemain, X, Output),!.
+
+moveToLocation(Pemain, Location):-
+    /*ganti lokasi sampai masuk lokasi tertentu*/
+    (lokasi(Location) ; properti(Location)),
+    
+    repeat, lokasiPemain(Pemain, CurrentLoc),
+    (
+        CurrentLoc == Location,!
+        ;
+        move(Pemain, 1),fail
+    ).
+
+moveToClosestTax(Pemain):-
+    /*ganti lokasi sampai masuk lokasi tertentu*/
+    repeat, lokasiPemain(Pemain, CurrentLoc),
+    (
+        (CurrentLoc == tx1 ; CurrentLoc == tx2),!
+        ;
+        move(Pemain, 1),fail
+    ).
 
 /*properti----------------------------------------------*/
 addPosession(Pemain, Properti, Level):-
@@ -587,7 +607,7 @@ checkPlayerDetail(Pemain):-
     /*Masuk ke sini yang card*/
 
 playerDetail(_Pemain):-
-    write("Nama pemain tidak valid").
+    write('Nama pemain tidak valid').
 
 
 
