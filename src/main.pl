@@ -5,6 +5,7 @@
 :-include('player.pl').
 :-include('gameCenter.pl').
 :-include('kartu.pl').
+:-inlcude('jail.pl'). 
 
 :-dynamic(debug/1).
 debug(debugging).
