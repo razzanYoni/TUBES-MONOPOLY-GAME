@@ -387,13 +387,14 @@ landingPropertiLawan(Pemain):-
     balance(Pemain, Uang),
 
     (
-        \+ landmark(Lokasi), \+ card(Pemain, 6),
+        (\+ landmark(Lokasi) ; card(Pemain, 6)),
+        printMap,
         write('Sekarang giliran: '), write(Pemain), nl,
         write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl
         ;
         landmark(Lokasi)
         ;
-        card(Pemain, 6)
+        \+ card(Pemain, 6)
     ),
 
     (
@@ -426,7 +427,7 @@ landingPropertiLawan(Pemain):-
                     (
                         Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
                         ;
-                        write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid'), fail
+                        write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write(' Bos! Gaya Elit, Ekonomi Sulid'),nl, fail
                     ), !
                 ;
                 AmbilAlih == tidak, !
