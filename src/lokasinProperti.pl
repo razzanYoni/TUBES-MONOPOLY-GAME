@@ -25,9 +25,10 @@ kepemilikanProperti(Properti, Pemilik):- asetProperti(Pemilik, Properti).
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaSewaProperti(Properti, HargaSewaTanah, _, _, _, _), BiayaSewaAsli is HargaSewaTanah, 
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
-                                            worldCup(Penyelenggara, MasaWaktu),
+                                            asetProperti(Pemilik, Properti),
+                                            worldCup(Penyelenggara, Lokasi),
                                             (
-                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
                                             )
                                         ;
@@ -36,9 +37,10 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan1', hargaSewaProperti(Properti, _, HargaSewaBangunan1, _, _, _), BiayaSewaAsli is HargaSewaBangunan1,
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
-                                            worldCup(Penyelenggara, MasaWaktu),
+                                            asetProperti(Pemilik, Properti),
+                                            worldCup(Penyelenggara, Lokasi),
                                             (
-                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
                                             )
                                         ;
@@ -47,9 +49,10 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan2', hargaSewaProperti(Properti, _, _, HargaSewaBangunan2, _, _), BiayaSewaAsli is HargaSewaBangunan2 ,
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
-                                            worldCup(Penyelenggara, MasaWaktu),
+                                            asetProperti(Pemilik, Properti),
+                                            worldCup(Penyelenggara, Lokasi),
                                             (
-                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
                                             )
                                         ;
@@ -58,9 +61,10 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaSewaProperti(Properti, _, _, _, HargaSewaBangunan3, _), BiayaSewaAsli is HargaSewaBangunan3 ,
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
-                                            worldCup(Penyelenggara, MasaWaktu),
+                                            asetProperti(Pemilik, Properti),
+                                            worldCup(Penyelenggara, Lokasi),
                                             (
-                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
                                             )
                                         ;
@@ -69,9 +73,10 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaSewaProperti(Properti, _, _, _, _, HargaSewaLandmark), BiayaSewaAsli is HargaSewaLandmark ,
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
-                                            worldCup(Penyelenggara, MasaWaktu),
+                                            asetProperti(Pemilik, Properti),
+                                            worldCup(Penyelenggara, Lokasi),
                                             (
-                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
                                             )
                                         ;
@@ -118,7 +123,7 @@ checkLocationDetail(X):- lokasi(X), X=='go',
     write('Pemain mendapatkan uang sebanyak 200$ ketika menginjak atau melewati daerah ini.'), nl,
     write('Pemain juga dapat meningkatkan properti miliknya saat menginjak daerah ini.'), nl, !.
 
-checkLocationDetail(X):- lokasi(X), X=='cc', 
+checkLocationDetail(X):- lokasi(X), (X =='cc1' ; X == 'cc2' ; X = 'cc3'), 
     write('Nama Lokasi         : '), write('Chance Card'), nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain mendapatkan kartu tertentu secara acak apabila menginjak daerah ini.'), nl,
@@ -146,7 +151,8 @@ checkLocationDetail(X):- lokasi(X), X=='fp',
 checkLocationDetail(X):- lokasi(X), X=='wt', 
     write('Nama Lokasi         : '), write('World Tour'),nl,
     write('Deskripsi Lokasi    : '), nl,
-    write('Bila pemain mendarat di kotak ini, pemain akan diberikan kesempatan untuk berpindah ke lokasi manapun di map kecuali kotak World Tour. Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan melewati kotak-kotak lainnya, pemain harus membayar 50$ untuk bisa berpindah'), nl.
+    write('Bila pemain mendarat di kotak ini, pemain akan diberikan kesempatan untuk berpindah ke lokasi manapun di map kecuali kotak World Tour.'), nl,
+    write('Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan melewati kotak-kotak lainnya, pemain harus membayar 50$ untuk bisa berpindah'), nl.
 
 checkLocationDetail(X):- lokasi(X), X =='tx', 
     write('Nama Lokasi         : '), write('Tax'), nl,
