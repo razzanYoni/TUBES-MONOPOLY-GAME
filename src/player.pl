@@ -97,13 +97,13 @@ switchPlayer:-
     currentPemain(X),
     X == p1,
     retract(currentPemain(_)),
-    asserta(currentPemain(p2)).
+    asserta(currentPemain(p2)),!.
 switchPlayer:-
     /*ganti player selang seling*/
     currentPemain(X),
     X == p2,
     retract(currentPemain(_)),
-    asserta(currentPemain(p1)).
+    asserta(currentPemain(p1)),!.
 
 
 /*ganti lokasiPemain dari nilai integer*/
@@ -310,7 +310,7 @@ goBuildProperty(Pemain, Lokasi):-
                         ;
                         InputPilihan == cancel
                         ;
-                        InputPilihan \= help,
+                        (InputPilihan \= help), (InputPilihan \= landmark),
                         write('Input tidak valid'), nl, nl, fail
                     )    
                 )
@@ -378,10 +378,7 @@ landingNonProperti(Pemain):-
 landingPropertiLawan(Pemain):-
     /*aksi jika player mendarat di properti selain sendiri*/
     lokasiPemain(Pemain, Lokasi),
-    asetProperti(Pemainlain, Lokasi),
-    Pemainlain \= Pemain,
-    
-    currentPemain(Pemain),
+
     biayaSewaProperti(Lokasi, BiayaSewa),
     asetProperti(PemilikLama, Lokasi),
 
@@ -391,7 +388,6 @@ landingPropertiLawan(Pemain):-
 
     (
         \+ landmark(Lokasi), \+ card(Pemain, 6),
-        printMap,
         write('Sekarang giliran: '), write(Pemain), nl,
         write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl
         ;
@@ -415,24 +411,30 @@ landingPropertiLawan(Pemain):-
         ;
         \+ card(Pemain, 6)
     ),
+    
+    checkBangkrut(Pemain),
 
+    bangkrut(Pemain, true)
+    ;
     (
-        \+ landmark(Lokasi),
-        (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
-            AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
-                (
-                    Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
-                    ;
-                    write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid'), ! 
-                ), !
+        bangkrut(Pemain, false),
+        (
+            \+ landmark(Lokasi), balance(Pemain, Uang),
+            repeat, Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
+            (
+                AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
+                    (
+                        Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
+                        ;
+                        write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid'), fail
+                    ), !
+                ;
+                AmbilAlih == tidak, !
+            )
             ;
-            AmbilAlih == tidak, !
+            landmark(Lokasi), !
         )
-        ;
-        landmark(Lokasi),!
-    ),
-
-    checkBangkrut(Pemain),!.
+    ),!.
 
 
 landingPropertiSendiri(Pemain):-
@@ -596,7 +598,7 @@ landingPropertiSendiri(Pemain):-
                         ;
                         InputPilihan == cancel
                         ;
-                        InputPilihan \= help,
+                        (InputPilihan \= help), (InputPilihan \= landmark),
                         write('Input tidak valid'), nl, nl, fail
                     )    
                 )
