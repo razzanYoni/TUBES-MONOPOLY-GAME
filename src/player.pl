@@ -90,12 +90,19 @@ changeLokasiPemain(Pemain, New):-
     retract(lokasiPemain(Pemain, _X)),
     asserta(lokasiPemain(Pemain, New)).
 
+changePlayerDirect(X):-
+    /*ganti player secara direct*/
+    retract(currentPemain(_)),
+    asserta(currentPemain(X)).
+
 switchPlayer:-
+    /*ganti player selang seling*/
     currentPemain(X),
     X == p1,
     retract(currentPemain(_)),
     asserta(currentPemain(p2)).
 switchPlayer:-
+    /*ganti player selang seling*/
     currentPemain(X),
     X == p2,
     retract(currentPemain(_)),
@@ -139,6 +146,7 @@ landingGC:-
 
 
 landingNonProperti(Pemain):-
+    /*detektor mendarat player di non properti*/
     lokasiPemain(Pemain, Lokasi),
     (
         Lokasi == jl,
@@ -184,6 +192,7 @@ landingPropertiLawan:-
 landingPropertiSendiri:-
     1 = 1.
 landingPropertiKosong:-
+    /*aksi jika player mendarat di properti kosong*/
     printMap,
     write('Sekarang giliran: '), currentPemain(X), write(X), nl,
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
@@ -289,6 +298,7 @@ landingPropertiKosong:-
     ).
 
 landingProperti(Pemain):-
+    /*detektor mendarat player di properti*/
     lokasiPemain(Pemain, Lokasi),
     (
         \+ asetProperti(_Siapapun, Lokasi),
@@ -306,6 +316,7 @@ landingProperti(Pemain):-
     ).
 
 checkLokasi(Pemain):-
+    /*detektor mendarat player di properti atau non*/
     lokasiPemain(Pemain, Lokasi),
     
     (
@@ -349,6 +360,8 @@ move(Pemain, X):-
 /*properti----------------------------------------------*/
 addPosession(Pemain, Properti, Level):-
     /*nambahin posession di paling depan*/
+    \+ asetProperti(Pemain, Properti),
+    properti(Properti),
     posessionArr(Pemain, OldArr),
     retract(posessionArr(Pemain, _X)),
 
@@ -356,6 +369,9 @@ addPosession(Pemain, Properti, Level):-
     asserta(tingkatanAset(Properti, Level)),
     
     asserta(posessionArr(Pemain, [Properti|OldArr])).
+
+addPosession(Pemain, Properti, Level):-
+    write('Properti tidak valid'), nl.
 
 inRemovePosession(_Pemain, Properti, [Properti|T], T).
     /*rekursif buat basis ngeluarin properti dari posession*/
@@ -365,6 +381,7 @@ inRemovePosession(Pemain, Properti, [H|T], [H|Next]):-
 
 removePosession(Pemain, Properti):-
     /*ngeluarin properti dari posession*/
+    asetProperti(Pemain, Properti),
     posessionArr(Pemain, OldArr),
     inRemovePosession(Pemain, Properti, OldArr, NewArr),
     
@@ -372,16 +389,26 @@ removePosession(Pemain, Properti):-
     retract(tingkatanAset(Properti, _X)),
 
     retract(posessionArr(Pemain, _Arr)),
-    asserta(posessionArr(Pemain, [Properti|NewArr])).
+    asserta(posessionArr(Pemain, NewArr)).
+
+removePosession(Pemain, Properti):-
+    write('Properti tidak valid'), nl.
+
 
 sellProperti(Pemain, Properti):-
     /*ngejual properti dari posession dengan harga 80%*/
+    asetProperti(Pemain, Properti),
     biayaProperti(Properti, Biaya),
     HargaJual is Biaya*80/100,
     addBalance(Pemain, HargaJual),
     removePosession(Pemain, Properti),!.
 
-inJumlahAsset(Pemain, 0, []).
+sellProperti(Pemain, Properti):-
+    /*kalo properti tidak dimiliki*/
+    write('Properti tidak valid'), nl.
+
+
+inJumlahAsset(_Pemain, 0, []).
 inJumlahAsset(Pemain, X, [H|T]):-
     /*rekursif untuk ngitung jumlah asset*/
     nilaiProperti(H, Nilai),
@@ -392,21 +419,25 @@ jumlahAsset(Pemain, Output):-
     posessionArr(Pemain, PossArr),
     inJumlahAsset(Pemain, Output, PossArr).
 totalAsset(Pemain, Output):-
+    /*ngitung asset + balance*/
     jumlahAsset(Pemain, Asset),
     balance(Pemain, Uang),
     Output is Asset + Uang.
 
-inShowProperties(Pemain, X, []).
+inShowProperties(_Pemain, _X, []).
 inShowProperties(Pemain, X, [H|T]):-
+    /*rekursif show properties*/
     tingkatanAset(H, Tingkat),
     write(X), write('. '), write(H), write(' - '), write(Tingkat),nl,
     A is X + 1,
     inShowProperties(Pemain, A, T).
 showProperties(Pemain):-
+    /*print properti yang dimiliki player dalam bentuk daftar*/
     posessionArr(Pemain, PossArr),
     inShowProperties(Pemain, 1, PossArr),!.
 
 checkPlayerDetail(Pemain):-
+    /*print informasi player*/
     pemain(Pemain),
     lokasiPemain(Pemain, Lokasi),
     balance(Pemain, Uang),
@@ -415,39 +446,50 @@ checkPlayerDetail(Pemain):-
 
     nl, write('Informasi '), write(Pemain), nl, nl,
 
-    write('Lokasi                        :' ), write(Lokasi), nl,
-    write('Total Uang                    :' ), write(Uang), nl,
-    write('Total Nilai Properti          :' ), write(Total),nl,nl,
+    write('Lokasi                        : ' ), write(Lokasi), nl,
+    write('Total Uang                    : ' ), write(Uang), nl,
+    write('Total Nilai Properti          : ' ), write(Asset),nl,
+    write('Total Aset                    : '), write(Total),nl,nl,
 
-    write('Daftar Kepemilikan Properti   :' ),nl,
-    showProperties(Pemain).
+    write('Daftar Kepemilikan Properti   : ' ),nl,
+    showProperties(Pemain),
 
     write('Daftar Kepemilikan Card       : '),nl.
 
     /*Masuk ke sini yang card*/
 
-playerDetail(Pemain):-
+playerDetail(_Pemain):-
     write("Nama pemain tidak valid").
-
-
-
 
 
 
 /*Bangkrut---------------------------------------------*/
 checkBangkrut(Pemain):-
     /*bangkrut kalo duit < 0*/
-    /*ini sintaks if else*/
+    /*kalo asset masih bisa dijual bakal masuk resolve bangkrut*/
     balance(Pemain, X),
     (X < 0,
 
-        /*ini harusnya condition semua harga jual - balance < 0 tapi belum*/
+        jumlahAsset(Pemain, AssetValue),
+        (AssetValue * 80/100) + X < 0,
 
-        write('Yah kalah :( \n'),
+        nl,
+        write('Pemain '), write(Pemain), write(' telah bangkrut'), nl,
+
+        pemain(Pemainlain),
+        Pemainlain \= Pemain,
+
+        write('Pemenangnya adalah '), write(Pemainlain),nl,nl,
+        write('Permainan telah berakhir, terima kasih telah bermain monopoli boku no prolog'),nl,
+
+        write('panggil \'resetGame.\' untuk mereset kembali ke kondisi semula'),nl,
+
         retract(bangkrut(Pemain, _X)),
-        asserta(bangkrut(Pemain, true))
+        asserta(bangkrut(Pemain, true)),!
     ;X < 0,
-        write('Duit habis bos\n'),
+        (AssetValue * 80/100) + X >= 0,
+        nl,
+        write('Uangmu tidak mencukupi untuk membayar, kamu harus memilih properti untuk dijual'),nl,
         retract(bangkrut(Pemain, _X)),
         asserta(bangkrut(Pemain, true)),
         resolveBangkrut(Pemain)
@@ -455,19 +497,39 @@ checkBangkrut(Pemain):-
 
 resolveBangkrut(Pemain):-
     /*buat resolve kalo ada yang bangkrut*/
-    /*harusnya fitur jual properti di sini tapi belum*/
-    write('Bayar utang bos\n'),
-    write('Properti yang akan dijual: \n'),
+    balance(Pemain, Utang),nl,
+    write('Utangmu senilai '), write(Utang), nl,
+    write('properti yang kamu miliki adalah sebagai berikut'), nl,
+    showProperties(Pemain),
+
+    write('Properti yang akan dijual: '),
+    read(InputProperty),
+    sellProperti(Pemain, InputProperty),
+
     retract(bangkrut(Pemain, _X)),
     asserta(bangkrut(Pemain, false)),
-
-    /*Masukin jual properti ke sini*/    
-    /*sellProperti(Pemain, Properti)*/    
 
     checkBangkrut(Pemain),
     !.
 
+resetGame:-
+    /*buat retract semua fakta jadi kaya pas awal mulai*/
+    retractall(bangkrut(_A, _B)),
+    retractall(lokasiPemain(_C, _D)),
+    retractall(bangkrut(_E, _F)),
+    retractall(currentPemain(_G)),
+    retractall(balance(_H, _I)),
+    retractall(asetProperti(_K, _L)),
+    retractall(tingkatanAset(_M, _N)),
+    retractall(posessionArr(_O, _P)),
+    retractall(lewatGO(_Q, _R)),
 
-
-    
-
+    asserta(currentPemain(p1)),
+    asserta(lokasiPemain(p1, go)),
+    asserta(lokasiPemain(p2, go)),
+    asserta(balance(p1, 300)),
+    asserta(balance(p2, 300)),
+    asserta(bangkrut(p1, false)),
+    asserta(bangkrut(p2, false)),
+    asserta(lewatGO(p1, 0)),
+    asserta(lewatGO(p1, 0)).
