@@ -41,6 +41,23 @@ posessionArr(p2, []).
 lewatGO(p1, 0).
 lewatGO(p2, 0).
 
+/*
+TEMP untuk debugging 
+asetProperti(p1, d1).
+asetProperti(p2, a2).
+asetProperti(p1, a1).
+asetProperti(p2, g1).
+asetProperti(p2, b2).
+asetProperti(p2, b3).
+tingkatanAset(d1, 'Tanah').
+tingkatanAset(a2, 'Tanah').
+tingkatanAset(a1, 'Tanah').
+tingkatanAset(b2, 'Tanah').
+tingkatanAset(b3, 'Tanah').
+tingkatanAset(g1, 'Bangunan2').
+posessionArr(p1, [d1,a2,a1]).
+posessionArr(p2, [g1,b2,b3]).
+*/
 
 
 /*Basic-----------------------------------------------*/
