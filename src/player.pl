@@ -35,14 +35,16 @@ bangkrut(p2, false).
 /*data properti yang dimiliki dalam array*/
     /*ini perlu buat ngitung asset, susah rekursinya kalo gak pake array*/
 :-dynamic(posessionArr/2).
+/*
 posessionArr(p1, []).
 posessionArr(p2, []).
+*/
 :-dynamic(lewatGO/2).
 lewatGO(p1, 0).
 lewatGO(p2, 0).
 
 /*
-TEMP untuk debugging
+TEMP untuk debugging */
 asetProperti(p1, d1).
 asetProperti(p2, a2).
 asetProperti(p1, a1).
@@ -57,7 +59,7 @@ tingkatanAset(b3, 'Tanah').
 tingkatanAset(g1, 'Bangunan2').
 posessionArr(p1, [d1,a2,a1]).
 posessionArr(p2, [g1,b2,b3]).
-*/
+
 
 /*Basic-----------------------------------------------*/
 changeBalance(Pemain, New):-
@@ -207,18 +209,18 @@ landingPropertiLawan(Pemain):-
     asetProperti(Pemainlain, Lokasi),
     Pemainlain \= Pemain,
 
-    printMap,
+    /*printMap,
     write('Sekarang giliran: '), write(Pemain), nl,
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
-    
+    */
     currentPemain(Pemain),
     biayaSewaProperti(Lokasi, BiayaSewa),
     (
         card(Pemain, 6), 
-        write('Apakah kamu ingin menggunakan Angel Card?[y/n]'), nl,
+        write('Apakah kamu ingin menggunakan Kartu Sakti?[y/n]'), nl,
         read(Answer),
         (
-            Answer == y, subtBalance(Pemain, BiayaSewa), write('Berhasil mengaktifkan Angel Card'), nl, nl, retract(card(Pemain, 6)), !
+            Answer == y, subtBalance(Pemain, BiayaSewa), write('Berhasil mengaktifkan Kartu Sakti'), nl, nl, retract(card(Pemain, 6)), !
             ;
             Answer == n, subtBalance(Pemain, BiayaSewa), asetProperti(PemainLawan, Lokasi) ,addBalance(PemainLawan, BiayaSewa), write('Biaya sewa properti berhasil dibayar'), !
             ;
@@ -233,12 +235,12 @@ landingPropertiLawan(Pemain):-
         (
             AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
                 (
-                    (Uang-BiayaAkuisisi)>= 0, asetProperti(PemilikLama, Lokasi), ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain)
+                    Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, asetProperti(PemilikLama, Lokasi), ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
                     ;
-                    write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid') 
-                )
+                    write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid'), ! 
+                ), !
             ;
-            AmbilAlih == tidak
+            AmbilAlih == tidak, !
         )
         ;
         checkBangkrut(Pemain) 

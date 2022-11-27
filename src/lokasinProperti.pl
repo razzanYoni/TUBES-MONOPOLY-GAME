@@ -27,7 +27,7 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
                                             asetProperti(Pemilik, Properti),
-                                            worldCup(Penyelenggara, Lokasi),
+                                            worldCupCurrent(Penyelenggara, Lokasi),
                                             (
                                                 Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
@@ -39,7 +39,7 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
                                             asetProperti(Pemilik, Properti),
-                                            worldCup(Penyelenggara, Lokasi),
+                                            worldCupCurrent(Penyelenggara, Lokasi),
                                             (
                                                 Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
@@ -51,7 +51,7 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
                                             asetProperti(Pemilik, Properti),
-                                            worldCup(Penyelenggara, Lokasi),
+                                            worldCupCurrent(Penyelenggara, Lokasi),
                                             (
                                                 Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
@@ -63,7 +63,7 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
                                             asetProperti(Pemilik, Properti),
-                                            worldCup(Penyelenggara, Lokasi),
+                                            worldCupCurrent(Penyelenggara, Lokasi),
                                             (
                                                 Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
@@ -75,7 +75,7 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
                                         (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
                                         (
                                             asetProperti(Pemilik, Properti),
-                                            worldCup(Penyelenggara, Lokasi),
+                                            worldCupCurrent(Penyelenggara, Lokasi),
                                             (
                                                 Lokasi == Properti, Penyelenggara == Pemilik, BiayaSewa is BiayaSewaTemp*2;
                                                 BiayaSewa is BiayaSewaTemp
@@ -85,15 +85,15 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
                                         ), !.
 
 /*biayaProperti(Properti, Biaya): Biaya adalah harga dari Properti*/
-nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaProperti(Properti, HargaTanah, _, _, _, _), Nilai is HargaTanah, !.
-nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan1', hargaProperti(Properti, HargaTanah, HargaBangunan1, _, _, _), Nilai is (HargaTanah + HargaBangunan1), !.
-nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan2', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, _, _), Nilai is (HargaTanah + HargaBangunan1 + HargaBangunan2), !.
-nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, _), Nilai is (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3), !.
-nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark), Nilai is (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3 + HargaLandmark), !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaProperti(Properti, HargaTanah, _, _, _, _), Nilai = HargaTanah, !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan1', hargaProperti(Properti, HargaTanah, HargaBangunan1, _, _, _), Nilai = (HargaTanah + HargaBangunan1), !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan2', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, _, _), Nilai = (HargaTanah + HargaBangunan1 + HargaBangunan2), !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, _), Nilai = (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3), !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark), Nilai = (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3 + HargaLandmark), !.
 
 /*biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
-biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+ landmark(Properti), BiayaAkuisisi is nilaiProperti*(2).
-biayaAkuisisiProperti(_Properti, BiayaAkuisisi):- BiayaAkuisisi is 'tidak bisa diakuisisi'.
+biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+ landmark(Properti), nilaiProperti(Properti, Nilai), BiayaAkuisisi = Nilai*(2), !.
+biayaAkuisisiProperti(_Properti, BiayaAkuisisi):- BiayaAkuisisi is 'tidak bisa diakuisisi', !.
 
 /*tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
 tingkatanProperti(Properti, TingkatanProperti):- tingkatanAset(Properti, TingkatanAset), TingkatanProperti = TingkatanAset.
@@ -319,7 +319,7 @@ checkPropertyDetail(X):- write(X), write(' bukan merupakan sebuah properti'), nl
 
 /*ambilAlihProperti(Properti, PemilikLama, PemilikBaru) */
 ambilAlihProperti(Properti, PemilikLama, PemilikBaru) :-  
-        asetProperti(PemilikLama),nilaiProperti(Properti, Nilai), tingkatanProperti(Properti, TingkatanProperti), % ambil ingfo 
-        subtBalance(PemilikBaru, Nilai), addBalance(PemilikBaru, Nilai), % transfer duit
+        tingkatanProperti(Properti, TingkatanProperti), biayaAkuisisiProperti(Properti, BiayaAkuisisi), 
+        subtBalance(PemilikBaru, BiayaAkuisisi), addBalance(PemilikLama, BiayaAkuisisi), % transfer duit
         removePosession(PemilikLama, Properti), addPosession(PemilikBaru, Properti, TingkatanProperti). % transfer kepemilikan
     
