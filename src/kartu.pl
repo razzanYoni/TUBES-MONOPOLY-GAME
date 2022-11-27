@@ -42,7 +42,7 @@ chanceCard1(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
 chanceCard1(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadiah Kepada Lawanmu'),
                     randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
                     subtBalance(p1, Saldo), addBalance(p2, Saldo), nl, !.
-chanceCard1(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl
+chanceCard1(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl,
                     asetProperti(p1, Properti), \+ landmark(Properti), removePosession(p1, Properti), !.
 chanceCard1(Num) :- Num == 13, write('Setelah Dilihat-lihat Ternyata Sudah Aman'), nl, !.
 chanceCard1(Num) :- Num == 14, write('Ada Tetanggamu yang Membutuhkan Tempat!!!'),
