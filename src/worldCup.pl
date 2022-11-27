@@ -11,9 +11,11 @@ outputWc :-
     write('  \\_/\\_/\\___/_| |_\\__,_|   |_|\\___/\\_,_|_|  '), !.
 /* ======================================== Initwcoutput ======================================== */
 
+
 /* ======================================== Pemain Lawan ======================================== */
     /* pemainLawan(P1,P2) benar jika P2 adalah pemain lawan dari P1 */
 pemainLawan(P1, P2) :-
+    pemain(P1),
     pemain(P2),
     P1 \== P2.
 /* ======================================== Pemain Lawan ======================================== */
@@ -40,7 +42,7 @@ worldCup :-
             write('(akhirnya cewek-cewek akan terpukau denganku!!)'),nl,
             write('pikirmu..'), nl, !
             ;
-            
+
             /* jika ingin keluar */
             InputProp == cancel
             ;
@@ -71,8 +73,6 @@ worldCup :-
                 ;
 
                 /* tidak termasuk semuanya */
-                \+ properti(InputProp),
-                \+ lokasi(InputProp),
                 write(InputProp), write(' bukanlah properti yang valid!'), nl
                 
             ), fail

@@ -35,26 +35,27 @@ worldTour :-
                 read(InputLoc),
                 (
                     /* wt */
-                    (InputLoc == wt,
+                    InputLoc == wt,
+                    (lokasi(InputLoc) ; properti(InputLoc)),
                     nl, 
                     write('Anda sudah berada di World Tour'), nl,
-                    write('Silakan pilih tempat yang lain'), nl, fail)
+                    write('Silakan pilih tempat yang lain'), nl, fail
                     ;
 
                     /* valid */
-                    (InputLoc \== wt,
+                    InputLoc \== wt,
                     (lokasi(InputLoc) ; properti(InputLoc)),
                     subtBalance(Pemain, 50),
                     moveToLocation(Pemain, InputLoc),
                     write('Anda telah sampai di '), write(InputLoc), nl,
-                    checkLokasi(Pemain), !)
+                    checkLokasi(Pemain), !
                     ;
 
                     /* non-valid */
-                    (\+ (lokasi(InputLoc) ; properti(InputLoc)),
+                    \+ (lokasi(InputLoc) ; properti(InputLoc)),
                     write(InputLoc), write(' bukan lokasi yang valid'), nl,
                     write('Silakan pilih tempat berikut :'), nl,
-                    tulisListLokasi(Lokasi), nl, fail)
+                    tulisListLokasi(Lokasi), nl, fail
                 )
             )
         ;
