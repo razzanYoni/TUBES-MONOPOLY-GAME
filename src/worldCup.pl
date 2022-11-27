@@ -65,7 +65,7 @@ worldCup :-
                 \+ properti(InputProp),
                 \+ lokasi(InputProp),
                 write(InputProp), write(' bukanlah properti yang valid!'), nl
-            )
+            ), fail
         )   
     )
 
