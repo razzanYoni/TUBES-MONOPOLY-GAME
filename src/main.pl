@@ -5,8 +5,9 @@
 :-include('player.pl').
 :-include('gameCenter.pl').
 :-include('kartu.pl').
-:-include('gameCenter.pl').
 
+:-dynamic(debug/1).
+debug(debugging).
 
 inputHandling:-
     (repeat,
@@ -18,7 +19,10 @@ inputHandling:-
                 InputString == help,
                 nl, write('Perintah yang tersedia'), nl,
                 write('lempar.: mulai melempar dadu'), nl,
-                write('locationDetail.: mengecek informasi lokasi yang ada'), nl, nl, fail
+                write('locationDetail.: mengecek informasi lokasi yang ada'), nl,
+                write('propertyDetail.: mengecek informasi properti yang ada'), nl,
+                write('playerDetail.: mengecek informasi properti yang ada'), nl,
+                write('debug.: keluar dari overlay game untuk memasukkan command secara direct'), nl, nl, fail
                 ;
 
                 /* Lempar */
@@ -26,7 +30,7 @@ inputHandling:-
                 throwDice,
                 (
                     /* Kalo gak double switch and stop */
-                    \+ double(Berapapun),
+                    \+ double(_Berapapun),
                     switchPlayer, !
                     ;
                     1 = 1
@@ -40,7 +44,7 @@ inputHandling:-
                     (
                         nl, write('Masukkan nama lokasi: '), read(InputLokasi),
                         (
-                            checkLocationDetail(InputLokasi)
+                            checkLocationDetail(InputLokasi),!
                         )
                     )
                 )
@@ -50,17 +54,30 @@ inputHandling:-
                 InputString == propertyDetail,
                 (repeat,
                     (
-                        nl, write('Masukkan nama properti: '), read(InputProperti),
+                        nl, write('Masukkan nama lokasi: '), read(InputLokasi),
                         (
-                            checkPropertyDetail(InputProperti)
+                            checkPropertyDetail(InputLokasi),!
                         )
                     )
                 )
                 ;
-                
-                /* Next */
-                InputString == test, nl, 
-                write('Test brehasil')
+
+                /* Check Property Player */
+                InputString == playerDetail,
+                (repeat,
+                    (
+                        nl, write('Masukkan nama pemain: '), read(_InputPlayer),
+                        (
+                            checkPlayerDetail(Pemain),!
+                        )
+                    )
+                )
+                ;
+
+                /* Debug mode*/
+                InputString == debug,
+                asserta(debug(debugging)),
+                nl, write('Masuk ke mode debug'), nl, nl, !
                 ;
 
                 /* Default */
@@ -85,10 +102,13 @@ startGameIn:-
     
     (bangkrut(X, true)
     ;
+    debug(debugging)
+    ;
     fail,!).
 
 
 startGame:-
+    retractall(debug(_Debugging)),
     (repeat,
        startGameIn
     ).
