@@ -134,6 +134,7 @@ landingGC(Pemain):-
     write('1. Ya'), nl,
     write('2. Tidak'), nl,
     write('Pilihan: '), read(Pilihan),
+    currentPemain(Pemain),
     (
         Pilihan == 1, subtBalance(Pemain,50), playGameCenter
         ;
@@ -166,28 +167,27 @@ landingNonProperti(Pemain):-
         landingGC(Pemain)
     ).
 
-landingPropertiLawan(Player):-
-% temporary buat debugging yang lain, nanti hapus
-    1 = 1.
-
-/*Properti
-landingPropertiLawan:-
+/* Properti */
+landingPropertiLawan(Pemain):-
+    /*aksi jika player mendarat di properti selain sendiri*/
+    currentPemain(Pemain),
     biayaSewaProperti(Lokasi, BiayaSewa),
-    subtBalance(Pemain, biayaSewa),
+    subtBalance(Pemain, BiayaSewa),
     balance(Pemain, Uang), 
     (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
         (
-            AmbilAlih == ya, 
+            AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
                 (
-                    har
+                    (Uang-BiayaAkuisisi)>= 0, asetProperti(PemilikLama, Lokasi), ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain)
+                    ;
+                    write('Kurang $'), write(BiayaAkuisisi-Uang), write('Bos! Gaya Elit, Ekonomi Sulid') 
                 )
             ;
-            Ambil == tidak
+            AmbilAlih == tidak
         )
-    ; 
-    ), */
-
-
+        ;
+        checkBangkrut(Pemain) 
+    ).
 
 landingPropertiSendiri(Pemain):-
     /*aksi jika player mendarat di properti sendiri*/
