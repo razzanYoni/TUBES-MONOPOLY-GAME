@@ -754,6 +754,8 @@ inMove(Pemain, X, []):-
         retract(worldCupCurrent(Penyelenggara, _LokasiWorldCup))
         ;
         \+ worldCupCurrent(Penyelenggara, _)
+        ;
+        Penyelenggara \== Pemain
     ),
 
     nl, write(Pemain), write(' melewati go, uangmu sekarang, '), write(Uang), nl, nl,

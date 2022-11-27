@@ -19,18 +19,18 @@ chanceCard1(Num) :- Num = 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jai
 chanceCard1(Num) :- Num = 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
                     write('Kamu Mendapatkan Uang sebesar '), 
                     write(Saldo), addBalance(p1, Saldo), nl.
-chanceCard1(Num) :- Num = 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'), 
+chanceCard1(Num) :- Num = 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'), nl,
                     moveToLocation(p1, gc), landingGC(p1), nl, !.
-chanceCard1(Num) :- Num == 4, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Start'),
+chanceCard1(Num) :- Num == 4, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Start'), nl,
                     moveToLocation(p1, go), landingGO(p1), nl, !.
-chanceCard1(Num) :- Num == 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Keliling Dunia'),
+chanceCard1(Num) :- Num == 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Keliling Dunia'), nl,
                     moveToLocation(p1, wt), landingWT(p1), nl, !.
 chanceCard1(Num) :- Num == 6, write('Selamat Kamu Mendapatkan Kartu Sakti'), 
                     assertz(card(p1,Num)), nl, retract(lenCard1(X)), X1 is X + 1, asserta(lenCard1(X1)), !.
-chanceCard1(Num) :- Num == 7, write('Selamat Kamu Pergi ke World Cup'), 
-                    moveToLocation(p1, wc), landingWC(p1), nl, !.
-chanceCard1(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'), 
-                    moveToClosestTax(p1), landingTX(p1), nl, !.
+chanceCard1(Num) :- Num == 7, write('Selamat Kamu Pergi ke World Cup'), nl, 
+                    moveToLocation(p1, wc), landingWC(p1), !.
+chanceCard1(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'), nl, 
+                    moveToClosestTax(p1), landingTX(p1), !.
 chanceCard1(Num) :- Num == 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'), 
                     asserta(jail(p1)), asserta(jail(p1)),
                     changeLokasiPemain(p1, jl), switchPlayer, retractall(double(_X)), nl, 
@@ -48,9 +48,9 @@ chanceCard1(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadi
 chanceCard1(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl,
                     asetProperti(p1, Properti), \+ landmark(Properti), removePosession(p1, Properti), !.
 chanceCard1(Num) :- Num == 13, write('Setelah Dilihat-lihat Ternyata Sudah Aman'), nl, !.
-chanceCard1(Num) :- Num == 14, write('Ada Tetanggamu yang Membutuhkan Tempat!!!'), nl,
+chanceCard1(Num) :- Num == 14, write('Ada Tetanggamu yang Membutuhkan Tempat'), nl,
                     asetProperti(p1, Properti), \+ landmark(Properti), nilaiProperti(Properti, Nilai),
-                    NilaiAkhir is (Nilai * 0.8), addBalance(p1, NilaiAkhir), !.
+                    NilaiAkhir is (Nilai * 0.8), addBalance(p1, NilaiAkhir), removePosession(p1, Properti), nl, !.
 chanceCard1(Num) :- Num == 14, write('Ternyata Nanya Doang Beli Kagak'), nl, !.
 
 
@@ -59,18 +59,18 @@ chanceCard2(Num) :- Num == 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Ja
 chanceCard2(Num) :- Num == 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50,
                     write('Kamu Mendapatkan Uang sebesar '), 
                     write(Saldo), addBalance(p2, Saldo), nl, !.
-chanceCard2(Num) :- Num == 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'),
+chanceCard2(Num) :- Num == 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'), nl,
                     moveToLocation(p2, gc),landingGC(p2), nl, !.
-chanceCard2(Num) :- Num == 4, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Start'), 
+chanceCard2(Num) :- Num == 4, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Start'), nl,
                     moveToLocation(p2, go),landingGO(p2), nl, !.
-chanceCard2(Num) :- Num == 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Keliling Dunia'),
+chanceCard2(Num) :- Num == 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Keliling Dunia'), nl,  
                     moveToLocation(p2, wt),landingWT(p2), nl, !.
 chanceCard2(Num) :- Num == 6, write('Selamat Kamu Mendapatkan Kartu Sakti'), 
                     assertz(card(p2,Num)), nl, retract(lenCard2(X)), X1 is X + 1, asserta(lenCard2(X1)), !.
-chanceCard2(Num) :- Num == 7, write('Selamat Kamu Pergi ke World Cup'), 
-                    moveToLocation(p2, wc),landingWC(p2), nl, !.
-chanceCard2(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'),
-                    moveToClosestTax(p2),landingTX(p2), nl, !.
+chanceCard2(Num) :- Num == 7, write('Selamat Kamu Pergi ke World Cup'), nl, 
+                    moveToLocation(p2, wc),landingWC(p2), !.
+chanceCard2(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'), nl,
+                    moveToClosestTax(p2),landingTX(p2), !.
 chanceCard2(Num) :- Num == 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'),
                     asserta(jail(p2)), asserta(jail(p2)),
                     changeLokasiPemain(p2, jl), switchPlayer, retractall(double(_X)), nl,
@@ -88,9 +88,9 @@ chanceCard2(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadi
 chanceCard2(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl,
                     asetProperti(p2, Properti), \+ landmark(Properti), removePosession(p2, Properti), !.
 chanceCard2(Num) :- Num == 13, write('Setelah Dilihat-lihat Ternyata Sudah Aman'), nl, !.
-chanceCard2(Num) :- Num == 14, write('Ada Tetanggamu yang Membutuhkan Tempat, Jual Propertimu'), nl,
+chanceCard2(Num) :- Num == 14, write('Ada Tetanggamu yang Membutuhkan Tempat'), nl,
                     asetProperti(p2, Properti), \+ landmark(Properti), nilaiProperti(Properti, Nilai),
-                    NilaiAkhir is (Nilai * 0.8), addBalance(p2, NilaiAkhir), !.
+                    NilaiAkhir is (Nilai * 0.8), addBalance(p2, NilaiAkhir), removePosession(p2, Properti), nl, !.
 chanceCard2(Num) :- Num == 14, write('Ternyata Nanya Doang Beli Kagak'), nl, !.
 
 /* Kartu kalau sudah 3 */
