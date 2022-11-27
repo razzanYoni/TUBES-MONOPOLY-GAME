@@ -1,7 +1,5 @@
 /* Lokasi */
 
-:- [player].
-
 /*Deklarasi Fakta*/
 
 listLokasi([go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
@@ -75,7 +73,7 @@ printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_)
             (X == tx1 ; X == tx2), write('tx')
             ;
             write(X)
-        ), nl, printBalance(p1),
+        ), nl, write('Saldo Player P1: '), printBalance(p1), nl,nl,
     write('P2 : '), lokasiPemain(p2, Y),
         (
             (Y == cc1 ; Y == cc2 ; Y == cc3), write('cc')
@@ -83,7 +81,7 @@ printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_)
             (Y == tx1 ; Y == tx2), write('tx')
             ;
             write(Y)
-        ), nl, printBalance(p2),!.
+        ), nl, write('Saldo Player P2: '), printBalance(p2),nl,nl,!.
 
 
 

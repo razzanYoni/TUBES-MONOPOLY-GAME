@@ -1,14 +1,16 @@
 
-:- [player, lokasinProperti].
+%:- [player, lokasinProperti].
 
 % Rules
 
 /* cek posisi player apakah di tiles tax */
 isOnTax(Player) :- lokasiPemain(Player, X), (X == tx1 ; X == tx2).
 
-indeksJenis(Jenis) :- Jenis == 
 
+/* Menghasilkan tax yang harus dibayar */
 
-/* Menghasilkan nilai properti dalam tiles */
+taxValue(Player, Tax) :- totalAsset(Player, Total), Tax is Total / 10.
 
-ProValue(Tile, V) :- hargaProperti([H|T]), Tile == H , TingkatanAset(Tile, Jenis), 
+/* Mengurangi Saldo Player dengan Tax */
+
+bayarPajak(Player) :- isOnTax(Player), taxValue(Player, Tax), subtBalance(Player, Tax).

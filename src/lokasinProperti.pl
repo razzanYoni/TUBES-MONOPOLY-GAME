@@ -23,16 +23,15 @@ biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanPr
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaSewaProperti(Properti, _, _, _, HargaSewaBangunan3, _), BiayaSewa is HargaSewaBangunan3, !.
 biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaSewaProperti(Properti, _, _, _, _, HargaSewaLandmark), BiayaSewa is HargaSewaLandmark, !.
 
-/*biayaProperti(Properti, Biaya): BiayaSewa adalah harga dari Properti*/
-biayaProperti(Properti, Biaya):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaProperti(Properti, HargaTanah, _, _, _, _), Biaya is HargaTanah, !.
-biayaProperti(Properti, Biaya):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan1', hargaProperti(Properti, _, HargaBangunan1, _, _, _), Biaya is HargaBangunan1, !.
-biayaProperti(Properti, Biaya):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan2', hargaProperti(Properti, _, _, HargaBangunan2, _, _), Biaya is HargaBangunan2, !.
-biayaProperti(Properti, Biaya):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaProperti(Properti, _, _, _, HargaBangunan3, _), Biaya is HargaBangunan3, !.
-biayaProperti(Properti, Biaya):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaProperti(Properti, _, _, _, _, HargaLandmark), Biaya is HargaLandmark, !.
-
+/*biayaProperti(Properti, Biaya): Biaya adalah harga dari Properti*/
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaProperti(Properti, HargaTanah, _, _, _, _), Nilai is HargaTanah, !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan1', hargaProperti(Properti, HargaTanah, HargaBangunan1, _, _, _), Nilai is (HargaTanah + HargaBangunan1), !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan2', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, _, _), Nilai is (HargaTanah + HargaBangunan1 + HargaBangunan2), !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, _), Nilai is (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3), !.
+nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark), Nilai is (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3 + HargaLandmark), !.
 
 /*biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
-biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+landmark(Properti).
+biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+landmark(Properti), BiayaAkuisisi is nilaiProperti*(80/100).
 biayaAkuisisiProperti(Properti, BiayaAkuisisi):- BiayaAkuisisi is 'tidak bisa diakuisisi'.
 
 /*tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
@@ -239,5 +238,9 @@ checkPropertyDetail(X):- properti(X),
     write('Harga Sewa Bangunan 3 : '), hargaSewaProperti(X, _, _, _, HargaSewaBangunan3, _) , write(HargaSewaBangunan3), nl,
     write('Harga Sewa Landmark   : '), hargaSewaProperti(X, _, _, _, _, HargaSewaLandmark) , write(HargaSewaLandmark), nl, !.
 
-checkPropertyDetail(X):- write(X), write(' bukan merupakan sebuah properti'), !.
+checkPropertyDetail(X):- write(X), write(' bukan merupakan sebuah properti'), nl.
+
+
+/*ambilAlihProperti(Properti, PemilikLama, PemilikBaru)
+ambilAlihProperti(Properti, PemilikLama, PemilikBaru) :-  */
     
