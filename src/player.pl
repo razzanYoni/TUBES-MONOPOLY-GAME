@@ -33,9 +33,9 @@ bangkrut(p2, false).
 :-dynamic(asetProperti/2).
 :-dynamic(tingkatanAset/2).
 /*data properti yang dimiliki dalam array*/
-    /*ini gw perlu buat ngitung asset, soalnya susah rekursinya kalo gak pake array*/
+    /*ini perlu buat ngitung asset, susah rekursinya kalo gak pake array*/
 :-dynamic(posessionArr/2).
-/*posessionArr(p1, [a1,a2,a3]).*/
+/*posessionArr(p1, []).*/
 /*posessionArr(p2, []).*/
 :-dynamic(lewatGO/2).
 lewatGO(p1, 0).
@@ -43,7 +43,7 @@ lewatGO(p2, 0).
 
 
 
-/*TEMP*/
+/*TEMP untuk debugging*/
 asetProperti(p1, d1).
 asetProperti(p2, a2).
 asetProperti(p1, a1).
@@ -190,6 +190,7 @@ landingPropertiLawan:-
 
 
 landingPropertiSendiri(Pemain):-
+    /*aksi jika player mendarat di properti sendiri*/
     balance(Pemain, Uang),
     lokasiPemain(Pemain, Lokasi),
     tingkatanAset(Lokasi, CurrentTingkat),
@@ -596,7 +597,7 @@ checkBangkrut(Pemain):-
     (X < 0,
 
         jumlahAsset(Pemain, AssetValue),
-        (AssetValue * 80/100) + X < 0,
+        (AssetValue * 80/100 + X) < 0,
 
         nl,
         write('Pemain '), write(Pemain), write(' telah bangkrut'), nl,
@@ -612,7 +613,9 @@ checkBangkrut(Pemain):-
         retract(bangkrut(Pemain, _X)),
         asserta(bangkrut(Pemain, true)),!
     ;X < 0,
-        (AssetValue * 80/100) + X >= 0,
+    
+        jumlahAsset(Pemain, AssetValue),
+        (AssetValue * 80/100 + X) >= 0,
         nl,
         write('Uangmu tidak mencukupi untuk membayar, kamu harus memilih properti untuk dijual'),nl,
         retract(bangkrut(Pemain, _X)),
@@ -627,15 +630,20 @@ resolveBangkrut(Pemain):-
     write('properti yang kamu miliki adalah sebagai berikut'), nl,
     showProperties(Pemain),
 
+    nl,write('atau tulis \'menyerah.\' jika tidak ingin melanjutkan permainan'), nl,
     write('Properti yang akan dijual: '),
-    read(InputProperty),
-    sellProperti(Pemain, InputProperty),
+    read(InputProperty),(
+        InputProperty \= menyerah,
+        sellProperti(Pemain, InputProperty),
 
-    retract(bangkrut(Pemain, _X)),
-    asserta(bangkrut(Pemain, false)),
+        retract(bangkrut(Pemain, _X)),
+        asserta(bangkrut(Pemain, false))
+        ;
+        InputProperty == menyerah,
+        changeBalance(Pemain, -9999999999999999)
+    ),
+    checkBangkrut(Pemain),!.
 
-    checkBangkrut(Pemain),
-    !.
 
 resetGame:-
     /*buat retract semua fakta jadi kaya pas awal mulai*/
