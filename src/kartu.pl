@@ -70,11 +70,11 @@ isChangeCard2(X, Num) :- X = 3, write('Kartumu berlebih mau mengambil kartu baru
                         (Answer \= y, Answer \= n, write('Input tidak valid'), nl, isChangeCard2(X, Num), !)), 
                         retract(lenCard2(Len)), LenNew is Len - 1, asserta(lenCard2(LenNew)), !.
 
-isPoor(Player) :- balance(Player, Balance1), ((Player = p1, X is 1, !); (Player = p2, X is 2,!)),Y is (X + 2), NumPlayerLain is (Y mod 2 + 1),
+isPoor(Player) :- totalAsset(Player, Asset1), ((Player = p1, X is 1, !); (Player = p2, X is 2,!)),Y is (X + 2), NumPlayerLain is (Y mod 2 + 1),
                           ((NumPlayerLain == 1, OtherPlayer = p1) ;(NumPlayerLain == 2, OtherPlayer = p2)),
-                           balance(OtherPlayer, Balance2), (Balance1 < (Balance2 * 0.5)), !.
+                           totalAsset(OtherPlayer, Asset2), (Asset1 < (Asset2 * 0.5)), !.
 
-/* taro di main langsung aja | untuk kocok kartu */
+/* untuk kocok kartu */
 runCard :-  currentPemain(_P), lokasiPemain(_P, Tempat),
             (
             Tempat \== cc1, Tempat \== cc2, Tempat \== cc3,
