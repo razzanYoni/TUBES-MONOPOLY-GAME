@@ -69,7 +69,7 @@ inputHandling:-
                     (
                         nl, write('Masukkan nama pemain: '), read(InputPlayer),
                         (
-                            checkPlayerDetail(Pemain),!
+                            checkPlayerDetail(InputPlayer),!
                         )
                     )
                 )
@@ -96,10 +96,6 @@ startGameIn:-
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
         
     inputHandling,
-
-    checkBangkrut(X),
-
-    /*Command Closingan kalo kalah di sini*/
     
     (bangkrut(X, true)
     ;
