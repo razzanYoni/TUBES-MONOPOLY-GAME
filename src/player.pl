@@ -54,11 +54,13 @@ asetProperti(p2, b3).
 tingkatanAset(d1, 'Tanah').
 tingkatanAset(a2, 'Tanah').
 tingkatanAset(a1, 'Tanah').
+
 tingkatanAset(g1, 'Tanah').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
 posessionArr(p1, [d1,a2,a1]).
 posessionArr(p2, [g1,b2,b3]).
+
 
 /*AKHIR TEMP*/
 
