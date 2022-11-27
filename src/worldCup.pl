@@ -1,6 +1,6 @@
 /* File : worldCup.pl */
 
-:- dynamic(worldCup/2).
+:- dynamic(worldCupCurrent/2).
 
 /* ======================================== Initwcoutput ======================================== */
     /* outputWc benar jika menampilkan pada layar */
@@ -28,13 +28,15 @@ worldCup :-
         (
             /* valid */
             asetProperti(Pemain, InputProp),
-            asserta(worldCup(Pemain, InputProp)),
-            asserta(worldCup(Pemain, InputProp)),
-            asserta(worldCup(Pemain, InputProp)),
+            asserta(worldCupCurrent(Pemain, InputProp)),
+            asserta(worldCupCurrent(Pemain, InputProp)),
+            asserta(worldCupCurrent(Pemain, InputProp)),
             write(InputProp), write(' menjadi Tuan rumah World cup'), nl,
-            write('di Dunia Boku no Prolog!'), nl
+            write('di Dunia Boku no Prolog!'), nl,
             write('(akhirnya cewek-cewek akan terpukau denganku!!)'),nl,
             write('pikirmu..'), nl, !
+            ;
+            InputProp == cancel
             ;
 
             /* non valid */
@@ -51,7 +53,7 @@ worldCup :-
                 /* termasuk properti lawan */
                 \+ lokasi(InputProp),
                 asetProperti(Lawan, InputProp),
-                write('Kamu ingin mengadakan World Cup di lokasi musuh!!')
+                write('Kamu ingin mengadakan World Cup di lokasi musuh!!'),
                 write(Lawan), write('menatap sinis padamu'), nl
                 ;
 
@@ -60,20 +62,22 @@ worldCup :-
                 \+ lokasi(InputProp),
                 \+ asetProperti(Lawan, InputProp),
                 write(InputProp), write(' belum dimiliki siapapun, termasuk dirimu!'), nl
+                ;
 
                 /* tidak termasuk semuanya */
                 \+ properti(InputProp),
                 \+ lokasi(InputProp),
                 write(InputProp), write(' bukanlah properti yang valid!'), nl
+                
             ), fail
         )   
-    )
+    ).
 
 
 worldCup :-
     currentPemain(Pemain),
     \+ lokasiPemain(Pemain, wc),
     write('Hmmmm kamu tidak berada di World Cup...'), nl,
-    write('cie pengen banget naikin harga properti'), nl, !.
+    write('cie pengen banget naikin harga properti'), nl,
     write('(duidmu dikit ya)'), nl, !.
 /* ======================================== Initwcoutput ======================================== */

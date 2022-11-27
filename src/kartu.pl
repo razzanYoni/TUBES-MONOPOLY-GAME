@@ -14,12 +14,12 @@ cardf(6,'Kartu Sakti'). % Angel Card
 randomNumberForCard(Number, 0) :- randomize, get_seed(X), Number is (X mod 14 + 1).
 randomNumberForCard(Number, 1) :- randomize, get_seed(X), Number is (X mod 7 + 1).
 
-chanceCard1(Num) :- Num == 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jail'), 
-                    assertz(card(p1, Num)), nl, retract(lenCard1(X)), X1 is X + 1, asserta(lenCard1(X1)), !.
-chanceCard1(Num) :- Num == 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
+chanceCard1(Num) :- Num = 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jail'), 
+                    assertz(card(p1, Num)), nl, retract(lenCard1(X)), X1 is X + 1, asserta(lenCard1(X1)).
+chanceCard1(Num) :- Num = 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
                     write('Kamu Mendapatkan Uang sebesar '), 
-                    write(Saldo), addBalance(p1, Saldo), nl, !.
-chanceCard1(Num) :- Num == 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'), 
+                    write(Saldo), addBalance(p1, Saldo), nl.
+chanceCard1(Num) :- Num = 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'), 
                     moveToLocation(p1, gc), nl, !.
 chanceCard1(Num) :- Num == 4, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Start'),
                     moveToLocation(p1, go), nl, !.
@@ -96,50 +96,18 @@ isChangeCard2(X, Num) :- X == 3, write('Kartumu berlebih mau mengambil kartu bar
                         ((Answer == y, retract(card(p2,_LastCard)), !) ; (Answer == n, retract(card(p2, Num)), !) ; 
                         (Answer \= y, Answer \= n, write('Input tidak valid'), nl, isChangeCard2(X, Num), !)), 
                         retract(lenCard2(Len)), LenNew is Len - 1, asserta(lenCard2(LenNew)), !.
+isChangeCard2(X, _Num) :- X \= 3.
 
-isPoor(Player) :- totalAsset(Player, Asset1), ((Player == p1, X is 1, !); (Player == p2, X is 2,!)),Y is (X + 2), NumPlayerLain is (Y mod 2 + 1),
-                          ((NumPlayerLain == 1, OtherPlayer is p1) ;(NumPlayerLain == 2, OtherPlayer is p2)),
-                           totalAsset(OtherPlayer, Asset2), (Asset1 < (Asset2 * 0.5)), !.
+isPoor(Player, Boolean) :- totalAsset(Player, Balance1),
+                            pemain(OtherPlayer),
+                            OtherPlayer \= Player,
+                           totalAsset(OtherPlayer, Balance2), (Balance1 < (Balance2 * 0.5), Boolean is 1 ; (\+ (Balance1 < (Balance2 * 0.5)), Boolean is 0 )), !.
 
 /* untuk kocok kartu */
-runCard :-  currentPemain(_P), lokasiPemain(_P, Tempat),
-            (
-            Tempat \== cc1, Tempat \== cc2, Tempat \== cc3,
-            write('Kamu tidak berada di chance card...'), write(Tempat), nl
-            ;
-                (Tempat == cc1 ; Tempat == cc2 ; Tempat == cc3),
-                (
-                    isPoor(_P),
-                    randomNumberForCard(Number, 1), 
-                    (
-                        (
-                            _P == p1, chanceCard1(Number), 
-                            lenCard1(X), 
-                            (
-                                isChangeCard1(X, Number), !
-                                ;
-                                \+ isChangeCard1(X, Number), !
-                            )
-                            
-                        ) , ! 
-                        ; 
-                        (
-                            _P == p2, 
-                            chanceCard2(Number), 
-                            lenCard2(X), 
-                            (
-                                isChangeCard2(X, Number),!
-                                ;
-                                \+ isChangeCard2(X, Number), !
-                            )
-                        ), !
-                    ), !
-                    ;
-                    \+ isPoor(_P),
-                    randomNumberForCard(Number, 0), 
-                    ((_P == p1, chanceCard1(Number), lenCard1(X), isChangeCard1(X, Number), !) ; (_P == p2, chanceCard2(Number), lenCard2(X), isChangeCard2(X, Number),!), !), !
-                ),!
-            ), !. 
+runCard :- currentPemain(_P), (lokasiPemain(_P, cc1); lokasiPemain(_P, cc2); lokasiPemain(_P, cc3)),
+           isPoor(_P, Boolean), randomNumberForCard(Number, Boolean), 
+           ((_P == p1, chanceCard1(Number), lenCard1(X), isChangeCard1(X, Number)) ; 
+           (_P == p2, chanceCard2(Number), lenCard2(X), isChangeCard2(X, Number))), !.
 
 /* program untuk print card */
 infoCard :- currentPemain(_P), _P == p1, lenCard1(_Len), _Len = 0, write('Kamu tidak memiliki kartu'), nl, !.        

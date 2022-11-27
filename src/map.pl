@@ -42,7 +42,7 @@ printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_)
                     write('             '),write('          '),(printPro(e1,_);write('        ')),write(' '),(printPro(e2,_);write('        ')),write(' '),(printPro(e3,_);write('        ')),write(' '),write('        '),write(' '),(printPro(f1,_);write('        ')),write(' '),(printPro(f2,_);write('        ')),write(' '),(printPro(f3,_);write('        ')),nl,
     write('    '),write('          ________________________________________________________________________________'), nl,
     write('    '),write('         |   FP   |   E1   |   WC   |   E2   |   CC2  |   F1   |   F2   |   F3   |   WT   |'), nl,
-    write('    '),write('         |'),pion(fp),write('|'),pion(e1),write('|'),pion(e2),write('|'),pion(e3),write('|'),pion(cc2),write('|'),pion(f1),write('|'),pion(f2),write('|'),pion(f3),write('|'),pion(wt),write('|'), nl,
+    write('    '),write('         |'),pion(fp),write('|'),pion(e1),write('|'),pion(wc),write('|'),pion(e2),write('|'),pion(cc2),write('|'),pion(f1),write('|'),pion(f2),write('|'),pion(f3),write('|'),pion(wt),write('|'), nl,
     write('    '),write('         |________|________|________|________|________|________|________|________|________|'), nl,
     write('    '),(printOwner(d3,_);write('        ')),write(' |   D3   |                                                              |   G1   |'), write(' '),(printOwner(g1,_);write('        ')),write(' '), nl,
     write('    '),(printPro(d3,_);write('        ')),write(' |'),pion(d3),write('|                              ->                              |'),pion(g1),write('|'), write(' '),(printPro(g1,_);write('        ')),write(' '), nl,

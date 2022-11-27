@@ -126,6 +126,8 @@ landingCC(_Pemain):-
     runCard.
 landingWT(_Pemain):-
     worldTour.
+landingWC(_Pemain):-
+    worldCup.
 landingGO(Pemain):-
     repeat,(
         nl, write('Pilih properti yang ingin kamu bangun: '),
@@ -135,6 +137,10 @@ landingGO(Pemain):-
             ;
             asetProperti(Pemain, LokasiPilihan),
             landingPropertiSendiri(Pemain),!
+            ;
+            LokasiPilihan == help,
+            nl, write('Perintah yang tersedia'), nl,
+            write('cancel.: tidak menambah properti'), nl, fail 
             ;
             \+ asetProperti(Pemain, LokasiPilihan),
             write('Pilihan tidak valid'), fail
@@ -182,8 +188,12 @@ landingNonProperti(Pemain):-
         landingWT(Pemain),!
         ;
         Lokasi == go,
-        nl , write('go'), nl, nl,
+        nl , write('Masuk go'), nl, nl,
         landingGO(Pemain),!
+        ;
+        Lokasi == wc,
+        nl , write('Masuk world cup'), nl, nl,
+        landingWC(Pemain),!
         ;
         lokasi == gc,
         nl, write('====SELAMAT DATANG DI GAME CENTER==='), nl, nl,
@@ -256,7 +266,7 @@ landingPropertiSendiri(Pemain):-
                 Input == help,
                 nl, write('Perintah yang tersedia'), nl,
                 write('tambah.: Menambah properti'), nl,
-                write('    landmark dapat dibeli setelah dua putaran'), nl,
+                write('    landmark dapat dibeli setelah satu putaran'), nl,
                 write('tidak.: tidak menambah properti'), nl, fail
                 ;
                 Input == tidak,
@@ -278,6 +288,7 @@ landingPropertiSendiri(Pemain):-
                         write('bangunan2.: beli Bangunan2'), nl,
                         write('bangunan3.: beli Bangunan3'), nl,
                         write('landmark.: beli Landmark'), nl,
+                        write('    landmark dapat dibeli setelah satu putaran dan memiliki tiga bangunan sebelumnya'), nl,
                         write('cancel.: tidak jadi membeli properti'), nl, nl, fail
                         ;
                         InputPilihan == tanah,
@@ -344,7 +355,7 @@ landingPropertiSendiri(Pemain):-
                             ;
                             (CurrentTingkat == 'Bangunan1'),
                                 (
-                                    HargaBeli = (HargaBangunan2 + HargaBangunan),
+                                    HargaBeli = (HargaBangunan2 + HargaBangunan3),
                                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                                     ;
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
@@ -373,7 +384,7 @@ landingPropertiSendiri(Pemain):-
                             (
                             lewatGO(Pemain, KaliLewat2),
                             CurrentTingkat == 'Bangunan3',
-                            KaliLewat2 > 1,(
+                            KaliLewat2 > 0,(
                                 Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                                 ;
                                 write('Landmark berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
@@ -382,6 +393,7 @@ landingPropertiSendiri(Pemain):-
                                 addPosession(Pemain, LokasiBeli, 'Landmark'),!
                             )
                             ;
+                            KaliLewat2 < 1,
                             write('landmark belum bisa dibeli'), nl, fail
                             )
                         )
@@ -418,7 +430,7 @@ landingPropertiKosong(Pemain):-
         Input == help,
         nl, write('Perintah yang tersedia'), nl,
         write('beli.: beli properti'), nl,
-        write('    landmark dapat dibeli setelah dua putaran'), nl,
+        write('    landmark dapat dibeli setelah satu putaran'), nl,
         write('tidak.: tidak membeli properti'), nl, nl,
         landingPropertiKosong(Pemain),!
         ;
@@ -442,6 +454,7 @@ landingPropertiKosong(Pemain):-
                 write('bangunan2.: beli Bangunan2'), nl,
                 write('bangunan3.: beli Bangunan3'), nl,
                 write('landmark.: beli Landmark'), nl,
+                write('    landmark dapat dibeli setelah satu putaran'), nl,
                 write('cancel.: tidak jadi membeli properti'), nl, nl, fail
                 ;
                 InputPilihan == tanah,
@@ -538,10 +551,13 @@ inMove(Pemain, X, []):-
     /*rekursif untuk list supaya sirkuler*/
     addBalance(Pemain, 200),
     balance(Pemain, Uang),
-    worldCup(Penyelenggara, _),
+    
     (
+        worldCupCurrent(Penyelenggara, _),
         Penyelenggara == Pemain,
-        retract(worldCup(Penyelenggara, LokasiWorldCup))
+        retract(worldCupCurrent(Penyelenggara, _LokasiWorldCup))
+        ;
+        \+ worldCupCurrent(Penyelenggara, _)
     ),
 
     nl, write(Pemain), write(' melewati go, uangmu sekarang, '), write(Uang), nl, nl,
@@ -845,18 +861,11 @@ isBlock(d3):-
 isBlock(e1):-
     pemain(Pemain),
     asetProperti(Pemain, e1),
-    asetProperti(Pemain, e2),
-    asetProperti(Pemain, e3).
+    asetProperti(Pemain, e2).
 isBlock(e2):-
     pemain(Pemain),
     asetProperti(Pemain, e1),
-    asetProperti(Pemain, e2),
-    asetProperti(Pemain, e3).
-isBlock(e3):-
-    pemain(Pemain),
-    asetProperti(Pemain, e1),
-    asetProperti(Pemain, e2),
-    asetProperti(Pemain, e3).
+    asetProperti(Pemain, e2).
 isBlock(f1):-
     pemain(Pemain),
     asetProperti(Pemain, f1),

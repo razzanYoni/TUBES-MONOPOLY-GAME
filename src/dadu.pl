@@ -24,9 +24,9 @@ throwDice :-
              Total is Number1 + Number2,
              move(_Pemain, Total),
              write('Anda maju sebanyak '), write(Total), write(' langkah'), nl, 
-             ((Number1 = Number2, retractall(double(X)), asserta(double(1))) 
+             ((Number1 == Number2, retractall(double(X)), asserta(double(1))) 
              ; 
-             (Number1 \= Number2, retractall(double(X)))),
+             (Number1 =\= Number2, retractall(double(X)))),
              !.
 
 /* lemparan selanjutnya, kondisi ketika belum double sebanyak 3 kali */
@@ -35,9 +35,9 @@ throwDice :- currentPemain(_Pemain),
              randomNumberForDice(Number1), randomNumberForDice(Number2), 
              write('Dadu 1: '), write(Number1), nl, 
              write('Dadu 2: '), write(Number2), nl, 
-             ((Number1 = Number2, retract(double(X)), X1 is X + 1, asserta(double(X1)), X1 \= 3) 
+             ((Number1 == Number2, retract(double(X)), X1 is X + 1, asserta(double(X1)), X1 =\= 3) 
              ; 
-             (Number1 \= Number2, retractall(double(X)))),
+             (Number1 =\= Number2, retractall(double(X)))),
              Total is Number1 + Number2,
 
              move(_Pemain, Total),
