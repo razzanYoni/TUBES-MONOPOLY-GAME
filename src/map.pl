@@ -38,15 +38,6 @@ printBalance(Player) :- balance(Player, X), write(X).
 pion(Tile) :- (lokasiPemain(p1, Tile), write(' p1 ') ; write('    ')) , 
                      (lokasiPemain(p2, Tile), write(' p2 ') ; write('    ')).
 
-%'),pion(),write('
-
-printBalance(Player) :- balance(Player, X), write(X).
-
-pion(Tile) :- (lokasiPemain(p1, Tile), write(' p1 ') ; write('    ')) , 
-                     (lokasiPemain(p2, Tile), write(' p2 ') ; write('    ')).
-
-%'),pion(),write('
-
 
 printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_);write('        ')),write(' '),(printOwner(e2,_);write('        ')),write(' '),(printOwner(e3,_);write('        ')),write(' '),write('        '),write(' '),(printOwner(f1,_);write('        ')),write(' '),(printOwner(f2,_);write('        ')),write(' '),(printOwner(f3,_);write('        ')),nl,
                     write('             '),write('          '),(printPro(e1,_);write('        ')),write(' '),(printPro(e2,_);write('        ')),write(' '),(printPro(e3,_);write('        ')),write(' '),write('        '),write(' '),(printPro(f1,_);write('        ')),write(' '),(printPro(f2,_);write('        ')),write(' '),(printPro(f3,_);write('        ')),nl,
