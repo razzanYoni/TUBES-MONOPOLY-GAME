@@ -187,7 +187,7 @@ landingPropertiLawan(Pemain):-
         )
         ;
         subtBalance(Pemain, BiayaSewa),
-        balance(Pemain, Uang), 
+        balance(Pemain, Uang)
     ),
 
     (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
