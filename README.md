@@ -4,7 +4,7 @@
 
 
 ## Installing
-- Windows
+- Windows <br>
     [Download GNU Prolog](http://www.gprolog.org/setup-gprolog-1.5.0-mingw-x64.exe)
 - UNIX
   ```shell 
