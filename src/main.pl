@@ -31,7 +31,7 @@ inputHandling:-
                 throwDice,
                 (
                     /* Kalo gak double switch and stop */
-                    \+ double(Berapapun),
+                    \+ double(_Berapapun),
                     switchPlayer, !
                     ;
                     1 = 1
@@ -67,7 +67,7 @@ inputHandling:-
                 InputString == playerDetail,
                 (repeat,
                     (
-                        nl, write('Masukkan nama pemain: '), read(InputPlayer),
+                        nl, write('Masukkan nama pemain: '), read(_InputPlayer),
                         (
                             checkPlayerDetail(Pemain),!
                         )

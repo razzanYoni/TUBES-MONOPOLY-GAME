@@ -127,6 +127,7 @@ landingGC:-
     write('1. Ya'), nl,
     write('2. Tidak'), nl,
     write('Pilihan: '), read(Pilihan),
+    currentPemain(Pemain),
     (
         Pilihan == 1, subtBalance(Pemain,50), playGameCenter
         ;
@@ -160,22 +161,26 @@ landingNonProperti(Pemain):-
         landingGC
     ).
 
-/*Properti
+/* Properti */
 landingPropertiLawan:-
+    currentPemain(Pemain),
     biayaSewaProperti(Lokasi, BiayaSewa),
-    subtBalance(Pemain, biayaSewa),
+    subtBalance(Pemain, BiayaSewa),
     balance(Pemain, Uang), 
     (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
         (
-            AmbilAlih == ya, 
+            AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
                 (
-                    har
+                    (Uang-BiayaAkuisisi)>= 0, asetProperti(PemilikLama, Lokasi), ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri
+                    ;
+                    write('Kurang $'), write(BiayaAkuisisi-Uang), write('Bos! Gaya Elit, Ekonomi Sulid') 
                 )
             ;
-            Ambil == tidak
+            AmbilAlih == tidak
         )
-    ; 
-    ), */
+        ;
+        checkBangkrut(Pemain) 
+    ).
 
 
 
@@ -379,7 +384,7 @@ sellProperti(Pemain, Properti):-
     addBalance(Pemain, HargaJual),
     removePosession(Pemain, Properti),!.
 
-inJumlahAsset(Pemain, 0, []).
+inJumlahAsset(_Pemain, 0, []).
 inJumlahAsset(Pemain, X, [H|T]):-
     /*rekursif untuk ngitung jumlah asset*/
     nilaiProperti(H, Nilai),
@@ -394,7 +399,7 @@ totalAsset(Pemain, Output):-
     balance(Pemain, Uang),
     Output is Asset + Uang.
 
-inShowProperties(Pemain, X, []).
+inShowProperties(_Pemain, _X, []).
 inShowProperties(Pemain, X, [H|T]):-
     tingkatanAset(H, Tingkat),
     write(X), write('. '), write(H), write(' - '), write(Tingkat),nl,
@@ -418,13 +423,13 @@ checkPlayerDetail(Pemain):-
     write('Total Nilai Properti          :' ), write(Total),nl,nl,
 
     write('Daftar Kepemilikan Properti   :' ),nl,
-    showProperties(Pemain).
+    showProperties(Pemain),
 
     write('Daftar Kepemilikan Card       : '),nl.
 
     /*Masuk ke sini yang card*/
 
-playerDetail(Pemain):-
+playerDetail(_Pemain):-
     write("Nama pemain tidak valid").
 
 

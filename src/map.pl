@@ -1,6 +1,5 @@
 /* Lokasi */
 
-:- [player].
 
 /*Deklarasi Fakta*/
 
@@ -10,8 +9,8 @@ listLokasi([go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,
 
 
 /*Deklarasi Rules*/
-searchProperti(Tile, [H|T]) :- H = Tile, !.
-searchProperti(Tile, [H|T]) :- searchProperti(Tile, T).
+searchProperti(Tile, [H|_T]) :- H = Tile, !.
+searchProperti(Tile, [_H|T]) :- searchProperti(Tile, T).
 
 cekProperti(T, X) :-
 % cek kepemilikan properti di tiles tersebut 
@@ -30,7 +29,7 @@ printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Landmark',
                 write('Landmark').
   
 
-printOwner(T,P) :- cekProperti(T,P), tingkatanAset(T, Aset),write(P), write('      '). 
+printOwner(T,P) :- cekProperti(T,P), tingkatanAset(T, _Aset),write(P), write('      '). 
 
 
 printMap :- nl, nl,
