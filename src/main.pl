@@ -91,15 +91,17 @@ inputHandling:-
 
 
 startGameIn:-
+
+    bayarPajak(X),
+
     printMap,
-    
+
     write('Sekarang giliran: '), currentPemain(X), write(X), nl,
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
         
     inputHandling,
 
     checkBangkrut(X),
-    bayarPajak(X),
 
     /*Command Closingan kalo kalah di sini*/
     

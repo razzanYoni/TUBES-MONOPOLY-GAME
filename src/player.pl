@@ -19,7 +19,7 @@ pemain(p1).
 pemain(p2).
 /*data lokasiPemain*/
 :-dynamic(lokasiPemain/2).
-lokasiPemain(p1, tx1).
+lokasiPemain(p1, tx2).
 lokasiPemain(p2, go).
 /*data duit*/
 :-dynamic(balance/2).
@@ -58,7 +58,7 @@ tingkatanAset(h3, 'Bangunan 1').
 tingkatanAset(b1, 'Landmark').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
-tingkatanAset(d1, 'Bangunan 2').
+tingkatanAset(g1, 'Bangunan 2').
 posessionArr(p1, [d1,a2,a1]).
 posessionArr(p2, [g1,b2,b3]).
 
