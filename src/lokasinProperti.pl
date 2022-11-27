@@ -22,11 +22,61 @@ lokasi(X) :- properti(X).
 kepemilikanProperti(Properti, Pemilik):- asetProperti(Pemilik, Properti).
 
 /*biayaSewaProperti(Properti, BiayaSewa): BiayaSewa adalah biaya sewa dari Properti saat ini*/
-biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaSewaProperti(Properti, HargaSewaTanah, _, _, _, _), BiayaSewaAsli is HargaSewaTanah, (isBlock(Properti), BiayaSewa is BiayaSewaAsli*2 ; BiayaSewa is BiayaSewaAsli), !.
-biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan1', hargaSewaProperti(Properti, _, HargaSewaBangunan1, _, _, _), BiayaSewaAsli is HargaSewaBangunan1,(isBlock(Properti), BiayaSewa is BiayaSewaAsli*2 ; BiayaSewa is BiayaSewaAsli), !.
-biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan2', hargaSewaProperti(Properti, _, _, HargaSewaBangunan2, _, _), BiayaSewaAsli is HargaSewaBangunan2 ,(isBlock(Properti), BiayaSewa is BiayaSewaAsli*2 ; BiayaSewa is BiayaSewaAsli), !.
-biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaSewaProperti(Properti, _, _, _, HargaSewaBangunan3, _), BiayaSewaAsli is HargaSewaBangunan3 ,(isBlock(Properti), BiayaSewa is BiayaSewaAsli*2 ; BiayaSewa is BiayaSewaAsli), !.
-biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaSewaProperti(Properti, _, _, _, _, HargaSewaLandmark), BiayaSewaAsli is HargaSewaLandmark ,(isBlock(Properti), BiayaSewa is BiayaSewaAsli*2 ; BiayaSewa is BiayaSewaAsli), !.
+biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaSewaProperti(Properti, HargaSewaTanah, _, _, _, _), BiayaSewaAsli is HargaSewaTanah, 
+                                        (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
+                                        (
+                                            worldCup(Penyelenggara, MasaWaktu),
+                                            (
+                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                BiayaSewa is BiayaSewaTemp
+                                            )
+                                        ;
+                                            BiayaSewa is BiayaSewaTemp 
+                                        ), !.
+biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan1', hargaSewaProperti(Properti, _, HargaSewaBangunan1, _, _, _), BiayaSewaAsli is HargaSewaBangunan1,
+                                        (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
+                                        (
+                                            worldCup(Penyelenggara, MasaWaktu),
+                                            (
+                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                BiayaSewa is BiayaSewaTemp
+                                            )
+                                        ;
+                                            BiayaSewa is BiayaSewaTemp 
+                                        ), !.
+biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan2', hargaSewaProperti(Properti, _, _, HargaSewaBangunan2, _, _), BiayaSewaAsli is HargaSewaBangunan2 ,
+                                        (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
+                                        (
+                                            worldCup(Penyelenggara, MasaWaktu),
+                                            (
+                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                BiayaSewa is BiayaSewaTemp
+                                            )
+                                        ;
+                                            BiayaSewa is BiayaSewaTemp 
+                                        ), !.
+biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Bangunan3', hargaSewaProperti(Properti, _, _, _, HargaSewaBangunan3, _), BiayaSewaAsli is HargaSewaBangunan3 ,
+                                        (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
+                                        (
+                                            worldCup(Penyelenggara, MasaWaktu),
+                                            (
+                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                BiayaSewa is BiayaSewaTemp
+                                            )
+                                        ;
+                                            BiayaSewa is BiayaSewaTemp 
+                                        ), !.
+biayaSewaProperti(Properti, BiayaSewa):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaSewaProperti(Properti, _, _, _, _, HargaSewaLandmark), BiayaSewaAsli is HargaSewaLandmark ,
+                                        (isBlock(Properti), BiayaSewaTemp is BiayaSewaAsli*2 ; BiayaSewaTemp is BiayaSewaAsli), 
+                                        (
+                                            worldCup(Penyelenggara, MasaWaktu),
+                                            (
+                                                (MasaWaktu > 0), BiayaSewa is BiayaSewaTemp*2;
+                                                BiayaSewa is BiayaSewaTemp
+                                            )
+                                        ;
+                                            BiayaSewa is BiayaSewaTemp 
+                                        ), !.
 
 /*biayaProperti(Properti, Biaya): Biaya adalah harga dari Properti*/
 nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Tanah', hargaProperti(Properti, HargaTanah, _, _, _, _), Nilai is HargaTanah, !.
