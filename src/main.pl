@@ -35,11 +35,11 @@ inputHandling:-
                 (
                     /* Kalo gak double switch and stop */
                     \+ double(_Berapapun),
-                    switchPlayer,
-                    checkLokasi(Pemain), !
+                    checkLokasi(Pemain),
+                    switchPlayer, !
                     ;
                     double(_Berapapun),
-                    checkLokasi(Pemain), fail
+                    checkLokasi(Pemain), !
                 )
                 ;
 

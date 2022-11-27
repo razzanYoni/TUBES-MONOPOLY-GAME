@@ -69,13 +69,13 @@ addBalance(Pemain, Amount):-
     /*ganti duit ditambahin*/
     pemain(Pemain),
     balance(Pemain, Old),
-    New is Old + Amount,
+    New is (Old + Amount),
     changeBalance(Pemain, New).
 subtBalance(Pemain, Amount):-
     /*ganti duit dikurangin*/
     pemain(Pemain),
     balance(Pemain, Old),
-    New is Old - Amount,
+    New is (Old - Amount),
     changeBalance(Pemain, New).
 
 changeLokasiPemain(Pemain, New):-
@@ -304,7 +304,7 @@ landingPropertiSendiri(Pemain):-
                         hargaProperti(LokasiBeli,_, HargaBangunan1, HargaBangunan2,_,_),
                             ((CurrentTingkat == 'Tanah'),
                                 (
-                                    HargaBeli = HargaBangunan1 + HargaBangunan2,
+                                    HargaBeli = (HargaBangunan1 + HargaBangunan2),
                                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                                     ;
                                     write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
@@ -333,7 +333,7 @@ landingPropertiSendiri(Pemain):-
                         hargaProperti(LokasiBeli,_, HargaBangunan1,HargaBangunan2, HargaBangunan3,_),
                             ((CurrentTingkat == 'Tanah'),
                                 (
-                                    HargaBeli = HargaBangunan1 + HargaBangunan2 + HargaBangunan3,
+                                    HargaBeli = (HargaBangunan1 + HargaBangunan2 + HargaBangunan3),
                                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                                     ;
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
@@ -344,7 +344,7 @@ landingPropertiSendiri(Pemain):-
                             ;
                             (CurrentTingkat == 'Bangunan1'),
                                 (
-                                    HargaBeli = HargaBangunan2 + HargaBangunan3,
+                                    HargaBeli = (HargaBangunan2 + HargaBangunan),
                                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                                     ;
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
@@ -355,7 +355,7 @@ landingPropertiSendiri(Pemain):-
                             ;
                             (CurrentTingkat == 'Bangunan2'),
                                 (
-                                    HargaBeli = HargaBangunan3,
+                                    HargaBeli = (HargaBangunan3),
                                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                                     ;
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
@@ -457,8 +457,8 @@ landingPropertiKosong(Pemain):-
                 ;
                 InputPilihan == bangunan1,
                 hargaProperti(LokasiBeli,HargaTanah, HargaBangunan1, _, _, _),
+                HargaBeli = (HargaTanah + HargaBangunan1),
                 (
-                    HargaBeli = (HargaTanah + HargaBangunan1),
                     Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
                     ;
                     write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
@@ -468,9 +468,9 @@ landingPropertiKosong(Pemain):-
                 ;
                 InputPilihan == bangunan2,
                 hargaProperti(LokasiBeli, HargaTanah, HargaBangunan1, HargaBangunan2, _, _),
+                HargaBeli = (HargaTanah + HargaBangunan1 + HargaBangunan2),
                 (
-                    HargaBeli = (HargaTanah + HargaBangunan1 + HargaBangunan2),
-                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli - Uang), write('lagi!') ,fail
                     ;
                     write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
@@ -479,13 +479,13 @@ landingPropertiKosong(Pemain):-
                 ;
                 InputPilihan == bangunan3,
                 hargaProperti(LokasiBeli, HargaTanah , HargaBangunan1 , HargaBangunan2 , HargaBangunan3, _),
+                HargaBeli = (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3),
                 (
-                    HargaBeli = (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3),
-                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli - Uang), write('lagi!') ,fail
                     ;
                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
-                    addPosession(Pemain, LokasiBeli, 'Bangunan3'),!
+                    addPosession(Pemain, LokasiBeli, 'Bangunan2'), landingPropertiSendiri(Pemain), !
                 )
                 ;
                 InputPilihan == landmark,
@@ -555,7 +555,7 @@ inMove(Pemain, 1, [H|_T]):-
     
 inMove(Pemain, X, [_H|T]):-
     /*rekursif untuk basis jika nilai integernya bukan 1*/
-    A is X-1,
+    A is X - 1,
     inMove(Pemain, A, T).
 move(Pemain, X):-
     /*ganti lokasi dari nilai integer*/
@@ -633,7 +633,7 @@ sellProperti(Pemain, Properti):-
     /*ngejual properti dari posession dengan harga 80%*/
     asetProperti(Pemain, Properti),
     nilaiProperti(Properti, Nilai),
-    HargaJual is Nilai*80/100,
+    HargaJual is (Nilai*(80/100)),
     addBalance(Pemain, HargaJual),
     removePosession(Pemain, Properti),!.
 
@@ -647,7 +647,7 @@ inJumlahAsset(Pemain, X, [H|T]):-
     /*rekursif untuk ngitung jumlah asset*/
     nilaiProperti(H, Nilai),
     inJumlahAsset(Pemain, A, T),
-    X is Nilai + A,!.
+    X is( Nilai + A),!.
 jumlahAsset(Pemain, Output):-
     /*ngitung jumlah asset*/
     posessionArr(Pemain, PossArr),
@@ -656,14 +656,14 @@ totalAsset(Pemain, Output):-
     /*ngitung asset + balance*/
     jumlahAsset(Pemain, Asset),
     balance(Pemain, Uang),
-    Output is Asset + Uang.
+    Output is (Asset + Uang).
 
 inShowProperties(_Pemain, _X, []).
 inShowProperties(Pemain, X, [H|T]):-
     /*rekursif show properties*/
     tingkatanAset(H, Tingkat),
     write(X), write('. '), write(H), write(' - '), write(Tingkat),nl,
-    A is X + 1,
+    A is (X + 1),
     inShowProperties(Pemain, A, T).
 showProperties(Pemain):-
     /*print properti yang dimiliki player dalam bentuk daftar*/

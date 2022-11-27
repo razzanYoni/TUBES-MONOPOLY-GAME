@@ -69,7 +69,7 @@ isPoor(Player) :- balance(Player, Balance1), ((Player = p1, X is 1, !); (Player 
                            balance(OtherPlayer, Balance2), (Balance1 < (Balance2 * 0.5)), !.
 
 /* taro di main langsung aja | untuk kocok kartu */
-runCard :-  currentPemain(_P), lokasiPemain(_P, Tempat),
+runCard:-  currentPemain(_P), lokasiPemain(_P, Tempat),
             (
             Tempat \== cc1, Tempat \== cc2, Tempat \== cc3,
             write('Kamu tidak berada di chance card...'), write(Tempat), nl
