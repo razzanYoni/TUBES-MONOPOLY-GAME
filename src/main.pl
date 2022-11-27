@@ -7,6 +7,7 @@
 :-include('kartu.pl').
 :-inlcude('jail.pl'). 
 
+
 :-dynamic(debug/1).
 debug(debugging).
 
@@ -90,8 +91,10 @@ inputHandling:-
 
 
 startGameIn:-
+
+
     printMap,
-    
+
     write('Sekarang giliran: '), currentPemain(X), write(X), nl,
     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,
         

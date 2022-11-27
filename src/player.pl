@@ -54,13 +54,13 @@ asetProperti(p2, b3).
 tingkatanAset(d1, 'Tanah').
 tingkatanAset(a2, 'Tanah').
 tingkatanAset(a1, 'Tanah').
-
-tingkatanAset(g1, 'Tanah').
+tingkatanAset(h3, 'Bangunan 1').
+tingkatanAset(b1, 'Landmark').
 tingkatanAset(b2, 'Tanah').
 tingkatanAset(b3, 'Tanah').
-posessionArr(p1, [d1,a1]).
-posessionArr(p2, [g1,b2,b3,a2]).
-
+tingkatanAset(g1, 'Bangunan 2').
+posessionArr(p1, [d1,a2,a1]).
+posessionArr(p2, [g1,b2,b3]).
 
 /*AKHIR TEMP*/
 
@@ -121,6 +121,9 @@ nextLocations(Pemain, Output):-
     listLokasi(ListLokasi),
     inNextLocations(Pemain, X, ListLokasi, Output).
 
+/* Menghitung Tax dari Satu Pemain */
+taxValue(Player, Tax) :- totalAsset(Player, Total), Tax is Total / 10.
+
 /*Check tempat landing buat move, masukin command sesuai keperluan*/
 /*Non Properti*/
 landingJail(Pemain):-
@@ -129,9 +132,15 @@ landingCC(Pemain):-
     1 = 1.
 landingWT(Pemain):-
     1 = 1.
-landingTX(Pemain):-
-    1 = 1.
-landingGC(Pemain):-
+landingTX:-
+    taxValue(Player, Tax),
+    nl, nl,
+    write('    Anda harus membayar pajak sebesar '), 
+    write(Tax),
+    write(' dolar.'),
+    subtBalance(Player, Tax).
+
+landingGC:-
     write('Apakah kamu ingin menguji keberuntunganmu??? (Masukkan angka: )'),
     write('1. Ya'), nl,
     write('2. Tidak'), nl,
