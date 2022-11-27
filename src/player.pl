@@ -700,8 +700,7 @@ landingPropertiKosong(Pemain):-
                 )
                 ;
                 InputPilihan == landmark,
-                write('landmark belum bisa dibeli'), nl,
-                landingPropertiKosong(Pemain),fail
+                write('landmark belum bisa dibeli'), nl, fail
                 ;
                 InputPilihan == cancel,!
                 ;
