@@ -19,14 +19,13 @@ cekProperti(T, X) :-
 
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Tanah',
                 write('Tanah   ').
-printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 1',
+printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan1',
                 write('Gedung 1').
-printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 2',
+printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan2',
                 write('Gedung 2').
-printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan 3',
+printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Bangunan3',
                 write('Gedung 3').
 printPro(T, P) :- cekProperti(T, P), tingkatanAset(T, Aset), Aset = 'Landmark',
-
                 write('Landmark').
   
 

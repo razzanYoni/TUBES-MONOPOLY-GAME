@@ -9,8 +9,8 @@ isDuitWTcukup(Pemain) :-
 /* ======================================== Pengecekan Duid ======================================== */
 
 /* ======================================== Write list lokasi ======================================== */
-tulisListLokasi([]) :-
-tulisListLokasi([H|_T])
+tulisListLokasi([]).
+tulisListLokasi([H|_T]):-
     H == wt,
     write('Anda ada disini(wt) '),
     tulisListLokasi(_T).
@@ -43,19 +43,22 @@ worldTour :-
 
                     /* valid */
                     InputLoc \== wt,
-                    Lokasi(InputLoc),
+                    (lokasi(InputLoc) ; properti(InputLoc)),
                     subtBalance(Pemain, 50),
                     moveToLocation(Pemain, InputLoc),
-                    wirte('Anda telah sampai di '), write(InputLoc), nl, !.
+                    write('Anda telah sampai di '), write(InputLoc), nl,
+                    checkLokasi(Pemain), !
+                    ;
 
                     /* non-valid */
-                    \+ Lokasi(InputLoc),
+                    \+ (lokasi(InputLoc) ; properti(InputLoc)),
                     write(InputLoc), write(' bukan lokasi yang valid'), nl,
                     write('Silakan pilih tempat berikut :'), nl,
                     tulisListLokasi(Lokasi), nl, fail
                 )
             )
         ;
+        \+ isDuitWTcukup(Pemain),
         write('Uangmu tidak cukup untuk melakukan World Tour!'), nl
     ), !.
 /* ======================================== World Tour ======================================== */

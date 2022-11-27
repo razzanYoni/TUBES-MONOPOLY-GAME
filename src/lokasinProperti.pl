@@ -36,11 +36,11 @@ nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti),
 nilaiProperti(Properti, Nilai):- tingkatanProperti(Properti, TingkatanProperti), TingkatanProperti=='Landmark', hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark), Nilai is (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3 + HargaLandmark), !.
 
 /*biayaAkuisisiProperti(Properti, BiayaAkuisisi): BiayaAkuisisi adalah biaya akuisisi dari Properti saat ini*/
-biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+landmark(Properti), BiayaAkuisisi is nilaiProperti*(2).
+biayaAkuisisiProperti(Properti, BiayaAkuisisi):- \+ landmark(Properti), BiayaAkuisisi is nilaiProperti*(2).
 biayaAkuisisiProperti(_Properti, BiayaAkuisisi):- BiayaAkuisisi is 'tidak bisa diakuisisi'.
 
 /*tingkatanProperti(Properti, TingkatanProperti): TingkatanProperti adalah tingkatan properti dari Properti saat ini*/
-tingkatanProperti(Properti, TingkatanProperti):- tingkatanAset(Properti, TingkatanAset), TingkatanProperti is TingkatanAset.
+tingkatanProperti(Properti, TingkatanProperti):- tingkatanAset(Properti, TingkatanAset), TingkatanProperti = TingkatanAset.
 
 
 /*checkLocationDetail(X): Menampilkan detail lokasi X*/

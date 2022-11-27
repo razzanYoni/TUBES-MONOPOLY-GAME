@@ -5,13 +5,15 @@
 :-include('player.pl').
 :-include('gameCenter.pl').
 :-include('kartu.pl').
-:-inlcude('jail.pl'). 
+:-include('jail.pl').
+:-include('worldTour').
 
 
 :-dynamic(debug/1).
 debug(debugging).
 
 inputHandling:-
+    currentPemain(Pemain),
     (repeat,
             write('Masukkan perintah: '),
             read(InputString),
@@ -33,11 +35,12 @@ inputHandling:-
                 (
                     /* Kalo gak double switch and stop */
                     \+ double(_Berapapun),
-                    switchPlayer, !
+                    switchPlayer,
+                    checkLokasi(Pemain), !
                     ;
-                    1 = 1
-                ),
-                checkLokasi(Pemain), !
+                    double(_Berapapun),
+                    checkLokasi(Pemain), fail
+                )
                 ;
 
                 /* Check Location Detail */
@@ -70,7 +73,7 @@ inputHandling:-
                     (
                         nl, write('Masukkan nama pemain: '), read(_InputPlayer),
                         (
-                            checkPlayerDetail(InputPlayer),!
+                            checkPlayerDetail(_InputPlayer),!
                         )
                     )
                 )
@@ -83,7 +86,7 @@ inputHandling:-
                 ;
 
                 /* Default */
-                InputString \= help,
+                InputString \= help, InputString \= lempar,
                 nl, write('Input tidak valid'), nl, nl, fail
             
             )
