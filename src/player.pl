@@ -35,15 +35,15 @@ bangkrut(p2, false).
 /*data properti yang dimiliki dalam array*/
     /*ini perlu buat ngitung asset, susah rekursinya kalo gak pake array*/
 :-dynamic(posessionArr/2).
-/*
+
 posessionArr(p1, []).
 posessionArr(p2, []).
-*/
+
 :-dynamic(lewatGO/2).
 lewatGO(p1, 0).
 lewatGO(p2, 0).
 
-
+/*
 landmark(b2).
 asetProperti(p1, d1).
 asetProperti(p2, a2).
@@ -59,7 +59,7 @@ tingkatanAset(b3, 'Tanah').
 tingkatanAset(g1, 'Bangunan2').
 posessionArr(p1, [d1,a2,a1]).
 posessionArr(p2, [g1,b2,b3]).
-
+*/
 
 
 /*Basic-----------------------------------------------*/
