@@ -174,15 +174,29 @@ landingPropertiLawan(Pemain):-
     /*aksi jika player mendarat di properti selain sendiri*/
     currentPemain(Pemain),
     biayaSewaProperti(Lokasi, BiayaSewa),
-    subtBalance(Pemain, BiayaSewa),
-    balance(Pemain, Uang), 
+    (
+        card(Pemain, 6), 
+        write('Apakah kamu ingin menggunakan Angel Card?[y/n]'), nl,
+        read(Answer),
+        (
+            Answer == y, subtBalance(Pemain, BiayaSewa), write('Berhasil mengaktifkan Angel Card'), nl, nl, retract(card(Pemain, 6)), !
+            ;
+            Answer == n, subtBalance(Pemain, BiayaSewa), asetProperti(PemainLawan, Lokasi) ,addBalance(PemainLawan, BiayaSewa), write('Biaya sewa properti berhasil dibayar'), !
+            ;
+            Answer \= y, Answer \= n, write('Input tidak valid'), nl, nl, landingPropertiLawan(Pemain), !
+        )
+        ;
+        subtBalance(Pemain, BiayaSewa),
+        balance(Pemain, Uang), 
+    ),
+
     (Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
         (
             AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
                 (
                     (Uang-BiayaAkuisisi)>= 0, asetProperti(PemilikLama, Lokasi), ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain)
                     ;
-                    write('Kurang $'), write(BiayaAkuisisi-Uang), write('Bos! Gaya Elit, Ekonomi Sulid') 
+                    write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write('Bos! Gaya Elit, Ekonomi Sulid') 
                 )
             ;
             AmbilAlih == tidak
@@ -190,7 +204,6 @@ landingPropertiLawan(Pemain):-
         ;
         checkBangkrut(Pemain) 
     ).
-
 landingPropertiSendiri(Pemain):-
     /*aksi jika player mendarat di properti sendiri*/
     balance(Pemain, Uang),
