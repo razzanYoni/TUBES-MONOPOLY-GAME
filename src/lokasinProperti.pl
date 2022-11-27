@@ -129,15 +129,24 @@ checkLocationDetail(X):- lokasi(X), (X =='cc1' ; X == 'cc2' ; X = 'cc3'),
     write('Deskripsi Lokasi    : '), nl,
     write('Pemain mendapatkan kartu tertentu secara acak apabila menginjak daerah ini.'), nl,
     write('Jenis Kartu: '), nl,
-    write('1. Kartu Tax: Pemain akan langsung pindah ke tempat Tax berikutnya (terdekat) dan langsung dikenai pajak.'), nl,
-    write('2. Kartu Hadiah: Pemain langsung mendapatkan uang berdasarkan nilai yang tertera pada kartu tersebut. Nilainya dapat diacak dan nominalnya dibebaskan selama tidak merusak flow permainan (balanced).'), nl,
-    write('3. Kartu Get Out From Jail: Pemain dapat menggunakan kartu ini saat berada di dalam penjara untuk langsung keluar tanpa menunggu tiga kali giliran atau membayar denda.'), nl,
-    write('4. Kartu Go To Jail: Pemain langsung ditransportasi ke lokasi Penjara dan dipenjara. Permainan dilanjutkan oleh pemain selanjutnya.'), nl, !.
+    write('1. Kartu Keluar Jail  : Pemain dapat menggunakan kartu ini saat berada di dalam penjara untuk'), nl,
+    write('                        langsung keluar tanpa menunggu tiga kali giliran atau membayar denda.'), nl,
+    write('2. Kartu Hadiah       : Pemain langsung mendapatkan uang berdasarkan nilai yang tertera pada kartu tersebut.'), nl,
+    write('                        Nilainya dapat diacak dan nominalnya dibebaskan selama tidak merusak flow permainan (balanced).'), nl,
+    write('3. Kartu Game Center  : Pemain akan langsung pindah ke tempat Tax berikutnya (terdekat) dan langsung dikenai pajak.'), nl,
+    write('4. Kartu Go           : Pemain akan langsung pindah ke GO'), nl,
+    write('5. Kartu World Tour   : Pemain akan langsung pindah ke World Tour dan dapat berkeliling dunia.'), nl,
+    write('6. Kartu Sakti        : Pemain dapat menggunakan kartu ini saat berada di properti lawan dan akan membayar biaya sewa secara gratis.'), nl,
+    write('7. Kartu World Cup    : Pemain akan langsung pindah ke World'), nl,
+    write('8. Kartu Tax          : Pemain akan langsung pindah ke tempat Tax berikutnya (terdekat) dan langsung dikenai pajak.'), nl,
+    write('9. Kartu Go To Jail   : Pemain langsung ditransportasi ke lokasi Penjara dan dipenjara. Permainan dilanjutkan oleh pemain selanjutnya.'), nl, !.
+    write('10. Kartu Free Parking: Pemain langsung ditransportasi ke free parking.'), nl,
 
 checkLocationDetail(X):- lokasi(X), X=='jl', 
     write('Nama Lokasi         : '), write('Jail'), nl,
     write('Deskripsi Lokasi    : '), nl,
-    write('Pemain akan masuk penjara apabila pemain mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. Pemain akan langsung dipindahkan ke “jail” dan akan diberi kesempatan untuk bermain dadu selama tiga kali giliran.'), nl,
+    write('Pemain akan masuk penjara apabila pemain mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut.'), nl, 
+    write('Pemain akan langsung dipindahkan ke “jail” dan akan diberi kesempatan untuk bermain dadu selama tiga kali giliran.'), nl, nl,
     write('Terdapat 4 mekanisme sebagai berikut untuk keluar dari penjara:'), nl,
     write('1. Apabila terdapat dadu yang double sebelum tiga kali giliran, pemain langsung keluar dari penjara.'), nl,
     write('2. Apabila pemain sudah melempar dadu sebanyak tiga kali, pemain keluar dari penjara.'), nl,
@@ -153,12 +162,14 @@ checkLocationDetail(X):- lokasi(X), X=='wt',
     write('Nama Lokasi         : '), write('World Tour'),nl,
     write('Deskripsi Lokasi    : '), nl,
     write('Bila pemain mendarat di kotak ini, pemain akan diberikan kesempatan untuk berpindah ke lokasi manapun di map kecuali kotak World Tour.'), nl,
-    write('Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan melewati kotak-kotak lainnya, pemain harus membayar 50$ untuk bisa berpindah'), nl.
+    write('Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan'), nl,
+    write('melewati kotak-kotak lainnya, pemain harus membayar 50$ untuk bisa berpindah'), nl.
 
 checkLocationDetail(X):- lokasi(X), X =='tx', 
     write('Nama Lokasi         : '), write('Tax'), nl,
     write('Deskripsi Lokasi    : '), nl,
-    write('Pemain yang mencapai daerah TX wajib membayar pajak sejumlah 10% dari total aset yang dimilikinya. Aset tersebut termasuk uang yang dimiliki dan semua nilai aset properti yang dimiliki.'), nl.
+    write('Pemain yang mencapai daerah TX wajib membayar pajak sejumlah 10% dari total aset yang dimilikinya.'),nl, 
+    write('Aset tersebut termasuk uang yang dimiliki dan semua nilai aset properti yang dimiliki.'), nl.
 
 checkLocationDetail(X):- lokasi(X), X =='gc', 
     write('Nama Lokasi         : '),  write('Game Center'), nl,

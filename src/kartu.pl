@@ -1,9 +1,9 @@
 /* Kartu Maksimal 2 */
 /* Dynamic Predicates */
 :- dynamic(card/2).
-:- dynamic(lenCard1/1). % panjang untuk player 1
+:- dynamic(lenCard1/1). 
 lenCard1(0).
-:- dynamic(lenCard2/1). % panjang untuk player 2
+:- dynamic(lenCard2/1). 
 lenCard2(0).
 
 /* Deklarasi Fakta */
@@ -11,8 +11,8 @@ cardf(1,'Keluar dari Jail').
 cardf(6,'Kartu Sakti'). % Angel Card
 
 /* Deklarasi Rules */
-randomNumberForCard(Number, 0) :- randomize, get_seed(X), Number is (X mod 9 + 1).
-randomNumberForCard(Number, 1) :- randomize, get_seed(X), Number is (X mod 6 + 1).
+randomNumberForCard(Number, 0) :- randomize, get_seed(X), Number is (X mod 10 + 1).
+randomNumberForCard(Number, 1) :- randomize, get_seed(X), Number is (X mod 7 + 1).
 
 chanceCard1(Num) :- Num = 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jail'), 
                     assertz(card(p1, Num)), nl, retract(lenCard1(X)), X1 is X + 1, asserta(lenCard1(X1)), !.
@@ -27,12 +27,15 @@ chanceCard1(Num) :- Num = 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pe
                     moveToLocation(p1, wt), nl, !.
 chanceCard1(Num) :- Num = 6, write('Selamat Kamu Mendapatkan Kartu Sakti'), 
                     assertz(card(p1,Num)), nl, retract(lenCard1(X)), X1 is X + 1, asserta(lenCard1(X1)), !.
-chanceCard1(Num) :- Num = 7, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'), 
+chanceCard1(Num) :- Num = 7, write('Selamat Kamu Pergi ke World Cup'), 
+                    changeLokasiPemain(p1, wc), nl, !.
+chanceCard1(Num) :- Num = 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'), 
                     moveToClosestTax(p1), nl, !.
-chanceCard1(Num) :- Num = 8, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'), 
+chanceCard1(Num) :- Num = 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'), 
+                    asserta(jail(p1)), asserta(jail(p1)),
                     changeLokasiPemain(p1, jl), nl, !.
-chanceCard1(Num) :- Num = 9, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
-                    moveToLocation(p1, fp), nl, !.
+chanceCard1(Num) :- Num = 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
+                    changeLokasiPemain(p1, fp), nl, !.
 
 chanceCard2(Num) :- Num = 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jail'), 
                     assertz(card(p2, Num)), nl, retract(lenCard2(X)), X1 is X + 1, asserta(lenCard2(X1)), !.
@@ -47,12 +50,15 @@ chanceCard2(Num) :- Num = 5, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pe
                     moveToLocation(p2, wt), nl, !.
 chanceCard2(Num) :- Num = 6, write('Selamat Kamu Mendapatkan Kartu Sakti'), 
                     assertz(card(p2,Num)), nl, retract(lenCard2(X)), X1 is X + 1, asserta(lenCard2(X1)), !.
-chanceCard2(Num) :- Num = 7, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'),
+chanceCard2(Num) :- Num = 7, write('Selamat Kamu Pergi ke World Cup'), 
+                    changeLokasiPemain(p2, wc), nl, !.
+chanceCard2(Num) :- Num = 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke Tax Terdekat'),
                     moveToClosestTax(p2), nl, !.
-chanceCard2(Num) :- Num = 8, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'), 
+chanceCard2(Num) :- Num = 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'),
+                    asserta(jail(p2)), asserta(jail(p2)),
                     changeLokasiPemain(p2, jl), nl, !.
-chanceCard2(Num) :- Num = 9, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
-                    moveToLocation(p2, fp), nl, !.
+chanceCard2(Num) :- Num = 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
+                    changeLokasiPemain(p2, fp), nl, !.
 
 /* Kartu kalau sudah 3 */
 isChangeCard1(X, Num) :- X = 3, write('Kartumu berlebih mau mengambil kartu baru?[y/n]'), nl, read(Answer), 
