@@ -4,7 +4,11 @@
 
 /* ======================================== Initwcoutput ======================================== */
     /* outputWc benar jika menampilkan pada layar */
-    /*  */
+outputWc :-
+    write('__      __       _    _   _____             '), nl,
+    write('\\ \\    / /__ _ _| |__| | |_   _|__ _  _ _ _ '), nl,
+    write(' \\ \\/\\/ / _ \\ \'_| / _` |   | |/ _ \\ || | \'_|'), nl,
+    write('  \\_/\\_/\\___/_| |_\\__,_|   |_|\\___/\\_,_|_|  '), !.
 /* ======================================== Initwcoutput ======================================== */
 
 /* ======================================== Pemain Lawan ======================================== */
@@ -36,6 +40,8 @@ worldCup :-
             write('(akhirnya cewek-cewek akan terpukau denganku!!)'),nl,
             write('pikirmu..'), nl, !
             ;
+            
+            /* jika ingin keluar */
             InputProp == cancel
             ;
 
@@ -71,7 +77,7 @@ worldCup :-
                 
             ), fail
         )   
-    ).
+    ),!.
 
 
 worldCup :-
