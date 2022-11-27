@@ -25,9 +25,14 @@ pemainLawan(P1, P2) :-
 /* ======================================== Initwcoutput ======================================== */
     /* worldCup benar jika currentPemain(P) ada di tile wc dan telah memilih 1 tile property untuk di upgrade */
 worldCup :-
+    outputWc,
     currentPemain(Pemain),
     lokasiPemain(Pemain, wc),
     pemainLawan(Pemain, Lawan),
+    retractall(worldCupCurrent(_Pemain, _Lokasi)),
+    (
+        write('efek World Cup' write(_Lokasi),
+    ),
     (
         repeat,
         write('Masukkan properti yang akan menjadi tuan rumah: '),
@@ -40,6 +45,7 @@ worldCup :-
             asserta(worldCupCurrent(Pemain, InputProp)),
             write(InputProp), write(' menjadi Tuan rumah World cup'), nl,
             write('di Dunia Boku no Prolog!'), nl,
+            write('(nilai properti '), write(InputProp), write(' naik 2 kali lipat)') nl,
             write('(akhirnya cewek-cewek akan terpukau denganku!!)'),nl,
             write('pikirmu..'), nl, !
             ;
