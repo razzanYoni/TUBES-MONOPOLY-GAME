@@ -3,7 +3,7 @@
 
 /*Deklarasi Fakta*/
 
-listLokasi([go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,e2,e3,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
+listLokasi([go,a1, gc, a2,cc1,b1,b2,b3,jl,c1,c2,c3,tx1,d1,d2,d3,fp,e1,wc,e2,cc2,f1,f2,f3,wt,g1,g2,g3,tx2,cc3,h1,h2]).
 
  
 
@@ -41,7 +41,7 @@ pion(Tile) :- (lokasiPemain(p1, Tile), write(' p1 ') ; write('    ')) ,
 printMap :- nl, nl, write('             '),write('          '),(printOwner(e1,_);write('        ')),write(' '),(printOwner(e2,_);write('        ')),write(' '),(printOwner(e3,_);write('        ')),write(' '),write('        '),write(' '),(printOwner(f1,_);write('        ')),write(' '),(printOwner(f2,_);write('        ')),write(' '),(printOwner(f3,_);write('        ')),nl,
                     write('             '),write('          '),(printPro(e1,_);write('        ')),write(' '),(printPro(e2,_);write('        ')),write(' '),(printPro(e3,_);write('        ')),write(' '),write('        '),write(' '),(printPro(f1,_);write('        ')),write(' '),(printPro(f2,_);write('        ')),write(' '),(printPro(f3,_);write('        ')),nl,
     write('    '),write('          ________________________________________________________________________________'), nl,
-    write('    '),write('         |   FP   |   E1   |   E2   |   E3   |   CC2  |   F1   |   F2   |   F3   |   WT   |'), nl,
+    write('    '),write('         |   FP   |   E1   |   WC   |   E2   |   CC2  |   F1   |   F2   |   F3   |   WT   |'), nl,
     write('    '),write('         |'),pion(fp),write('|'),pion(e1),write('|'),pion(e2),write('|'),pion(e3),write('|'),pion(cc2),write('|'),pion(f1),write('|'),pion(f2),write('|'),pion(f3),write('|'),pion(wt),write('|'), nl,
     write('    '),write('         |________|________|________|________|________|________|________|________|________|'), nl,
     write('    '),(printOwner(d3,_);write('        ')),write(' |   D3   |                                                              |   G1   |'), write(' '),(printOwner(g1,_);write('        ')),write(' '), nl,
