@@ -174,7 +174,6 @@ landingNonProperti(Pemain):-
     lokasiPemain(Pemain, Lokasi),
     (
         Lokasi == jl,
-        nl , write('Masuk penjara'), nl, nl,
         landingJail(Pemain),!
         ;
         (Lokasi == cc1;Lokasi == cc2;Lokasi == cc3),
@@ -194,7 +193,6 @@ landingNonProperti(Pemain):-
         landingGO(Pemain),!
         ;
         Lokasi == wc,
-        nl , write('Masuk world cup'), nl, nl,
         landingWC(Pemain),!
         ;
         lokasi == gc,
