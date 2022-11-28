@@ -47,8 +47,7 @@ worldCup :-
             asserta(worldCupCurrent(Pemain, InputProp)),
             asserta(worldCupCurrent(Pemain, InputProp)),
             asserta(worldCupCurrent(Pemain, InputProp)),
-            write(InputProp), write(' menjadi Tuan rumah World cup'), nl,
-            write('di Dunia Boku no Prolog!'), nl,
+            write(InputProp), write(' menjadi Tuan rumah World cup di Dunia Boku no Prolog!'), nl,
             write('(nilai properti '), write(InputProp), write(' naik 2 kali lipat)'), nl,
             write('(akhirnya cewek-cewek akan terpukau denganku!!)'),nl,
             write('pikirmu..'), nl, !

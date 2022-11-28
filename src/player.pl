@@ -23,8 +23,8 @@ lokasiPemain(p1, go).
 lokasiPemain(p2, go).
 /*data duit*/
 :-dynamic(balance/2).
-balance(p1, 2000).
-balance(p2, 2000).
+balance(p1, 4000).
+balance(p2, 4000).
 /*data kondisi bangkrut*/
 :-dynamic(bangkrut/2).
 bangkrut(p1, false).
@@ -772,7 +772,7 @@ checkLokasi(Pemain):-
 /*Move*/
 inMove(Pemain, X, []):-
     /*rekursif untuk list supaya sirkuler*/
-    addBalance(Pemain, 200),
+    addBalance(Pemain, 400),
     balance(Pemain, Uang),
     
     (
@@ -1034,12 +1034,17 @@ resetGame:-
     asserta(currentPemain(p1)),
     asserta(lokasiPemain(p1, go)),
     asserta(lokasiPemain(p2, go)),
-    asserta(balance(p1, 2000)),
-    asserta(balance(p2, 2000)),
+    asserta(balance(p1, 4000)),
+    asserta(balance(p2, 4000)),
     asserta(bangkrut(p1, false)),
     asserta(bangkrut(p2, false)),
+    asserta(posessionArr(p1, [])),
+    asserta(posessionArr(p2, [])),
     asserta(lewatGO(p1, 0)),
-    asserta(lewatGO(p1, 0)).
+    asserta(lewatGO(p1, 0)),
+    asserta(lenCard1(0)),
+    asserta(lenCard2(0)).
+    
 
 /*Blok---------------------------------------------*/
 isBlock(a1):-
