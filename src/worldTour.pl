@@ -28,7 +28,11 @@ worldTour :-
         isDuitWTcukup(Pemain),
             listLokasi(Lokasi),
             printMap,
-            write('Selamat datang di World Tour Boku no Prolog!'), nl,
+            write('Selamat datang di World Tour Boku no Prolog!       '), nl,
+            write('__      __       _    _   _____                    '), nl,
+            write('\\ \\    / /__ _ _| |__| | |_   _|__ _  _ _ _      '), nl,
+            write(' \\ \\/\\/ / _ \\ \'_| / _` |   | |/ _ \\ || | \'_|'), nl,
+            write('  \\_/\\_/\\___/_| |_\\__,_|   |_|\\___/\\_,_|_|   '), nl, nl,
             (
                 repeat,
                 write('Masukkan lokasi yang ingin dikunjungi: '),
