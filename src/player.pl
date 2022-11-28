@@ -203,8 +203,9 @@ goBuildProperty(Pemain, Lokasi):-
                             ((CurrentTingkat == 'Tanah',
                             hargaProperti(LokasiBeli,_, HargaBeli,_,_,_),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
+                                    Uang >= HargaBeli,
                                     write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -221,8 +222,9 @@ goBuildProperty(Pemain, Lokasi):-
                             ((CurrentTingkat == 'Tanah'),
                             HargaBeli = (HargaBangunan1 + HargaBangunan2),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
+                                    Uang >= HargaBeli,
                                     write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -233,8 +235,9 @@ goBuildProperty(Pemain, Lokasi):-
                             (CurrentTingkat == 'Bangunan1'),
                             HargaBeli = HargaBangunan2,
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
+                                    Uang >= HargaBeli,
                                     write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -250,9 +253,9 @@ goBuildProperty(Pemain, Lokasi):-
                             ((CurrentTingkat == 'Tanah'),
                             HargaBeli = (HargaBangunan1 + HargaBangunan2 + HargaBangunan3),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ Uang < HargaBeli,
+                                    Uang >= HargaBeli,
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -262,9 +265,9 @@ goBuildProperty(Pemain, Lokasi):-
                             (CurrentTingkat == 'Bangunan1'),
                             HargaBeli = (HargaBangunan2 + HargaBangunan3),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ (Uang < HargaBeli),
+                                    Uang >= HargaBeli,
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -274,9 +277,9 @@ goBuildProperty(Pemain, Lokasi):-
                             (CurrentTingkat == 'Bangunan2'),
                             HargaBeli = (HargaBangunan3),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ Uang < HargaBeli,
+                                    Uang >= HargaBeli,
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -294,9 +297,9 @@ goBuildProperty(Pemain, Lokasi):-
                                 CurrentTingkat == 'Bangunan3',
                                 KaliLewat2 > 0,
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli - Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ Uang < HargaBeli,
+                                    Uang >= HargaBeli,
                                     write('Landmark berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -310,7 +313,7 @@ goBuildProperty(Pemain, Lokasi):-
                         ;
                         InputPilihan == cancel
                         ;
-                        (InputPilihan \= help), (InputPilihan \= landmark),
+                        (InputPilihan \= help), (InputPilihan \= landmark), (InputPilihan \= bangunan1), (InputPilihan \= bangunan2), (InputPilihan \= bangunan3), (InputPilihan \= cancel),
                         write('Input tidak valid'), nl, nl, fail
                     )    
                 )
@@ -492,8 +495,9 @@ landingPropertiSendiri(Pemain):-
                             ((CurrentTingkat == 'Tanah',
                             hargaProperti(LokasiBeli,_, HargaBeli,_,_,_),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
+                                    Uang >= HargaBeli,
                                     write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -510,8 +514,9 @@ landingPropertiSendiri(Pemain):-
                             ((CurrentTingkat == 'Tanah'),
                             HargaBeli = (HargaBangunan1 + HargaBangunan2),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
+                                    Uang >= HargaBeli,
                                     write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -522,8 +527,9 @@ landingPropertiSendiri(Pemain):-
                             (CurrentTingkat == 'Bangunan1'),
                             HargaBeli = HargaBangunan2,
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
+                                    Uang >= HargaBeli,
                                     write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -539,9 +545,9 @@ landingPropertiSendiri(Pemain):-
                             ((CurrentTingkat == 'Tanah'),
                             HargaBeli = (HargaBangunan1 + HargaBangunan2 + HargaBangunan3),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ Uang < HargaBeli,
+                                    Uang >= HargaBeli,
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -551,9 +557,9 @@ landingPropertiSendiri(Pemain):-
                             (CurrentTingkat == 'Bangunan1'),
                             HargaBeli = (HargaBangunan2 + HargaBangunan3),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ (Uang < HargaBeli),
+                                    Uang >= HargaBeli,
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -563,9 +569,9 @@ landingPropertiSendiri(Pemain):-
                             (CurrentTingkat == 'Bangunan2'),
                             HargaBeli = (HargaBangunan3),
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ Uang < HargaBeli,
+                                    Uang >= HargaBeli,
                                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -583,9 +589,9 @@ landingPropertiSendiri(Pemain):-
                                 CurrentTingkat == 'Bangunan3',
                                 KaliLewat2 > 0,
                                 (
-                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli - Uang), write('lagi!') ,fail
+                                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                                     ;
-                                    \+ Uang < HargaBeli,
+                                    Uang >= HargaBeli,
                                     write('Landmark berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                                     subtBalance(Pemain, HargaBeli),
                                     removePosession(Pemain, LokasiBeli),
@@ -599,7 +605,7 @@ landingPropertiSendiri(Pemain):-
                         ;
                         InputPilihan == cancel
                         ;
-                        (InputPilihan \= help), (InputPilihan \= landmark),
+                        (InputPilihan \= help), (InputPilihan \= landmark), (InputPilihan \= bangunan1), (InputPilihan \= bangunan2), (InputPilihan \= bangunan3), (InputPilihan \= cancel),
                         write('Input tidak valid'), nl, nl, fail
                     )    
                 )
@@ -659,8 +665,9 @@ landingPropertiKosong(Pemain):-
                 InputPilihan == tanah,
                 hargaProperti(LokasiBeli, HargaBeli, _, _, _, _),
                 (
-                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                     ;
+                    Uang >= HargaBeli,
                     write('Tanah berhasil dibeli! '), nl, 
                     idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
@@ -671,8 +678,9 @@ landingPropertiKosong(Pemain):-
                 hargaProperti(LokasiBeli,HargaTanah, HargaBangunan1, _, _, _),
                 HargaBeli = (HargaTanah + HargaBangunan1),
                 (
-                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli-Uang), write('lagi!') ,fail
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                     ;
+                    Uang >= HargaBeli,
                     write('Bangunan1 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
                     addPosession(Pemain, LokasiBeli, 'Bangunan1'), landingPropertiSendiri(Pemain), !
@@ -682,8 +690,9 @@ landingPropertiKosong(Pemain):-
                 hargaProperti(LokasiBeli, HargaTanah, HargaBangunan1, HargaBangunan2, _, _),
                 HargaBeli = (HargaTanah + HargaBangunan1 + HargaBangunan2),
                 (
-                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli - Uang), write('lagi!') ,fail
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                     ;
+                    Uang >= HargaBeli,
                     write('Bangunan2 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
                     addPosession(Pemain, LokasiBeli, 'Bangunan2'), landingPropertiSendiri(Pemain), !
@@ -693,8 +702,9 @@ landingPropertiKosong(Pemain):-
                 hargaProperti(LokasiBeli, HargaTanah , HargaBangunan1 , HargaBangunan2 , HargaBangunan3, _),
                 HargaBeli = (HargaTanah + HargaBangunan1 + HargaBangunan2 + HargaBangunan3),
                 (
-                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), write(HargaBeli - Uang), write('lagi!') ,fail
+                    Uang < HargaBeli, write('Yahh... Uangmu tidak Cukup :('), write('Uangmu kurang $'), Kekurangan is (HargaBeli-Uang), write(Kekurangan), write('lagi!)'), nl ,fail
                     ;
+                    Uang >= HargaBeli,
                     write('Bangunan3 berhasil dibeli! '), nl, idProperti(LokasiBeli, NamaPropertiBeli, _),  write(NamaPropertiBeli),write(' Sekarang menjadi milikmu'), nl,
                     subtBalance(Pemain, HargaBeli),
                     addPosession(Pemain, LokasiBeli, 'Bangunan3'), !
@@ -705,7 +715,7 @@ landingPropertiKosong(Pemain):-
                 ;
                 InputPilihan == cancel,!
                 ;
-                (InputPilihan \= help), (InputPilihan \= landmark),
+                (InputPilihan \= help), (InputPilihan \= landmark), (InputPilihan \= tanah), (InputPilihan \= bangunan1), (InputPilihan \= bangunan2), (InputPilihan \= bangunan3), (InputPilihan \= cancel),
                 write('Input tidak valid'), nl, nl, fail
             )    
         )

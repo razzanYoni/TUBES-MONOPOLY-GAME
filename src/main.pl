@@ -6,8 +6,8 @@
 :-include('gameCenter.pl').
 :-include('kartu.pl').
 :-include('jail.pl').
-:-include('worldTour').
-:-include('worldCup').
+:-include('worldTour.pl').
+:-include('worldCup.pl').
 
 
 :-dynamic(debug/1).

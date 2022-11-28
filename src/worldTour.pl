@@ -36,7 +36,7 @@ worldTour :-
                 (
                     /* wt */
                     InputLoc == wt,
-                    (lokasi(InputLoc) ; properti(InputLoc)),
+                    lokasi(InputLoc),
                     nl, 
                     write('Anda sudah berada di World Tour'), nl,
                     write('Silakan pilih tempat yang lain'), nl, fail
@@ -44,7 +44,7 @@ worldTour :-
 
                     /* valid */
                     InputLoc \== wt,
-                    (lokasi(InputLoc) ; properti(InputLoc)),
+                    lokasi(InputLoc),
                     subtBalance(Pemain, 50),
                     moveToLocation(Pemain, InputLoc),
                     write('Anda telah sampai di '), write(InputLoc), nl,
@@ -52,7 +52,7 @@ worldTour :-
                     ;
 
                     /* non-valid */
-                    \+ (lokasi(InputLoc) ; properti(InputLoc)),
+                    \+ lokasi(InputLoc),
                     write(InputLoc), write(' bukan lokasi yang valid'), nl,
                     write('Silakan pilih tempat berikut :'), nl,
                     tulisListLokasi(Lokasi), nl, fail
