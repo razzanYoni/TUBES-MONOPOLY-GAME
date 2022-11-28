@@ -119,7 +119,7 @@ runCard :- currentPemain(_P), (lokasiPemain(_P, cc1); lokasiPemain(_P, cc2); lok
 /* program untuk print card */
 infoCard :- currentPemain(_P), _P == p1, lenCard1(_Len), _Len = 0, write('Kamu tidak memiliki kartu'), nl, !.        
 infoCard :- currentPemain(_P), _P == p1, lenCard1(_Len), _Len \= 0,  write('Kartu Kamu : '), nl, nl,
-            (currentPemain(_P), card(_P,Temp), cardf(Temp, _Num), write(_Num), nl, fail ), !.
+            ((currentPemain(_P), card(_P,Temp), cardf(Temp, _Num), write(_Num), nl, fail) ; (nl)), !.
 infoCard :- currentPemain(_P), _P == p2, lenCard2(_Len), _Len = 0, write('Kamu tidak memiliki kartu'), nl, !.        
 infoCard :- currentPemain(_P), _P == p2, lenCard2(_Len), _Len \= 0,  write('Kartu Kamu : '), nl, nl,
-            (currentPemain(_P), card(_P,Temp), cardf(Temp, _Num), write(_Num), nl, fail ), !.
+            ((currentPemain(_P), card(_P,Temp), cardf(Temp, _Num), write(_Num), nl, fail); (nl)), !.
