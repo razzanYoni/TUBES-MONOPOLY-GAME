@@ -16,7 +16,7 @@ randomNumberForCard(Number, 1) :- randomize, get_seed(X), Number is (X mod 7 + 1
 
 chanceCard1(Num) :- Num = 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jail'), 
                     assertz(card(p1, Num)), nl, retract(lenCard1(X)), X1 is X + 1, asserta(lenCard1(X1)).
-chanceCard1(Num) :- Num = 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
+chanceCard1(Num) :- Num = 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 100, 
                     write('Kamu Mendapatkan Uang sebesar '), 
                     write(Saldo), addBalance(p1, Saldo), nl.
 chanceCard1(Num) :- Num = 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'), nl,
@@ -33,17 +33,17 @@ chanceCard1(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke 
                     moveToClosestTax(p1), landingTX(p1), !.
 chanceCard1(Num) :- Num == 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'), 
                     asserta(jail(p1)), asserta(jail(p1)),
-                    changeLokasiPemain(p1, jl), switchPlayer, retractall(double(_X)), nl, 
+                    changeLokasiPemain(p1, jl), ((double(_A), switchPlayer, retractall(double(_X)), !) ; (retractall(double(_X)), !)), nl, 
                     printMap,
                     write('Sekarang giliran: '), currentPemain(X), write(X), nl,
                     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,!.
 chanceCard1(Num) :- Num == 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
                     moveToLocation(p1, fp), nl, !.
 chanceCard1(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
-                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
+                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 100, 
                     subtBalance(p1, Saldo), nl, !.
 chanceCard1(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadiah Kepada Lawanmu'),
-                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
+                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 100, 
                     subtBalance(p1, Saldo), addBalance(p2, Saldo), nl, !.
 chanceCard1(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl,
                     asetProperti(p1, Properti), \+ landmark(Properti), removePosession(p1, Properti), !.
@@ -56,7 +56,7 @@ chanceCard1(Num) :- Num == 14, write('Ternyata Nanya Doang Beli Kagak'), nl, !.
 
 chanceCard2(Num) :- Num == 1, write('Kamu Mendapatkan Kartu Untuk Keluar dari Jail'), 
                     assertz(card(p2, Num)), nl, retract(lenCard2(X)), X1 is X + 1, asserta(lenCard2(X1)), !.
-chanceCard2(Num) :- Num == 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50,
+chanceCard2(Num) :- Num == 2, randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 100,
                     write('Kamu Mendapatkan Uang sebesar '), 
                     write(Saldo), addBalance(p2, Saldo), nl, !.
 chanceCard2(Num) :- Num == 3, write('Selamat Kamu Mendapatkan Kesempatan Untuk Pergi Ke Game Center'), nl,
@@ -73,17 +73,17 @@ chanceCard2(Num) :- Num == 8, write('Orang Pintar Bayar Pajak, Silakan Pergi ke 
                     moveToClosestTax(p2),landingTX(p2), !.
 chanceCard2(Num) :- Num == 9, write('Kamu Mencurigakan, Silakan Pergi ke Jail Untuk Diperiksa'),
                     asserta(jail(p2)), asserta(jail(p2)),
-                    changeLokasiPemain(p2, jl), switchPlayer, retractall(double(_X)), nl,
+                    changeLokasiPemain(p2, jl), ((double(_A), switchPlayer, retractall(double(_X)), !) ; (retractall(double(_X)), !)), nl,
                     printMap,
                     write('Sekarang giliran: '), currentPemain(X), write(X), nl,
                     write('Tulis \'help.\' untuk memberikan daftar perintah yang tersedia'), nl, nl,!.
 chanceCard2(Num) :- Num == 10, write('Kamu Terlihat Kelelahan, Silakan Parkir terlebih dahulu'), 
                     moveToLocation(p2, fp), nl, !.
 chanceCard2(Num) :- Num == 11, write('Kamu dipalak preman, Silakan Bayar'),
-                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
+                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 100, 
                     subtBalance(p2, Saldo), nl, !.
 chanceCard2(Num) :- Num == 12, write('Lawanmu Sedang Mengadakan Pesta, Beri Hadiah Kepada Lawanmu'),
-                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 50, 
+                    randomize, get_seed(X), Pengali is (X mod 5 + 1), Saldo is Pengali * 100, 
                     subtBalance(p2, Saldo), addBalance(p1, Saldo), nl, !.
 chanceCard2(Num) :- Num == 13, write('Propertimu telah usang, Propertimu akan disita'), nl,
                     asetProperti(p2, Properti), \+ landmark(Properti), removePosession(p2, Properti), !.
