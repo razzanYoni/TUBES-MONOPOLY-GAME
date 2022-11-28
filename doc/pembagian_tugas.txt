@@ -1,4 +1,5 @@
-Muhammad Fadhil Amri                (13521066)  : Lokasi dan Properti
-Akmal Mahardika Nurwahyu Pratama    (13521070)  : Word Tour dan Penjara
-Naufal Syifa Firdaus                (13521050)  : Map dan Tax
-
+Muhammad Fadhil Amri                (13521066)  : Lokasi, Properti, Game Center, World Cup, Color Set, Main, Laporan 
+Akmal Mahardika Nurwahyu Pratama    (13521070)  : Jail, World Tour, ASCII Art, World Cup,  Main, Laporan 
+Naufal Syifa Firdaus                (13521050)  : Map, Tax, ASCII Art, Main, Laporan 
+Razzan Daksana Yoni                 (13521087)  : Dadu, Chance Card, World Cup, Variasi Chance Card, Main, Laporan 
+Muhamad Aji Wibisono                (13521095)  : Player, Bangkrut, Buildable Go, World Cup, Color Set,  Main, Laporan 
