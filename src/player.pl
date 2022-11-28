@@ -418,25 +418,27 @@ landingPropertiLawan(Pemain):-
     
     checkBangkrut(Pemain),
 
-    bangkrut(Pemain, true)
-    ;
     (
-        bangkrut(Pemain, false),
+        bangkrut(Pemain, true)
+        ;
         (
-            \+ landmark(Lokasi), balance(Pemain, Uang),
-            repeat, Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
+            bangkrut(Pemain, false),
             (
-                AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
-                    (
-                        Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
-                        ;
-                        write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write(' Bos! Gaya Elit, Ekonomi Sulid'),nl, fail
-                    ), !
+                \+ landmark(Lokasi), balance(Pemain, Uang),
+                repeat, Uang >= 0, write('Ambil Alih?(ya/tidak) '), read(AmbilAlih),
+                (
+                    AmbilAlih == ya, biayaAkuisisiProperti(Lokasi, BiayaAkuisisi), 
+                        (
+                            Sisa = (Uang - BiayaAkuisisi), Sisa >= 0, ambilAlihProperti(Lokasi, PemilikLama, Pemain), landingPropertiSendiri(Pemain), !
+                            ;
+                            write('Kurang $'), Kekurangan is (BiayaAkuisisi - Uang), write(Kekurangan), write(' Bos! Gaya Elit, Ekonomi Sulid'),nl, fail
+                        ), !
+                    ;
+                    AmbilAlih == tidak, !
+                )
                 ;
-                AmbilAlih == tidak, !
+                landmark(Lokasi), !
             )
-            ;
-            landmark(Lokasi), !
         )
     ),!.
 
