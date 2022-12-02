@@ -1,0 +1,27 @@
+## Definisi
+Properti adalah lokasi yang dapat diakuisisi oleh pemain. Properti disimbolkan dengan sebuah karakter yang menunjukkan set warna dan sebuah digit yang menunjukkan urutannya pada map, 
+misalnya properti A1 dan properti C3. Akuisisi semula dari properti berupa tanah kosong, dan properti tersebut dapat kemudian ditingkatkan mulai dari bangunan 1, bangunan 2, bangunan 3, hingga landmark.
+Peningkatan sebuah properti tidak bergantung pada properti lain (termasuk yang satu set warna). Peningkatan properti ke landmark hanya dapat dilakukan ketika properti telah memiliki bangunan 3 sebelumnya dan pemain telah menyelesaikan putaran pertamanya.
+Jika properti belum diakuisisi oleh pemain manapun, pemain yang baru saja mencapai properti tersebut dapat mengakuisisi properti dan menambahkan hingga bangunan 3 di saat yang sama.
+Jika properti telah diakuisisi oleh seorang pemain, pemain lain yang bukan merupakan pemilik properti harus membayar biaya sewa sesuai dengan tingkatan properti. Selanjutnya, pemain boleh memilih untuk mengakuisisi properti tersebut dengan membayar biaya akuisisi kepada pemilik semula sejumlah dua kali nilai aset properti saat ini dengan syarat properti belum memiliki landmark, kemudian memilih untuk melakukan peningkatan properti atau tidak.
+Jika properti merupakan milik pemain yang mencapai properti tersebut, pemain dapat memilih untuk melakukan peningkatan properti.
+Giliran pemain berakhir setelah aksi-aksi di atas dilakukan, kecuali jika pemain mendapatkan double pada throwDice sebelumnya.
+Informasi properti mengandung poin sebagai berikut.
+Nama properti
+Deskripsi properti
+Biaya sewa (tanah, bangunan 1, bangunan 2, bangunan 3, landmark)
+Catatan: biaya sewa tidak bersifat kumulatif
+Harga beli properti: tanah, house, dan landmark
+
+## Rencana Alur 
+- Deklarasi Fakta tentang Identitas properti (Nama, Deskripsi)
+- Deklarasi Fakta tentang harga properti (harga tanah, harga bangunan1, harga bangunan2, harga bangunan3, harga landmark)
+- Deklarasi Fakta tentang harga sewa properti (harga sewa tanah, harga sewa bangunan1, harga sewa bangunan2, harga sewa bangunan3, harga sewa landmark) 
+- Menampilkan detail properti jika dipanggil checkPropertyDetail
+
+## Fakta dan Rules
+/* properti(X): X adalah sebuah properti */
+/* idProperti(Properti, NamaProperti, DeskripsiProperti) : Fakta tentang identitas dari Properti*/
+/* hargaProperti(Properti, HargaTanah, HargaBangunan1, HargaBangunan2, HargaBangunan3, HargaLandmark): Fakta tentang harga pada Properti*/
+/* hargaSewaProperti(Properti, HargaSewaTanah, HargaSewaBangunan1, HargaSewaBangunan2, HargaSewaBangunan3, HargaSewaLandmark): Fakta tentang harga hargaSewa pada Properti*/
+/* checkPropertyDetail(X): Menampilkan detail dari suatu properti*/

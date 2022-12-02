@@ -1,0 +1,26 @@
+### Definisi
+Pemain dinyatakan kalah apabila pemain tidak lagi mempunyai total kekayaan (uang yang dipegang + total kekayaan properti)
+yang cukup jika dikenai biaya denda atau biaya sewa. Jika uang yang dipegang pemain tidak cukup, tetapi pemain memiliki kekayaan properti
+yang bisa dijual (dan cukup untuk melunasi hutang), pemain dapat memilih untuk menjual propertinya untuk melanjutkan permainan atau menyerah (surrender).
+Hasil penjualan properti adalah 80% dari harga beli. Pemain hanya dapat menjual tile atau kotak secara keseluruhan (tidak bisa parsial, misal mengurangi jumlah bangunan). 
+Kalian disarankan untuk mengimplementasikan “deteksi bangkrut” di dalam throwDice.
+Narasi dan pesan permainan dibebaskan kepada kalian, silakan berkreasi. Yang penting alurnya jelas.
+
+
+### Rencana Alur
+- Fitur bangkrut akan disatukan dengan player sebagai fakta
+	Game dimulai dengan kedua player berkondisi bangkrut false
+	Game berakhir ketika salah satu player berkondisi bangkrut
+- Deteksinya akan dilakukan setiap throwDice
+- Akan ada rule deteksiBangkrut untuk mendeteksi kondisi player
+	Jika uang < 0 maka akan ada resolveBangkrut sebagai tempat player memilih properti yang akan dijual atau menyerah.
+	Jika uang < 0 dan aset properti tidak memenuhi utang maka player dinyatakan bangkrut dan game akan berakhir dengan pemain bangkrut.
+	Jika uang >= 0 game akan berlanjut seperti biasa
+- Pada resolve bangkrut player akan memilih untuk menyerah atau memilih properti yang dijual sampai uang >= 0
+- Fungsi untuk menjual properti dan menambahkan uang sudah ada di fungsi player karena digunakan juga untuk pengambilalihan properti
+
+
+### Fakta dan Rules
+/*bankrupt(Player, X) menunjukkan X sebagai kondisi bangkrut Player, X adalah true/false*/
+/*checkBankrupt(Player) mendeteksi kondisi player jika kondisi memenuhi seperti pada alur*/
+/*resolveBankrupt(Player) menyajikan tempat memilih properti yang akan dijual atau pilihan untuk menyerah*/

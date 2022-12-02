@@ -1,0 +1,22 @@
+### Definisi
+Map adalah tempat bermain utama yang berbentuk kotak kecil "tiles" tersusun.
+Pemain dapat menempati tiles yang menandakan posisi pemain dalam permainan.
+Setiap tile mempunyai indeks yag menunjukan penggunaan atau efek dari tile tersebut kepada pemain.
+Posisi player pada map ditunjukan dengan print dari indeks tile yang ditempati pemain.
+Pada setiap tiles yang diprint akan ditunjukan properti yang didirikan di tile tersebut.
+
+### Rencana Alur
+
+- Map akan diprint menggunakan fungsi write() sesuai format yang diperlukan.
+
+- Posisi pemain akan dicek dan ditampilkan dibawah map
+    - contoh : jika location(p1, go) , maka akan ditampilkan P1 : GO
+
+- Properti pada tile akan dicek setiap program map dirun dan ditampilkan jika terdapat properti.
+    - jika tile A1 mempunyai properti kepunyaan pemain P1:
+        tampilkan  
+
+
+### Fakta dan Rules
+tiles([]) adalah list yang berisi tiles terurut sesuai format map.
+printmap menampilkan map ke layar

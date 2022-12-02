@@ -1,0 +1,64 @@
+### Definisi
+Total pemain pada permainan Monopoly ini adalah 2 pemain dengan pemain saling berlawanan satu sama lain.
+Setiap pemain diberi uang pada awal permainan yang nominalnya dibebaskan. 
+Setiap pemain dapat mempunyai aset serta mempunyai informasi total nilai aset yang dimiliki.
+Setiap pemain berhak mendapatkan uang sesuai dengan nominal yang ditentukan saat pemain menginjak atau melewati daerah GO untuk kali kedua, ketiga, dan seterusnya.
+
+Terdapat juga fitur untuk mengetahui kondisi pemain x dimana nantinya akan disertakan 
+informasi-informasi pada saat command dijalankan sebagai berikut.
+Lokasi keberadaan pemain x
+Total uang (cash-on-hand) yang dimiliki pemain x
+Total nilai properti, yaitu penjumlahan nilai beli semua properti yang telah dimiliki oleh pemain x. 
+Sebagai informasi tambahan, misalkan pemain x memiliki landmark pada D2, maka nilai properti pada D2 adalah penjumlahan dari harga tanah + harga bangunan 1 + harga bangunan 2 + harga bangunan 3 + harga landmark.
+Total aset, yaitu penjumlahan dari total uang dengan total nilai properti
+Daftar kepemilikan properti, memberikan keluaran berupa daftar properti yang dimiliki oleh player x. Setiap properti memiliki format IDlokasi - Tingkatan Bangunan.
+Daftar kepemilikan card, memberikan keluaran berupa daftar card yang dimiliki oleh player x
+
+Perintah: checkPlayerDetail(x) (dengan x : representasi variabel pemain)
+
+
+### Rencana Alur
+- Data lokasi disimpan sebagai fakta.
+- Uang yang dimiliki pemain disimpan sebagai fakta.
+- Total nilai properti dan aset dapat dihitung dari properti dan uang yang dimiliki player.
+- Properti dan tingkatan yang dimiliki pemain disimpan sebagai fakta.
+	Tiap properti adalah faktanya sendiri.
+- Kepemilikan card disimpan sebagai fakta terpisah untuk masing - masing player
+	Tiap kartu berbeda adalah faktanya sendiri.
+- Jumlah kelipatan telah melewati go disimpan sebagai fakta
+	Kelipatan melewati go tidak akan bertambah setelah 3
+	Uang yang diterima akan berkait dengan kelipatan dari fakta ini
+- Jika ada perubahan fakta dilakukan retract jika diperlukan lalu assert.
+
+
+### Fakta dan Rules
+/*FAKTA*/
+/*currentPlayer(X) menunjukkan player yang mendapatkan giliran*/
+/*player(X) menunjukkan X adalah player (belum tentu diperlukan, nanti dipikirkan lagi)*/
+/*location(Player, X) menunjukkan X sebagai lokasi dari player*/
+/*balance(Player, X) menunjukkan X sebagai uang yang dimiliki player*/
+/*bankrupt(Player, X) menunjukkan X sebagai kondisi bangkrut player, berisikan true atau false*/
+/*cardp1(X) menunjukkan X sebagai kartu yang dimiliki player1*/
+/*cardp2(X) menunjukkan X sebagai kartu yang dimiliki player2*/
+/*posession(Player, Location, Level) menunjukkan kepemilikan player akan suatu lokasi dan level propertinya*/
+
+/*RULES*/
+/*keperluan balance*/
+/*changeBalance(Player, New) mengganti fakta balance player dengan New sebagai X*/
+/*addBalance(Player, Amount) menambahkan Amount pada X di fakta balance player*/
+/*subtBalance(Player, Amount) mengurangkan Amount pada X di fakta balance player*/
+
+/*keperluan lokasi*/
+/*changeLocation(Player, New) mengganti lokasi player*/
+/*move(Player, X, ArrayMap) mengganti lokasi player sesuai X sebagai nilai dadu*/
+
+/*keperluan properti*/
+/*inPosession(Player, Posession, X) fungsi internal rekursif untuk mengecek kepemilikan properti, X true/false*/
+/*checkPosession(Player, Posession, X) fungsi untuk mengecek kepemilikan properti, X true/false*/
+/*addPosession(Player, Property) fungsi untuk menambahkan kepemilikan properti*/
+/*removePosession(Player, Property) fungsi untuk mengurangi kepemilikan properti*/
+/*sellProperty(Player, Property, Level) fungsi untuk menjual properti dan menambahkan uang ke balance*/
+
+
+/*COMMAND*/
+/*checkPlayerDetail(X) untuk mengeluarkan semua data yang dimiliki player*/

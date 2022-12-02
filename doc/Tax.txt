@@ -1,0 +1,15 @@
+### Definisi
+Ketika pemain berhenti di tiles TAX maka pemain tersebut harus membayar pajak sebesar
+10% dari jumlah total aset. Asset yang dimaksud merupakan semua properti yang pemain miliki 
+dan juga semua uang yang pemain punya.
+
+### Rencana Alur
+Pada akhir move pemain akan dicek posisinya. Jika ia berada pada tile TAX maka fungsi TAX dijalankan.
+
+- tax(p1, X) menghitung jumlah pajak yang harus dibayarkan pemain
+    - mentotalkan semua value aset pemain
+    - mengambil 10% dari nilai total aset
+
+- payTax(p1, X) mengurangi jumlah uang pemain sesuai dengan nilai pajaknya (X)
+
+- propertyValue(p1, X) menghitung nilai semua properti pemain

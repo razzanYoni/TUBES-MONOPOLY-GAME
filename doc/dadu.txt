@@ -1,0 +1,25 @@
+### Definisi
+Pada permainan Monopoly, tentunya terdapat dadu untuk melakukan giliran. 
+Dadu di permainan ini direpresentasikan sebagai angka acak 1-6 untuk masing-masing dadu (terdapat dua dadu). 
+Pemain akan melangkah sebanyak angka yang ditunjukkan pada dadu. Apabila pemain mendapatkan dua dadu dengan angka yang sama, 
+pemain dapat melakukan gilirannya kembali. Ketika pemain mendapatkan dua angka yang sama 3 kali berturut-turut, 
+pemain akan masuk penjara.
+
+### Rencana Alur
+- cek state pemain apa yang sedang berjalan
+- cek apakah double
+	- jika ya maka masukkan double ke predikat double dan isinya sebanyak += 1
+	- apakah double tiga kali
+		- jika ya maka masuk jail lalu taruh ke predikat sebanyak 2 
+
+- jika di dalam penjara dan memilih lempar dadu 
+	- jika lemparan double 
+		- pemain ke luar dari penjara 
+	- jika lemparan tidak double 
+		- jika pemain sudah pada lemparan ke 3 pemain ke luar dari penjara
+		- jika tidak pemain masih di dalam penjara
+
+#### Fakta dan Rules
+/* Deklarasi Fakta dan Rules */
+/* throwDice perintah untuk melempar dadu sudah mencakup kondisi apakah di penjara atau tidak
+	berapa kali gulir dan berapa kali double */

@@ -1,0 +1,29 @@
+### Definisi
+Pemain bisa memilih untuk bermain di game center atau tidak jika menginjak tile ini.
+Permainan di game center ini adalah menebak sisi yang akan muncul dari koin yang dilempar.
+Jika pemain memilih untuk bermain, ia harus membayar $50 untuk memulai permainan.
+Permainan berakhir jika pemain salah menebak sisi koin, pemain berhasil menebak dengan benar 3 kali,
+atau pemain memilih untuk berhenti bermain dan mengklaim hadiahnya.
+Jika pemain berhasil menebak dengan benar, tetapi pada saat tebakan selanjutnya ia salah,
+hadiah yang telah dikumpulkan sebelumnya menjadi 0.
+
+Rincian Hadiah:
+Hadiah1 : Jika berhasil menebak dengan benar satu kali ($150)
+Hadiah2 : Jika berhasil menebak dengan benar dua kali ($300)
+Hadiah3 : Jika berhasil menebak dengan benar tiga kali ($500)
+
+### Rencana Alur
+Ketika pemain menginjak tile GC, akan dipanggil command playGameCenter, serta mengurangi uang pemain sebesar $50
+Setelah waktu bermain di gameCenter berakhir, akan ditambahkan hadiah ke uang pemain (jika mendapat hadiah)
+
+#### Fakta dan Rules
+/*Dynamic Predicates*/
+:- dynamic(n_true/1). # Menyimpan jumlah tebakan benar
+:- dynamic(hadiah_pemain/1). # Menyimpan hadiah yang dikumpulkan pemain
+:- dynamic(bermain/1). # Menyimpan status permainan, 1: Bermain, 2: Exit
+/*hadiah(Hadiah1, Hadiah2, Hadiah3) : Deklarasi besaran hadiah jika player bisa menebak dengan benar 1,2 atau 3 kali*/
+/*playGameCenter : Memulai permainan di game center*/
+/*lempar_koin(Sisi): Melakukan randomize, dan memperoleh angka 1(HEAD) atau 0(TAIL)*/
+/*guessing(N_true, Guess, Hadiah_pemain) : Predikat untuk berjalannya game, terminasi saat tebakan salah, tebakan pemain benar 3 kali, atau pemain mengkaim hadiah, */
+/*inputGuessing : Prosedur untuk menangani input dari pemain*/
+/*guessing_flow : Prosedur untuk mengatur jalannya permainan di Game Center*/

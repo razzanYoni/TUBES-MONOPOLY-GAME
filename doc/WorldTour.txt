@@ -1,0 +1,23 @@
+### Definisi
+Bila pemain mendarat di kotak “World Tour”, maka pemain akan diberikan kesempatan untuk berpindah ke lokasi manapun di map kecuali kotak World Tour.
+Perpindahan pemain tidak menggunakan konsep teleport (langsung berpindah dari kotak World Tour ke kotak tujuan akhir) melainkan berjalan melewati kotak-kotak lainnya.
+Artinya, jika untuk mencapai kotak tujuan pemain harus melewati titik GO, maka pemain akan mendapatkan uang sesuai dengan nominal yang telah ditentukan.
+Pemain yang ingin menggunakan World Tour harus membayar sejumlah nominal yang nilainya dibebaskan.
+
+#### Rencana Alur
+Misal, pemain tiba/menginjak tile WT (World Tour)
+- mengecek keadaan uang pemain
+- jika uanag pemain < harga "tiket" WT
+    - menampilkan pesan 
+- jika uang pemain > harga "tiket" WT
+    - menampilkan map
+    - meminta input berupa nama tile
+    - loop : pengecekan input sampai berhasil (yang diterima semua tile, kecuali WT)
+    - input berhasil
+    - pemain akann tiba di tempat tujuan
+    - ditampilkan map
+    - (?)ditampilkan apakah ia mendapat uang (melewati GO)
+
+#### Fakta dan Rules
+/* Deklarasi Fakta dan Rules */
+/* isInWT(X) benar jika pemain X ada di tile WT */
