@@ -15,7 +15,7 @@
 ## How To Run The Program
 1. Clone The Repository
    ```shell
-    git clone https://github.com/GAIB20/tugas-besar-logika-komputasional-2022-boku-no-prolog.git 
+    git clone https://github.com/razzanYoni/TUBES-MONOPOLY-GAME.git 
    ```
 2. Open GNU Prolog
 3. Change Directory to 'tugas-besar-logika-komputasional-2022-boku-no-prolog/src/'
